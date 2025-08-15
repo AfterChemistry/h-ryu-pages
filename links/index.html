@@ -6,7 +6,7 @@
   <title>Links – Haonan LIU’s Personal Page</title>
   <meta name="description" content="Curated links for journals, research tools, societies, suppliers, and campus resources.">
 
-  <!-- Theme -->
+  <!-- Shared theme -->
   <style>
     :root{
       --bg:#f5f6fa;
@@ -16,6 +16,7 @@
       --border:#e6e9ef;
       --shadow:0 8px 24px rgba(23,31,56,.08);
       --radius:16px;
+
       --primary:#4a90e2;
       --accent:#212a74;
     }
@@ -36,61 +37,46 @@
     .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
     .brand .desc{color:var(--muted);font-size:.92rem}
 
-    /* Nav + dropdown with hover buffer */
     .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
     .nav a{padding:8px 10px;border-radius:10px}
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
 
+    /* Dropdown (hover buffer，更好点选) */
     .nav li{position:relative;padding-bottom:6px}
-    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
+    .nav li::after{
+      content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px;
+    }
     .nav .submenu{
-      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;min-width:220px;
+      position:absolute;top:100%;left:0;margin-top:6px;min-width:220px;
       background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-      padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none
+      padding:8px;display:none;z-index:50
     }
-    .nav li:hover .submenu,
-    .nav li:focus-within .submenu{
-      opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto
-    }
+    .nav li:hover .submenu{display:block}
     .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
     .nav .submenu a:hover{background:#f3f6fb}
 
     /* Layout */
-    .container{max-width:1200px;margin:20px auto;padding:0 20px}
-    .page-title{margin:0 0 14px;font-weight:800;color:var(--accent);font-size:1.6rem}
-
-    /* Card grid (two columns on desktop) */
-    .grid{
+    .container{max-width:1200px;margin:18px auto;padding:0 20px}
+    .page-title{margin:0 0 14px;font-weight:800;color:var(--accent)}
+    /* 双栏卡片网格（与 presentation/current topic 一致） */
+    .grid.two-column{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
       gap:20px;
-      align-items:start;
-    }
-    @media (max-width:960px){
-      .grid{grid-template-columns:1fr}
     }
 
-    /* Card */
+    /* Cards */
     .card{
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:18px 18px 14px;
+      padding:20px;
     }
-    .card h3{
-      margin:0 0 8px;
-      font-size:1.05rem;
-      color:#2b2f36;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .card h3 a{color:#2b2f36}
-    .card .list{margin:0;padding-left:1.1em}
-    .card .list li{margin:6px 0}
-    .muted{color:var(--muted);font-size:.95rem;margin-top:12px}
+    .list{margin:0;padding-left:1.1em}
+    .list li{margin:6px 0}
+
+    .muted{color:var(--muted);font-size:.95rem}
 
     /* Footer */
     .site-footer{margin-top:28px;border-top:1px solid var(--border);background:#fff}
@@ -136,9 +122,8 @@
   <main class="container">
     <h1 class="page-title">Links</h1>
 
-    <div class="grid">
-
-      <!-- Left column cards -->
+    <div class="grid two-column">
+      <!-- Left column cards (按顺序自动排版为双栏) -->
       <section class="card">
         <h3>Springer Nature</h3>
         <ul class="list">
@@ -303,7 +288,6 @@
           <li><a href="https://www.jorudan.co.jp/norikae/" target="_blank" rel="noreferrer noopener">Jorudan</a></li>
         </ul>
       </section>
-
     </div>
 
     <div class="muted">Note: Numbers in parentheses are indicative impact factors (for quick reference only).</div>
