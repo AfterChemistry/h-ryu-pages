@@ -119,11 +119,13 @@
   </header>
 
   <!-- Main -->
-  <main class="container">
-    <h1 class="page-title">Links</h1>
+<main class="container">
+  <h1 class="page-title">Links</h1>
 
-    <div class="grid two-column">
-      <!-- Left column cards (按顺序自动排版为双栏) -->
+  <!-- 两栏：左=期刊，右=其他 -->
+  <div class="grid">
+    <!-- 左栏：期刊 -->
+    <div class="stack">
       <section class="card">
         <h3>Springer Nature</h3>
         <ul class="list">
@@ -207,91 +209,96 @@
           <li><a href="https://www.sciencedirect.com/journal/polymer/articles-in-press" target="_blank" rel="noreferrer noopener"><em>Polymer</em></a> (4.1)</li>
         </ul>
       </section>
+    </div>
 
-      <!-- Right column cards -->
-      <section class="card">
-        <h3><a href="https://www.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Tokyo Tech</a></h3>
-        <ul class="list">
-          <li><a href="https://portal.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Portal</a></li>
-          <li><a href="https://www.envpro.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Envpro</a></li>
-          <li><a href="http://iasor7.envpro.titech.ac.jp/iasor7/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO R7</a></li>
-          <li><a href="http://iasog3.envpro.titech.ac.jp/iasog3/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO G3</a></li>
-          <li><a href="https://www.libra.titech.ac.jp/oa" target="_blank" rel="noreferrer noopener">OA News Libra</a></li>
-        </ul>
-      </section>
+    <!-- 右栏：其他 -->
+    <div class="grid">
+      <div class="stack">
+        <section class="card">
+          <h3><a href="https://www.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Tokyo Tech</a></h3>
+          <ul class="list">
+            <li><a href="https://portal.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Portal</a></li>
+            <li><a href="https://www.envpro.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Envpro</a></li>
+            <li><a href="http://iasor7.envpro.titech.ac.jp/iasor7/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO R7</a></li>
+            <li><a href="http://iasog3.envpro.titech.ac.jp/iasog3/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO G3</a></li>
+            <li><a href="https://www.libra.titech.ac.jp/oa" target="_blank" rel="noreferrer noopener">OA News Libra</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Research</h3>
-        <ul class="list">
-          <li><a href="https://scifinder-n.cas.org/?referrer=scifinder.cas.org" target="_blank" rel="noreferrer noopener">SciFinder</a></li>
-          <li><a href="https://www.reaxys.com/#/search/quick" target="_blank" rel="noreferrer noopener">Reaxys</a></li>
-          <li><a href="https://www.webofscience.com/wos/woscc/basic-search" target="_blank" rel="noreferrer noopener">Web of Science</a></li>
-          <li><a href="https://sdbs.db.aist.go.jp/" target="_blank" rel="noreferrer noopener">SDBS</a></li>
-          <li><a href="https://toolsforscience.github.io/locator/" target="_blank" rel="noreferrer noopener">Article Locator</a></li>
-          <li><a href="https://chemsearch.kovsky.net/simple.htm" target="_blank" rel="noreferrer noopener">Chem Search</a></li>
-          <li><a href="https://dx.doi.org/" target="_blank" rel="noreferrer noopener">DOI Search</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Research</h3>
+          <ul class="list">
+            <li><a href="https://scifinder-n.cas.org/?referrer=scifinder.cas.org" target="_blank" rel="noreferrer noopener">SciFinder</a></li>
+            <li><a href="https://www.reaxys.com/#/search/quick" target="_blank" rel="noreferrer noopener">Reaxys</a></li>
+            <li><a href="https://www.webofscience.com/wos/woscc/basic-search" target="_blank" rel="noreferrer noopener">Web of Science</a></li>
+            <li><a href="https://sdbs.db.aist.go.jp/" target="_blank" rel="noreferrer noopener">SDBS</a></li>
+            <li><a href="https://toolsforscience.github.io/locator/" target="_blank" rel="noreferrer noopener">Article Locator</a></li>
+            <li><a href="https://chemsearch.kovsky.net/simple.htm" target="_blank" rel="noreferrer noopener">Chem Search</a></li>
+            <li><a href="https://dx.doi.org/" target="_blank" rel="noreferrer noopener">DOI Search</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Tools</h3>
-        <ul class="list">
-          <li><a href="https://www.deepl.com/translator" target="_blank" rel="noreferrer noopener">DeepL</a></li>
-          <li><a href="https://chat.openai.com/" target="_blank" rel="noreferrer noopener">ChatGPT</a></li>
-          <li><a href="https://app.editage.jp/?type=individual" target="_blank" rel="noreferrer noopener">Editage</a></li>
-          <li><a href="https://www.english-corpora.org/coca/" target="_blank" rel="noreferrer noopener">COCA</a></li>
-          <li><a href="https://www.overleaf.com/login?" target="_blank" rel="noreferrer noopener">Overleaf</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Tools</h3>
+          <ul class="list">
+            <li><a href="https://www.deepl.com/translator" target="_blank" rel="noreferrer noopener">DeepL</a></li>
+            <li><a href="https://chat.openai.com/" target="_blank" rel="noreferrer noopener">ChatGPT</a></li>
+            <li><a href="https://app.editage.jp/?type=individual" target="_blank" rel="noreferrer noopener">Editage</a></li>
+            <li><a href="https://www.english-corpora.org/coca/" target="_blank" rel="noreferrer noopener">COCA</a></li>
+            <li><a href="https://www.overleaf.com/login?" target="_blank" rel="noreferrer noopener">Overleaf</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Publish</h3>
-        <ul class="list">
-          <li><a href="https://acsparagonplus.acs.org/psweb/loginForm?code=1000" target="_blank" rel="noreferrer noopener">ACS Paragon Plus</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Publish</h3>
+          <ul class="list">
+            <li><a href="https://acsparagonplus.acs.org/psweb/loginForm?code=1000" target="_blank" rel="noreferrer noopener">ACS Paragon Plus</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Societies &amp; Meetings</h3>
-        <ul class="list">
-          <li><a href="https://www.spsj.or.jp/" target="_blank" rel="noreferrer noopener">SPSJ, Japan</a></li>
-          <li><a href="https://www.jsap.or.jp/" target="_blank" rel="noreferrer noopener">JSAP, Japan</a></li>
-          <li><a href="https://www.acs.org/meetings/acs-meetings.html" target="_blank" rel="noreferrer noopener">ACS Meetings</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Societies &amp; Meetings</h3>
+          <ul class="list">
+            <li><a href="https://www.spsj.or.jp/" target="_blank" rel="noreferrer noopener">SPSJ, Japan</a></li>
+            <li><a href="https://www.jsap.or.jp/" target="_blank" rel="noreferrer noopener">JSAP, Japan</a></li>
+            <li><a href="https://www.acs.org/meetings/acs-meetings.html" target="_blank" rel="noreferrer noopener">ACS Meetings</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Suppliers</h3>
-        <ul class="list">
-          <li><a href="https://www.monotaro.com/" target="_blank" rel="noreferrer noopener">Monotaro</a></li>
-          <li><a href="https://www.amazon.co.jp/" target="_blank" rel="noreferrer noopener">Amazon Business</a></li>
-          <li><a href="https://solution.soloel.com/buyer/view/a010/DAA01010.html" target="_blank" rel="noreferrer noopener">Askul</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Suppliers</h3>
+          <ul class="list">
+            <li><a href="https://www.monotaro.com/" target="_blank" rel="noreferrer noopener">Monotaro</a></li>
+            <li><a href="https://www.amazon.co.jp/" target="_blank" rel="noreferrer noopener">Amazon Business</a></li>
+            <li><a href="https://solution.soloel.com/buyer/view/a010/DAA01010.html" target="_blank" rel="noreferrer noopener">Askul</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Chemical Reagents</h3>
-        <ul class="list">
-          <li><a href="https://www.e-nacalai.jp/ec2/EC-srchtop.cfm" target="_blank" rel="noreferrer noopener">e-Nacalai</a></li>
-          <li><a href="https://www.tcichemicals.com/JP/ja/" target="_blank" rel="noreferrer noopener">TCI</a></li>
-          <li><a href="https://cica-web.kanto.co.jp/CicaWeb/servlet/wsj.front.ItemListSvlt" target="_blank" rel="noreferrer noopener">Kanto Kagaku</a></li>
-          <li><a href="https://labchem-wako.fujifilm.com/jp/index.html" target="_blank" rel="noreferrer noopener">FUJIFILM Wako</a></li>
-          <li><a href="https://www.sigmaaldrich.com/JP/ja" target="_blank" rel="noreferrer noopener">Sigma-Aldrich</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Chemical Reagents</h3>
+          <ul class="list">
+            <li><a href="https://www.e-nacalai.jp/ec2/EC-srchtop.cfm" target="_blank" rel="noreferrer noopener">e-Nacalai</a></li>
+            <li><a href="https://www.tcichemicals.com/JP/ja/" target="_blank" rel="noreferrer noopener">TCI</a></li>
+            <li><a href="https://cica-web.kanto.co.jp/CicaWeb/servlet/wsj.front.ItemListSvlt" target="_blank" rel="noreferrer noopener">Kanto Kagaku</a></li>
+            <li><a href="https://labchem-wako.fujifilm.com/jp/index.html" target="_blank" rel="noreferrer noopener">FUJIFILM Wako</a></li>
+            <li><a href="https://www.sigmaaldrich.com/JP/ja" target="_blank" rel="noreferrer noopener">Sigma-Aldrich</a></li>
+          </ul>
+        </section>
 
-      <section class="card">
-        <h3>Trip</h3>
-        <ul class="list">
-          <li><a href="https://tokyo-ame.jwa.or.jp/" target="_blank" rel="noreferrer noopener">Tokyo-ame</a></li>
-          <li><a href="https://www.railmaps.jp/tokyo/" target="_blank" rel="noreferrer noopener">Railway Map</a></li>
-          <li><a href="https://www.jorudan.co.jp/norikae/" target="_blank" rel="noreferrer noopener">Jorudan</a></li>
-        </ul>
-      </section>
+        <section class="card">
+          <h3>Trip</h3>
+          <ul class="list">
+            <li><a href="https://tokyo-ame.jwa.or.jp/" target="_blank" rel="noreferrer noopener">Tokyo-ame</a></li>
+            <li><a href="https://www.railmaps.jp/tokyo/" target="_blank" rel="noreferrer noopener">Railway Map</a></li>
+            <li><a href="https://www.jorudan.co.jp/norikae/" target="_blank" rel="noreferrer noopener">Jorudan</a></li>
+          </ul>
+        </section>
+      </div>
     </div>
 
     <div class="muted">Note: Numbers in parentheses are indicative impact factors (for quick reference only).</div>
   </main>
+
 
   <!-- Footer -->
   <footer class="site-footer">
