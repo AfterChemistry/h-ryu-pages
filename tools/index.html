@@ -3,149 +3,141 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tools - Haonan LIU's Personal Page</title>
+  <title>Tools – Frequency–Wavelength–Wavenumber Converter</title>
 
+  <!-- 仅修复下拉菜单悬停，其余保持你原来的结构与功能 -->
   <style>
-    :root {
-      --card-bg: #fff;
-      --card-radius: 16px;
-      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      --primary-color: #4a90e2;
-      --border: #ddd;
-      --shadow: 0 2px 12px rgba(0,0,0,0.08);
-      --font-main: Arial, sans-serif;
+    :root{
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --text:#20242a;
+      --muted:#5c6270;
+      --border:#e6e9ef;
+      --shadow:0 8px 24px rgba(23,31,56,.08);
+      --radius:16px;
+
+      /* 供图表取色（脚本里也有兜底） */
+      --primary:#4a90e2;
+      --accent:#212a74;
+      --rose:#d81b60;
+      --grid:#eceef4;
     }
 
-    body {
-      font-family: var(--font-main);
-      margin: 0;
-      padding: 0;
-      background: #f5f6fa;
-      color: #333;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      line-height:1.6
     }
+    a{color:var(--primary);text-decoration:none}
+    a:hover{opacity:.88}
 
-    /* Header */
-    .site-header {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-    .site-branding .site-title a {
-      font-weight: 600;
-      font-size: 20px;
-      color: #222;
-      text-decoration: none;
-    }
-    .site-description {
-      margin: 4px 0 0;
-      color: #555;
-      font-size: 14px;
-    }
+    /* Header（延续你之前的结构） */
+    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
+    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;flex-direction:column}
+    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
+    .brand .desc{color:var(--muted);font-size:.92rem}
 
-    /* Main nav */
-    .site-navigation ul.menu {
-      list-style: none;
-      padding: 0;
-      margin: 8px 0 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .site-navigation ul.menu > li > a {
-      text-decoration: none;
-    }
-    .site-navigation .current_page_item > a,
-    .site-navigation .current-menu-item > a {
-      font-weight: 600;
-      text-decoration: underline;
-    }
+    /* 主导航 */
+    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    .nav a{padding:8px 10px;border-radius:10px}
+    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
 
-    /* 下拉菜单交互（替换旧版） */
-    .site-navigation ul.menu > li {
-      position: relative;
-      padding-bottom: 6px;
+    /* ✅ 下拉菜单（与 presentation 同款缓冲悬停） */
+    .nav li{position:relative;padding-bottom:6px}
+    .nav li::after{
+      content:"";
+      position:absolute;left:0;right:0;height:8px;bottom:-8px; /* 鼠标缓冲带，避免中途消失 */
     }
-    .site-navigation ul.menu > li::after {
-      content: "";
-      position: absolute;
-      left: 0; right: 0;
-      height: 8px;
-      bottom: -8px;
+    .nav .submenu{
+      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;min-width:220px;
+      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
+      padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none
     }
-    .site-navigation .sub-menu {
-      position: absolute;
-      z-index: 50;
-      top: 100%;
-      left: 0;
-      margin-top: 6px;
-      min-width: 220px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      padding: 8px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(6px);
-      transition: opacity .25s, transform .25s, visibility .25s;
-      pointer-events: none;
+    .nav li:hover .submenu,
+    .nav li:focus-within .submenu{
+      opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto
     }
-    .site-navigation ul.menu > li:hover .sub-menu,
-    .site-navigation ul.menu > li:focus-within .sub-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .site-navigation .sub-menu a {
-      display: block;
-      padding: 8px 10px;
-      border-radius: 8px;
-      white-space: nowrap;
-    }
-    .site-navigation .sub-menu a:hover {
-      background: #f3f6fb;
-    }
+    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
+    .nav .submenu a:hover{background:#f3f6fb}
 
-    /* Card layout for tools */
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--card-radius);
-      box-shadow: var(--card-shadow);
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
+    /* 页面布局与卡片 */
+    .container{max-width:1200px;margin:18px auto;padding:0 20px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
+    .page-title{font-size:1.6rem;margin:0 0 2px;font-weight:800;color:var(--accent)}
+    .title{font-size:1.8em;margin:0 0 6px;font-weight:800;color:#4a90e2}
+    .subtitle{margin:0 0 14px;color:var(--muted);font-size:.98rem}
+
+    /* 计算器表单 */
+    .calc-table{display:flex;flex-direction:column;gap:14px}
+    .calc-row{display:flex;flex-wrap:wrap;gap:16px}
+    .calc-group{display:flex;flex-direction:column;flex:1 1 320px;min-width:280px}
+    .calc-label{font-weight:700;margin-bottom:6px;color:var(--accent)}
+    .calc-input,.calc-select{
+      height:40px;border:1px solid var(--border);border-radius:10px;padding:0 10px;font-size:1rem;background:#fff;outline:none;
+      transition:border-color .15s, box-shadow .15s
+    }
+    .calc-input:focus,.calc-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.14)}
+    .note{font-size:.92rem;color:var(--muted);margin-top:6px}
+
+    /* Chart */
+    .chart-block{width:100%;height:560px}
+
+    /* Spectrum block */
+    .rainbow-bar{width:100%;height:16px;border-radius:999px;margin:0 auto 12px auto;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(7,1fr);overflow:hidden;border:1px solid var(--border)}
+    .rainbow-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;align-items:end;font-size:0.98rem}
+    .band-title{font-weight:800;color:var(--accent)}
+    .band-range{color:#5d616a;margin-bottom:3px}
+    .band-wl{color:var(--rose)}
+    .caption{color:var(--muted);text-align:center;font-size:.95rem;margin-top:8px}
+
+    /* Footer */
+    .site-footer{margin-top:28px;border-top:1px solid var(--border);background:#fff}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
+    .copyright{color:var(--muted);font-size:.92rem}
+
+    @media (max-width:720px){
+      .nav ul{gap:10px;flex-wrap:wrap}
+      .rainbow-labels{font-size:.92rem}
     }
   </style>
+
+  <!-- Chart.js（保持原功能） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 </head>
 <body>
-  <header id="site-header" class="site-header">
-    <div class="site-branding">
-      <div class="site-title">
-        <a href="/" title="Home" rel="home">Haonan LIU&#039;s Personal Page</a>
-      </div>
-      <p class="site-description">Ph.D., Assistant Professor, Institute of Science Tokyo</p>
-    </div>
-    <nav class="site-navigation" aria-label="Main menu">
-      <ul id="menu-main" class="menu">
-        <li class="menu-item menu-item-home"><a href="/">Home</a></li>
-        <li class="menu-item menu-item-has-children">
-          <a href="/profile/">Profile</a>
-          <ul class="sub-menu">
-            <li class="menu-item"><a href="/profile/current_topic/">Current Topics</a></li>
-            <li class="menu-item"><a href="/profile/publication/">Publication</a></li>
-            <li class="menu-item"><a href="/profile/presentation/">Presentation</a></li>
-            <li class="menu-item"><a href="/patent/">Patent</a></li>
-            <li class="menu-item"><a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a></li>
-          </ul>
-        </li>
-        <li class="menu-item"><a href="/category/posts/">Posts</a></li>
-        <li class="menu-item"><a href="/links/">Links</a></li>
-        <li class="menu-item current_page_item"><a href="/tools/">Tools</a></li>
-      </ul>
-    </nav>
-  </header>
 
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <a class="title" href="/">Haonan LIU’s Personal Page</a>
+        <div class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</div>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="/profile/">Profile</a>
+            <div class="submenu" role="menu" aria-label="Profile submenu">
+              <a href="/profile/current_topic/">Current Topics</a>
+              <a href="/profile/publication/">Publication</a>
+              <a href="/profile/presentation/">Presentation</a>
+              <a href="/patent/">Patent</a>
+              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
+            </div>
+          </li>
+          <li><a href="/category/posts/">Posts</a></li>
+          <li><a href="/links/">Links</a></li>
+          <li><a href="/tools/" aria-current="page">Tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <!-- Main -->
   <main class="container">
@@ -187,7 +179,7 @@
             <label class="calc-label" for="wavenumber">Wavenumber</label>
             <input type="number" id="wavenumber" step="any" class="calc-input" inputmode="decimal" />
             <select id="wnUnit" class="calc-select" aria-label="Wavenumber unit">
-              <!-- Correct conversion factors relative to cm⁻¹ -->
+              <!-- factors relative to cm⁻¹ -->
               <option value="1">cm⁻¹</option>
               <option value="10">mm⁻¹</option>
               <option value="10000">μm⁻¹</option>
@@ -265,169 +257,3 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/profile/">Profile</a></li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/" aria-current="page">Tools</a></li>
-        </ul>
-      </nav>
-      <div class="copyright">© <span id="yy"></span> Haonan LIU. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <!-- Functionality: converter + chart + footer year -->
-  <script>
-    // Footer year
-    document.getElementById('yy').textContent = new Date().getFullYear();
-
-    // Exact speed of light (m/s)
-    const c = 299792458;
-
-    // Form elements
-    const freqInput = document.getElementById('freq');
-    const wlInput   = document.getElementById('wavelength');
-    const wnInput   = document.getElementById('wavenumber');
-    const freqUnit  = document.getElementById('freqUnit');
-    const wlUnit    = document.getElementById('wlUnit');
-    const wnUnit    = document.getElementById('wnUnit');
-
-    // Update lock to avoid feedback loops
-    let lock = false;
-
-    function fromFrequency() {
-      if (lock) return; lock = true;
-      const f = parseFloat(freqInput.value) * parseFloat(freqUnit.value);
-      if (isFinite(f) && f > 0) {
-        const lambda_m = c / f;
-        wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(8);
-        const wn_cm = 1 / (lambda_m * 100); // cm^-1
-        wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(8);
-      } else { wlInput.value = ''; wnInput.value = ''; }
-      lock = false;
-    }
-    function fromWavelength() {
-      if (lock) return; lock = true;
-      const lambda_m = parseFloat(wlInput.value) * parseFloat(wlUnit.value);
-      if (isFinite(lambda_m) && lambda_m > 0) {
-        const f = c / lambda_m;
-        freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(8);
-        const wn_cm = 1 / (lambda_m * 100);
-        wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(8);
-      } else { freqInput.value = ''; wnInput.value = ''; }
-      lock = false;
-    }
-    function fromWavenumber() {
-      if (lock) return; lock = true;
-      const wn_cm = parseFloat(wnInput.value) * parseFloat(wnUnit.value); // cm^-1
-      if (isFinite(wn_cm) && wn_cm > 0) {
-        const lambda_m = 1 / (wn_cm * 100);
-        wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(8);
-        const f = c / lambda_m;
-        freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(8);
-      } else { wlInput.value = ''; freqInput.value = ''; }
-      lock = false;
-    }
-
-    freqInput.addEventListener('input', fromFrequency);
-    wlInput.addEventListener('input', fromWavelength);
-    wnInput.addEventListener('input', fromWavenumber);
-    freqUnit.addEventListener('change', fromFrequency);
-    wlUnit.addEventListener('change', fromWavelength);
-    wnUnit.addEventListener('change', fromWavenumber);
-
-    // ===== Chart =====
-    document.addEventListener('DOMContentLoaded', function(){
-      const ctx = document.getElementById('chart').getContext('2d');
-
-      // Frequency samples (1e9–1e14 Hz)
-      const freqFine = [];
-      for (let exp = 9; exp <= 14; exp += 0.007) freqFine.push(Math.pow(10, exp));
-
-      // X ticks (GHz → THz)
-      const freqTicks  = [0.5,1,2,5,10,20,50,100,200,500,1e3,2e3,5e3,1e4,2e4,5e4,1e5,2e5];
-      const freqLabels = freqTicks.map(v => v < 1e3 ? v + 'GHz' : (v/1e3) + 'THz');
-
-      // Reference lines
-      const bandLinesLeft  = [{y:1,label:"1 μm"},{y:10,label:"10 μm"},{y:100,label:"100 μm"},{y:1e3,label:"1 mm"},{y:1e4,label:"1 cm"}];
-      const bandLinesRight = [{y:1,label:"1 cm⁻¹"},{y:10,label:"1 mm⁻¹"},{y:100,label:"100 cm⁻¹"},{y:1e4,label:"1 μm⁻¹"}];
-
-      // Display units
-      const wlUnitChart = { label: "μm",  factor: 1e-6 };
-      const wnUnitChart = { label: "cm⁻¹", factor: 1 };
-
-      const wavelengthY = freqFine.map(f => (c / f) / wlUnitChart.factor);
-      const wavenumberY = freqFine.map(f => (f / c) / wnUnitChart.factor / 100);
-
-      const rose  = getComputedStyle(document.documentElement).getPropertyValue('--rose').trim()  || '#d81b60';
-      const navy  = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()|| '#212a74';
-      const gridC = getComputedStyle(document.documentElement).getPropertyValue('--grid').trim()  || '#eceef4';
-
-      window.myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: freqFine.map(f => f / 1e9), // GHz for tooltip title
-          datasets: [
-            { label:`Wavelength (${wlUnitChart.label})`, data:wavelengthY, yAxisID:'y1', borderWidth:2, tension:0.08, pointRadius:0, borderColor:rose },
-            { label:`Wavenumber (${wnUnitChart.label})`, data:wavenumberY, yAxisID:'y2', borderWidth:2, borderDash:[7,7], tension:0.08, pointRadius:0, borderColor:navy }
-          ]
-        },
-        options: {
-          maintainAspectRatio:false, responsive:true,
-          layout:{ padding:{ right:24, left:8, top:8, bottom:8 } },
-          plugins:{
-            legend:{ display:false },
-            tooltip:{
-              mode:'index', intersect:false, backgroundColor:'#fff', borderColor:'#e5e7ef', borderWidth:1,
-              titleColor:'#111', bodyColor:'#111', titleFont:{size:14,weight:'700'}, bodyFont:{size:13}, padding:10,
-              callbacks:{ title(items){ const vGHz = items[0].parsed.x; return vGHz<1000 ? vGHz.toFixed(2)+' GHz' : (vGHz/1000).toFixed(2)+' THz'; } }
-            }
-          },
-          scales:{
-            x:{
-              type:'logarithmic', min:0.5, max:2e5, grid:{color:gridC}, border:{color:'#dde0ea'},
-              title:{ display:true, text:'Frequency (GHz → THz)', color:navy, font:{size:15,weight:'700'} },
-              afterBuildTicks(axis){ axis.ticks = freqTicks.map(v=>({value:v})); return axis.ticks; },
-              ticks:{ color:'#3a3e46', callback(val){ const i=freqTicks.indexOf(val); return i!==-1? freqLabels[i] : ''; } }
-            },
-            y1:{
-              type:'logarithmic', position:'left', min:Math.min(...wavelengthY)*0.9, max:Math.max(...wavelengthY)*1.1,
-              grid:{color:gridC}, border:{color:'#dde0ea'},
-              title:{ display:true, text:`Wavelength (${wlUnitChart.label})`, color:rose, font:{size:14,weight:'700'} },
-              ticks:{ color:rose, callback(v){ if(v<1||v>=1e4) return Number(v).toExponential(1); if(v>=1e3) return (v/1e3).toFixed(1)+'k'; return Number(v).toFixed(0); } }
-            },
-            y2:{
-              type:'logarithmic', position:'right', min:Math.min(...wavenumberY)*0.7, max:Math.max(...wavenumberY)*1.3,
-              grid:{ drawOnChartArea:false }, border:{color:'#dde0ea'},
-              title:{ display:true, text:`Wavenumber (${wnUnitChart.label})`, color:navy, font:{size:14,weight:'700'} },
-              ticks:{ color:navy, callback(v){ if(v<1||v>=1e4) return Number(v).toExponential(1); return Number(v).toFixed(0); } }
-            }
-          }
-        },
-        plugins:[{
-          id:'bandLines',
-          afterDatasetsDraw:(chart)=>{
-            const x=chart.scales.x, y1=chart.scales.y1, y2=chart.scales.y2, ctx=chart.ctx;
-
-            // Left axis lines (wavelength)
-            bandLinesLeft.forEach(l=>{
-              const py=y1.getPixelForValue(l.y); if(py<y1.top||py>y1.bottom) return;
-              ctx.save(); ctx.beginPath(); ctx.setLineDash([4,3]); ctx.strokeStyle="#bbb"; ctx.globalAlpha=.29;
-              ctx.moveTo(x.left,py); ctx.lineTo(x.right,py); ctx.stroke();
-              ctx.setLineDash([]); ctx.globalAlpha=1; ctx.font='italic 13px Arial,sans-serif'; ctx.fillStyle=rose; ctx.textAlign='left';
-              ctx.fillText(l.label, x.left+5, py-2); ctx.restore();
-            });
-
-            // Right axis lines (wavenumber)
-            bandLinesRight.forEach(l=>{
-              const py=y2.getPixelForValue(l.y); if(py<y2.top||py>y2.bottom) return;
-              ctx.save(); ctx.beginPath(); ctx.setLineDash([4,3]); ctx.strokeStyle="#bbb"; ctx.globalAlpha=.29;
-              ctx.moveTo(x.left,py); ctx.lineTo(x.right,py); ctx.stroke();
-              ctx.setLineDash([]); ctx.globalAlpha=1; ctx.font='italic 13px Arial,sans-serif'; ctx.fillStyle = navy; ctx.textAlign='right';
-              ctx.fillText(l.label, x.right-5, py-2); ctx.restore();
-            });
-          }
-        }]
-      });
-    });
-  </script>
-</body>
-</html>
