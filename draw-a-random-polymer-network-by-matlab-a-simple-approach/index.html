@@ -1,125 +1,150 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Draw a random polymer network by Matlab – a simple approach</title>
+  <meta name="description" content="A simple Matlab script to draw a random polymer network and a stretched variant.">
 
-  <!-- 皮肤样式（精简版） -->
+  <!-- Self-contained theme (exactly the same as Presentation/Patent) -->
   <style>
     :root{
-      --bg:#f5f6fa; --card:#ffffff; --text:#20242a; --muted:#5c6270;
-      --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
-      --primary:#4a90e2; --accent:#212a74;
-      --space:24px; --space-sm:16px; --container-y:24px; --card-pad:24px;
+      /* Core palette */
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --text:#20242a;
+      --muted:#5c6270;
+      --border:#e6e9ef;
+      --shadow:0 8px 24px rgba(23,31,56,.08);
+      --radius:16px;
+
+      --primary:#4a90e2;
+      --accent:#212a74;
+      --rose:#d81b60;
+      --grid:#eceef4;
+
+      /* Spacing scale */
+      --space:24px;
+      --space-sm:16px;
+      --container-y:24px;
+      --card-pad:24px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; background:var(--bg); color:var(--text);
+      margin:0;background:var(--bg);color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      line-height:1.65;
+      line-height:1.65
     }
-    a{color:var(--primary); text-decoration:none}
+    a{color:var(--primary);text-decoration:none}
     a:hover{opacity:.9}
 
     /* Header */
-    header.site-header{
-      position:sticky; top:0; z-index:40; background:#fff; border-bottom:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 20px;
-    }
-    .brand{display:flex; flex-direction:column}
-    .brand .title{margin:0; font-weight:800; color:var(--accent); font-size:1.15rem}
-    .brand .desc{margin:.25rem 0 0; color:var(--muted); font-size:.92rem}
+    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
+    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;flex-direction:column}
+    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
+    .brand .desc{color:var(--muted);font-size:.92rem}
 
-    /* Nav（可访问下拉） */
-    nav.nav ul{list-style:none; margin:0; padding:0; display:flex; gap:18px; align-items:center}
-    nav.nav li{position:relative; padding-bottom:6px}
-    nav.nav a{padding:8px 10px; border-radius:10px}
-    nav.nav a[aria-current="page"]{background:rgba(74,144,226,.12); color:var(--accent); font-weight:600}
-    .submenu{
-      position:absolute; top:100%; left:0; margin-top:6px; z-index:50;
-      background:#fff; border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow);
-      min-width:220px; padding:8px;
-      opacity:0; visibility:hidden; transform:translateY(6px);
-      transition:opacity .25s ease, transform .25s ease, visibility .25s ease; transition-delay:.12s;
-      pointer-events:none;
-    }
-    nav.nav li:hover>.submenu, nav.nav li:focus-within>.submenu{
-      opacity:1; visibility:visible; transform:translateY(0); transition-delay:0s; pointer-events:auto;
-    }
-    .submenu a{display:block; padding:8px 10px; border-radius:8px; white-space:nowrap}
-    .submenu a:hover{background:#f3f6fb}
-    nav.nav li::after{content:""; position:absolute; left:0; right:0; height:8px; bottom:-8px}
-    @media (prefers-reduced-motion:reduce){.submenu{transition:none}}
+    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    .nav a{padding:8px 10px;border-radius:10px}
+    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+    .nav li{position:relative;padding-bottom:6px}
 
-    /* Layout 单栏 */
-    .container{max-width:1200px; margin:var(--container-y) auto; padding:0 20px}
-    .main{max-width:800px; margin:0 auto}
-    .page-header{margin:0 0 var(--space-sm)}
-    .entry-title{margin:0; font-weight:800; color:var(--accent)}
+    /* Accessible submenu (same behavior as Presentation) */
+    .nav .submenu{
+      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
+      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
+      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+      transition-delay:.12s;pointer-events:none
+    }
+    .nav li:hover .submenu,.nav li:focus-within .submenu{
+      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
+    }
+    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
+    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
+    .nav .submenu a:hover{background:#f3f6fb}
+    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
-    /* 内容卡片 */
+    /* Layout */
+    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
+    .container>section+section{margin-top:var(--space)}
+
+    /* Cards & headings */
     .card{
-      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:var(--card-pad);
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:var(--card-pad)
     }
-    .wp-block-code code{display:block; border:1px solid var(--border); border-radius:12px; padding:16px; overflow:auto}
+    .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
+    .lead{font-size:1.05rem}
+    .muted{color:var(--muted)}
+    .wp-code{border:1px solid var(--border);border-radius:12px;padding:16px;overflow:auto;background:#f7f8fb}
     figure{margin:var(--space-sm) 0}
-    figure img{display:block; width:100%; height:auto; border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow)}
-    figcaption{color:var(--muted); text-align:center; margin-top:6px}
+    figure img{display:block;width:100%;height:auto;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow)}
+    figcaption{color:var(--muted);text-align:center;margin-top:6px}
 
     /* Footer */
-    footer.site-footer{margin-top:var(--space); border-top:1px solid var(--border); background:#fff}
-    .footer-inner{max-width:1200px; margin:0 auto; padding:14px 20px; display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:space-between}
-    .footer-nav ul{list-style:none; margin:0; padding:0; display:flex; gap:16px; flex-wrap:wrap}
-    .footer-nav a{padding:6px 10px; border:1px solid var(--border); border-radius:999px}
+    .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
+      justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
+    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
+    .copyright{color:var(--muted);font-size:.92rem}
 
     /* Responsive */
     @media (max-width:960px){
-      :root{--space:20px; --container-y:20px; --card-pad:20px}
-      header.site-header{flex-wrap:wrap}
+      :root{--space:20px;--container-y:20px;--card-pad:20px}
     }
   </style>
+
+  <link rel="icon" href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/wp-content/uploads/2022/09/cropped-avatar-180x180.png">
 </head>
 <body>
-  <a class="skip-link" href="#content">跳到内容</a>
 
+  <!-- Header (identical structure to Patent/Presentation) -->
   <header class="site-header">
-    <div class="brand">
-      <p class="title">Haonan LIU&#39;s Personal Page</p>
-      <p class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</p>
+    <div class="header-inner">
+      <div class="brand">
+        <a class="title" href="/">Haonan LIU’s Personal Page</a>
+        <div class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</div>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="/profile/" aria-haspopup="true" aria-expanded="false" aria-controls="sub-profile">Profile</a>
+            <div id="sub-profile" class="submenu" role="menu" aria-label="Profile submenu">
+              <a href="/profile/current_topic/">Current Topics</a>
+              <a href="/profile/publication/">Publication</a>
+              <a href="/profile/presentation/">Presentation</a>
+              <a href="/profile/patent/">Patent</a>
+              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
+            </div>
+          </li>
+          <li><a href="/category/posts/" aria-current="page">Posts</a></li>
+          <li><a href="/links/">Links</a></li>
+          <li><a href="/tools/">Tools</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav class="nav" aria-label="Main menu">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li>
-          <a href="/profile/" aria-haspopup="true">Profile</a>
-          <div class="submenu" role="menu" aria-label="Profile submenu">
-            <a href="/profile/current_topic/">Current Topics</a>
-            <a href="/profile/publication/">Publication</a>
-            <a href="/profile/presentation/">Presentation</a>
-            <a href="/profile/patent/">Patent</a>
-            <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
-          </div>
-        </li>
-        <li><a href="/category/posts/" aria-current="page">Posts</a></li>
-        <li><a href="/links/">Links</a></li>
-        <li><a href="/tools/">Tools</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main id="content" class="container">
-    <div class="main">
-      <header class="page-header">
-        <h1 class="entry-title">Draw a random polymer network by Matlab – a simple approach</h1>
-      </header>
+  <!-- Main -->
+  <main class="container">
+    <!-- Page title / intro -->
+    <section class="card">
+      <h1 class="section-title">Draw a random polymer network by Matlab – a simple approach</h1>
+      <p class="lead">A simple code can be used to depict the schematic diagram of the polymer network (to ease manual drawing).</p>
+    </section>
 
-      <section class="card">
-        <p>A simple code can be used to depict the schematic diagram of the polymer network. (To solve the pain of manual depiction)</p>
+    <!-- Article body -->
+    <section class="card">
+<pre class="wp-code"><code>clc,clear,close all
 
-<pre class="wp-block-code"><code>clc,clear,close all
 N = 200; % The length of chains.
 P = 200; % The amount of chains.
 
@@ -146,24 +171,24 @@ xticks([])
 yticks([])
 axis square;</code></pre>
 
-        <figure>
-          <img src="/wp-content/uploads/2022/05/simple-1.png" alt="example result" width="718" height="719" />
-          <figcaption>An example of the result.</figcaption>
-        </figure>
+      <figure>
+        <img src="/wp-content/uploads/2022/05/simple-1.png" alt="Example result of random polymer network" width="718" height="719">
+        <figcaption>An example of the result.</figcaption>
+      </figure>
 
-        <p>By simple modification, a stretched network could also be produced.</p>
+      <p>By simple modification, a stretched network could also be produced.</p>
 
-        <figure>
-          <img src="/wp-content/uploads/2022/05/stretch.png" alt="stretched network (Y)" width="718" height="719" />
-          <figcaption>An example of stretched network (along Y).</figcaption>
-        </figure>
-      </section>
-    </div>
+      <figure>
+        <img src="/wp-content/uploads/2022/05/stretch.png" alt="Stretched network along Y" width="718" height="719">
+        <figcaption>An example of stretched network (along Y).</figcaption>
+      </figure>
+    </section>
   </main>
 
+  <!-- Footer (identical structure to Patent/Presentation) -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer menu">
+      <nav class="footer-nav" aria-label="Footer">
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/profile/">Profile</a></li>
@@ -176,10 +201,12 @@ axis square;</code></pre>
           <li><a href="/tools/">Tools</a></li>
         </ul>
       </nav>
-      <small class="muted">© <span id="y"></span> Haonan LIU</small>
+      <div class="copyright">© <span id="yy"></span> Haonan LIU. All rights reserved.</div>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('yy').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
