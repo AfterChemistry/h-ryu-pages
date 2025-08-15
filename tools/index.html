@@ -1,120 +1,146 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Frequency–Wavelength–Wavenumber Converter</title>
 
-  <!-- 统一主题样式 -->
   <style>
-    :root{
-      --bg:#f5f6f8;
-      --card:#ffffff;
-      --text:#1e1e22;
-      --muted:#5b5e66;
-      --border:#e8eaf0;
-      --shadow:0 8px 24px rgba(23,31,56,.08);
-      --radius:18px;
-
-      --primary:#7b3fc4;   /* 主题紫 */
-      --accent:#212a74;    /* 深蓝 */
-      --rose:#d81b60;      /* 玫红 */
-      --grid:#eceef4;
+    :root {
+      --card-bg: #fff;
+      --card-radius: 16px;
+      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --primary-color: #4a90e2;
+      --border-color: #ddd;
+      --font-main: Arial, sans-serif;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    body {
+      font-family: var(--font-main);
+      margin: 0;
+      padding: 0;
+      background: #f5f6fa;
+      color: #333;
     }
 
-    a{color:var(--primary);text-decoration:none;transition:color .2s}
-    a:hover{color:#9f6be5}
-
-    .container{max-width:1240px;padding:24px;margin:0 auto}
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:24px 28px;
-      margin:20px 0;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
-    .title{
-      margin:0 0 8px;
-      text-align:center;
-      font-weight:700;
-      letter-spacing:.2px;
-      color:var(--accent);
-    }
-    .subtitle{
-      margin:0 auto 6px;
-      text-align:center;
-      color:var(--muted);
-      font-size:.95rem;
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--card-radius);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
-    /* 工具区 */
-    .tool-container{width:1200px;max-width:100%;margin:0 auto}
-    .calc-table{display:flex;flex-direction:column;gap:16px;margin:18px 0}
-    .calc-row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
-    .calc-group{
-      display:flex;align-items:center;gap:10px;
-      padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:#fff;
-      min-width:320px;max-width:380px;flex:1 1 320px
+    .title {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: var(--primary-color);
     }
-    .calc-label{min-width:120px;color:var(--accent);font-weight:600}
-    .calc-input,.calc-select{
-      height:40px; border:1px solid var(--border); border-radius:10px; padding:0 10px;
-      font-size:0.98rem; color:var(--text); background:#fff; outline:none;
-      transition:border-color .15s, box-shadow .15s; width:120px;
-    }
-    .calc-input:focus,.calc-select:focus{
-      border-color:var(--primary);
-      box-shadow:0 0 0 3px rgba(123,63,196,.12);
-    }
-    .note{color:var(--muted);text-align:center;font-size:.95rem}
 
-    /* 图表区 */
-    .chart-card{padding:18px}
-    .chart-block{width:100%;height:760px}
-    @media (max-width:1050px){ .chart-block{height:62vw;min-height:380px} }
-
-    /* 彩虹频谱区（统一圆角与阴影） */
-    .spectrum-card{padding:20px 22px}
-    .rainbow-bar{
-      width:100%;height:18px;border-radius:999px;overflow:hidden;
-      box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(7,1fr);margin:0 auto 14px;
-      border:1px solid var(--border)
+    .subtitle {
+      font-size: 1em;
+      color: #555;
+      margin-bottom: 20px;
     }
-    .rainbow-labels{
-      display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;align-items:end;
-      font-size:0.98rem
-    }
-    .band-title{font-weight:700;color:var(--accent)}
-    .band-range{color:#5d616a;margin-bottom:3px}
-    .band-wl{color:var(--rose);font-size:.95rem}
 
-    /* 页脚小字 */
-    .caption{color:var(--muted);text-align:center;font-size:.95rem;margin-top:8px}
+    .calc-table {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .calc-group {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 300px;
+    }
+
+    .calc-label {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .calc-input, .calc-select {
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    .calc-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .note {
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .chart-block {
+      height: 400px;
+    }
+
+    .rainbow-bar {
+      width: 100%;
+      height: 16px;
+      border-radius: 9px;
+      margin: 0 auto 12px auto;
+      box-shadow: 0 1px 8px #bbb6;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      overflow: hidden;
+    }
+
+    .rainbow-labels {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      width: 100%;
+      text-align: center;
+      align-items: end;
+      font-size: 1em;
+    }
+
+    .band-title {
+      font-size: 1.27em;
+      font-weight: 500;
+    }
+
+    .band-range {
+      color: #444;
+      margin-bottom: 1.5px;
+    }
+
+    .band-wl {
+      color: #c1463b;
+      font-size: 0.98em;
+    }
+
+    .caption {
+      text-align: center;
+      color: #aaa;
+      font-size: 1.05em;
+      margin-top: 8px;
+    }
   </style>
 
-  <!-- Chart.js （如有 CSP，请允许 https://cdn.jsdelivr.net） -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 </head>
 <body>
   <div class="container">
-    <!-- 工具卡片 -->
+    <!-- Tool Card -->
     <section class="card">
       <h1 class="title">Frequency–Wavelength–Wavenumber Converter</h1>
-      <p class="subtitle">在真空中计算（c = 3 × 10<sup>8</sup> m/s）。任意字段输入自动联动转换。</p>
+      <p class="subtitle">Calculated in vacuum (c = 299,792,458 m/s). Enter any field and the others will update automatically.</p>
 
       <div class="tool-container">
         <form class="calc-table" autocomplete="off" onsubmit="return false;">
@@ -147,33 +173,33 @@
               <input type="number" id="wavenumber" step="any" class="calc-input" inputmode="decimal" />
               <select id="wnUnit" class="calc-select" aria-label="Wavenumber unit">
                 <option value="1">cm⁻¹</option>
-                <option value="1e3">mm⁻¹</option>
-                <option value="1e6">μm⁻¹</option>
+                <option value="10">mm⁻¹</option>
+                <option value="10000">μm⁻¹</option>
               </select>
             </div>
           </div>
         </form>
-        <div class="note">提示：支持小数与科学计数法（如 3e2）。单位切换将自动换算。</div>
+        <div class="note">Tip: Supports decimals and scientific notation (e.g., 3e2). Units will auto-convert when changed.</div>
       </div>
     </section>
 
-    <!-- 图表卡片 -->
+    <!-- Chart Card -->
     <section class="card chart-card">
       <div class="chart-block">
         <canvas id="chart"></canvas>
       </div>
     </section>
 
-    <!-- 彩虹频谱卡片（风格统一） -->
+    <!-- Spectrum Card -->
     <section class="card spectrum-card">
       <div class="rainbow-bar" aria-hidden="true">
-        <div style="background:linear-gradient(to right,#a9b9d9,#60cfc7)"></div>
-        <div style="background:linear-gradient(to right,#60cfc7,#f4e57d)"></div>
-        <div style="background:linear-gradient(to right,#f4e57d,#fe0000)"></div>
-        <div style="background:linear-gradient(to right,#fe0000 0%,#fe0 25%,#0f0 50%,#00f 75%,#8b00ff 100%)"></div>
-        <div style="background:linear-gradient(to right,#8b00ff,#e2c6e4)"></div>
-        <div style="background:linear-gradient(to right,#e2c6e4,#b7bad7)"></div>
-        <div style="background:linear-gradient(to right,#b7bad7,#e6e6f3)"></div>
+        <div style="background: linear-gradient(to right, #a9b9d9, #60cfc7)"></div>
+        <div style="background: linear-gradient(to right, #60cfc7, #f4e57d)"></div>
+        <div style="background: linear-gradient(to right, #f4e57d, #fe0000)"></div>
+        <div style="background: linear-gradient(to right, #fe0000 0%, #fe0 25%, #0f0 50%, #00f 75%, #8b00ff 100%)"></div>
+        <div style="background: linear-gradient(to right, #8b00ff, #e2c6e4)"></div>
+        <div style="background: linear-gradient(to right, #e2c6e4, #b7bad7)"></div>
+        <div style="background: linear-gradient(to right, #b7bad7, #e6e6f3)"></div>
       </div>
 
       <div class="rainbow-labels">
@@ -188,7 +214,7 @@
           <div class="band-wl">10 cm – 1 mm</div>
         </div>
         <div>
-          <div class="band-title">IR</div>
+          <div class="band-title">Infrared</div>
           <div class="band-range">300 GHz – 400 THz</div>
           <div class="band-wl">1 mm – 750 nm</div>
         </div>
@@ -198,7 +224,7 @@
           <div class="band-wl" style="font-weight:600">750 – 400 nm</div>
         </div>
         <div>
-          <div class="band-title">UV</div>
+          <div class="band-title">Ultraviolet</div>
           <div class="band-range">750 THz – 30 PHz</div>
           <div class="band-wl">400 – 10 nm</div>
         </div>
@@ -208,161 +234,112 @@
           <div class="band-wl">10 nm – 0.01 nm</div>
         </div>
         <div>
-          <div class="band-title">Gamma</div>
+          <div class="band-title">Gamma Ray</div>
           <div class="band-range">&gt;30 EHz</div>
           <div class="band-wl">&lt;0.01 nm</div>
         </div>
       </div>
 
       <div class="caption">
-        Electromagnetic spectrum: frequency and wavelength (in vacuum). Ranges are approximate, transitions are smooth.
+        Electromagnetic spectrum: frequency and wavelength (in vacuum). Ranges are approximate, transitions are gradual.
       </div>
     </section>
   </div>
 
-  <!-- 功能脚本 -->
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      /* 计算联动 */
-      const c = 3e8;
-      const $ = id => document.getElementById(id);
-      const freqInput = $("freq"), freqUnit = $("freqUnit");
-      const wlInput   = $("wavelength"), wlUnit = $("wlUnit");
-      const wnInput   = $("wavenumber"), wnUnit = $("wnUnit");
-      let lock = false;
+    const c = 299792458; // m/s (exact in vacuum)
 
-      function fromFreq(){
-        if (lock) return; lock = true;
-        const f = parseFloat(freqInput.value) * parseFloat(freqUnit.value);
-        if (f > 0){
-          const lambda_m = c / f;
-          wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(8);
-          const wn_cm = 1 / (lambda_m * 100);
-          wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(8);
-        } else { wlInput.value = ''; wnInput.value = ''; }
-        lock = false;
-      }
-      function fromWavelength(){
-        if (lock) return; lock = true;
-        const lambda_m = parseFloat(wlInput.value) * parseFloat(wlUnit.value);
-        if (lambda_m > 0){
-          const f = c / lambda_m;
-          freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(8);
-          const wn_cm = 1 / (lambda_m * 100);
-          wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(8);
-        } else { freqInput.value = ''; wnInput.value = ''; }
-        lock = false;
-      }
-      function fromWavenumber(){
-        if (lock) return; lock = true;
-        const wnval = parseFloat(wnInput.value) * parseFloat(wnUnit.value); // cm⁻¹
-        if (wnval > 0){
-          const lambda_m = (1 / wnval) / 100;
-          wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(8);
-          const f = c / lambda_m;
-          freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(8);
-        } else { wlInput.value = ''; freqInput.value = ''; }
-        lock = false;
-      }
+    const freqInput = document.getElementById('freq');
+    const wlInput = document.getElementById('wavelength');
+    const wnInput = document.getElementById('wavenumber');
 
-      freqInput.addEventListener("input", fromFreq);
-      freqUnit.addEventListener("change", fromFreq);
-      wlInput.addEventListener("input", fromWavelength);
-      wlUnit.addEventListener("change", fromWavelength);
-      wnInput.addEventListener("input", fromWavenumber);
-      wnUnit.addEventListener("change", fromWavenumber);
+    const freqUnit = document.getElementById('freqUnit');
+    const wlUnit = document.getElementById('wlUnit');
+    const wnUnit = document.getElementById('wnUnit');
 
-      /* 图表绘制（与主题色统一） */
-      const ctx = document.getElementById('chart').getContext('2d');
-      const freqTicks = [0.5,1,2,5,10,20,50,100,200,500,1e3,2e3,5e3,1e4,2e4,5e4,1e5,2e5];
-      const freqLabels = freqTicks.map(v => v < 1e3 ? v + 'GHz' : (v/1e3) + 'THz');
-      const freqFine = [];
-      for (let exp = 9; exp <= 14; exp += 0.007) freqFine.push(Math.pow(10, exp));
+    function fromFrequency() {
+      const f = parseFloat(freqInput.value) * parseFloat(freqUnit.value);
+      if (!isFinite(f) || f <= 0) return;
+      const lambda_m = c / f;
+      wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(6);
+      const wn_cm = 1 / (lambda_m * 100);
+      wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(6);
+    }
 
-      const wlUnitChart = { label: "μm",  factor: 1e-6 };
-      const wnUnitChart = { label: "cm⁻¹", factor: 1 };
+    function fromWavelength() {
+      const lambda_m = parseFloat(wlInput.value) * parseFloat(wlUnit.value);
+      if (!isFinite(lambda_m) || lambda_m <= 0) return;
+      const f = c / lambda_m;
+      freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(6);
+      const wn_cm = 1 / (lambda_m * 100);
+      wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(6);
+    }
 
-      function drawChart(){
-        const wavelengthY = freqFine.map(f => (c / f) / wlUnitChart.factor);
-        const wavenumberY = freqFine.map(f => (f / c) / wnUnitChart.factor / 100);
+    function fromWavenumber() {
+      const wn_cm = parseFloat(wnInput.value) * parseFloat(wnUnit.value);
+      if (!isFinite(wn_cm) || wn_cm <= 0) return;
+      const lambda_m = 1 / (wn_cm * 100);
+      const f = c / lambda_m;
+      freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(6);
+      wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(6);
+    }
 
-        if (window.myChart) window.myChart.destroy();
-        window.myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: freqFine.map(f => f / 1e9),
-            datasets: [
-              {
-                label:`Wavelength (${wlUnitChart.label})`,
-                data:wavelengthY, yAxisID:'y1',
-                borderWidth:2, tension:0.08, pointRadius:0,
-                borderColor:getComputedStyle(document.documentElement).getPropertyValue('--rose').trim()
-              },
-              {
-                label:`Wavenumber (${wnUnitChart.label})`,
-                data:wavenumberY, yAxisID:'y2',
-                borderWidth:2, borderDash:[7,7], tension:0.08, pointRadius:0,
-                borderColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()
-              }
-            ]
+    freqInput.addEventListener('input', fromFrequency);
+    wlInput.addEventListener('input', fromWavelength);
+    wnInput.addEventListener('input', fromWavenumber);
+
+    freqUnit.addEventListener('change', fromFrequency);
+    wlUnit.addEventListener('change', fromWavelength);
+    wnUnit.addEventListener('change', fromWavenumber);
+
+    const ctx = document.getElementById('chart').getContext('2d');
+
+    const bandLinesLeft = [
+      { x: 1e0, label: "1 Hz" },
+      { x: 1e3, label: "1 kHz" },
+      { x: 1e6, label: "1 MHz" },
+      { x: 1e9, label: "1 GHz" },
+      { x: 1e12, label: "1 THz" },
+      { x: 1e15, label: "1 PHz" },
+      { x: 1e18, label: "1 EHz" }
+    ];
+
+    const bandLinesRight = [
+      { y: 1, label: "1 cm⁻¹" },
+      { y: 10, label: "1 mm⁻¹" },
+      { y: 100, label: "100 cm⁻¹" },
+      { y: 1e4, label: "1 μm⁻¹" }
+    ];
+
+    new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        datasets: [{
+          label: 'Spectrum',
+          data: [],
+          pointRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            type: 'logarithmic',
+            position: 'bottom',
+            title: { display: true, text: 'Frequency (Hz)' },
+            grid: { color: '#eee' }
           },
-          options: {
-            maintainAspectRatio:false,
-            responsive:true,
-            layout:{ padding:{ right:24, left:8, top:8, bottom:8 } },
-            plugins:{
-              legend:{ display:false },
-              tooltip:{
-                mode:'index', intersect:false,
-                titleColor:'#111', bodyColor:'#111',
-                backgroundColor:'#fff', borderColor:'#e5e7ef', borderWidth:1,
-                titleFont:{size:14,weight:'700'}, bodyFont:{size:13},
-                padding:10,
-                callbacks:{
-                  title(items){
-                    const v = items[0].parsed.x;
-                    return v<1000 ? v.toFixed(2)+' GHz' : (v/1000).toFixed(2)+' THz';
-                  }
-                }
-              }
-            },
-            scales:{
-              x:{
-                type:'logarithmic', min:0.5, max:2e5,
-                grid:{ color:getComputedStyle(document.documentElement).getPropertyValue('--grid').trim() },
-                border:{ color:'#dde0ea' },
-                title:{ display:true, text:'Frequency (GHz → THz)', color: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), font:{size:15,weight:'600'} },
-                afterBuildTicks(axis){ axis.ticks = freqTicks.map(v=>({value:v})); return axis.ticks; },
-                ticks:{
-                  color:'#3a3e46',
-                  callback(val){ const i=freqTicks.indexOf(val); return i!==-1? freqLabels[i] : '';}
-                }
-              },
-              y1:{
-                type:'logarithmic', position:'left',
-                grid:{ color:getComputedStyle(document.documentElement).getPropertyValue('--grid').trim() },
-                border:{ color:'#dde0ea' },
-                title:{ display:true, text:`Wavelength (${wlUnitChart.label})`, color:getComputedStyle(document.documentElement).getPropertyValue('--rose').trim(), font:{size:14,weight:'600'} },
-                ticks:{
-                  color:getComputedStyle(document.documentElement).getPropertyValue('--rose').trim(),
-                  callback(v){ if(v<1||v>=1e4) return Number(v).toExponential(1); if(v>=1e3) return (v/1e3).toFixed(1)+'k'; return Number(v).toFixed(0); }
-                }
-              },
-              y2:{
-                type:'logarithmic', position:'right',
-                grid:{ drawOnChartArea:false },
-                border:{ color:'#dde0ea' },
-                title:{ display:true, text:`Wavenumber (${wnUnitChart.label})`, color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), font:{size:14,weight:'600'} },
-                ticks:{
-                  color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
-                  callback(v){ if(v<1||v>=1e4) return Number(v).toExponential(1); return Number(v).toFixed(0); }
-                }
-              }
-            }
+          y: {
+            type: 'logarithmic',
+            position: 'left',
+            title: { display: true, text: 'Wavenumber (cm⁻¹)' },
+            grid: { color: '#eee' }
           }
-        });
+        },
+        plugins: {
+          legend: { display: false }
+        }
       }
-      drawChart();
     });
   </script>
 </body>
