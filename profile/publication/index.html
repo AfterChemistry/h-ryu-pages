@@ -1,20 +1,35 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Publication – Haonan LIU’s Personal Page</title>
-  <meta name="description" content="Publications by Haonan Liu and collaborators, organized by year.">
-  <link rel="canonical" href="/profile/publication/" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Presentation – Haonan LIU’s Personal Page</title>
+  <meta name="description" content="Conference and symposium presentations by Haonan Liu and collaborators, organized by year.">
 
-  <!-- Self-contained unified theme -->
+  <!-- Self-contained theme (shared with Home/Tools) -->
   <style>
     :root{
-      --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
-      --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08);
-      --accent:#212a74; --primary:#4a90e2;
-      --radius:16px; --space:24px; --space-sm:16px; --pad:24px
+      /* Core palette */
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --text:#20242a;
+      --muted:#5c6270;
+      --border:#e6e9ef;
+      --shadow:0 8px 24px rgba(23,31,56,.08);
+      --radius:16px;
+
+      --primary:#4a90e2;
+      --accent:#212a74;
+      --rose:#d81b60;
+      --grid:#eceef4;
+
+      /* Spacing scale */
+      --space:24px;
+      --space-sm:16px;
+      --container-y:24px;
+      --card-pad:24px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -31,43 +46,62 @@
     .brand{display:flex;flex-direction:column}
     .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
     .brand .desc{color:var(--muted);font-size:.92rem}
+
     .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
     .nav a{padding:8px 10px;border-radius:10px}
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-
-    /* Submenu */
     .nav li{position:relative;padding-bottom:6px}
+
+    /* Accessible submenu */
     .nav .submenu{
-      position:absolute;top:100%;left:0;margin-top:6px;min-width:220px;
+      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
       background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-      padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none
+      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+      transition-delay:.12s;pointer-events:none
     }
-    .nav li:hover .submenu,.nav li:focus-within .submenu{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+    .nav li:hover .submenu,.nav li:focus-within .submenu{
+      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
+    }
+    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
     .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
     .nav .submenu a:hover{background:#f3f6fb}
+    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
     /* Layout */
-    .container{max-width:1200px;margin:24px auto;padding:0 20px}
-    /* 关键：与 Presentation 一致的节间距 */
-    .container > section + section{margin-top:var(--space)}
+    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
+    .container>section+section{margin-top:var(--space)}
 
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--pad)}
+    /* Cards & headings */
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:var(--card-pad)
+    }
     .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
-    .year{scroll-margin-top:90px}
-    .bullets{padding-left:1.15em;margin:0}
-    .bullets li{margin:10px 0}
+    .lead{font-size:1.05rem}
+    .bullets{padding-left:1.1em;margin:0}
+    .bullets li{margin:8px 0}
+    .muted{color:var(--muted)}
     mark.has-inline-color{color:#bc4166;background:transparent}
+
+    /* Year nav (local) */
     .year-nav{display:flex;flex-wrap:wrap;gap:8px}
-    .year-nav a{border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+    .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+    .year{scroll-margin-top:90px}
 
     /* Footer */
     .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
-    .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
+      justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
     .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
     .copyright{color:var(--muted);font-size:.92rem}
 
-    @media (max-width:960px){:root{--pad:20px;--space:20px}}
+    /* Responsive */
+    @media (max-width:960px){
+      :root{--space:20px;--container-y:20px;--card-pad:20px}
+    }
   </style>
 
   <link rel="icon" href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png" sizes="32x32">
@@ -89,8 +123,8 @@
             <a href="/profile/" aria-haspopup="true" aria-expanded="false" aria-controls="sub-profile">Profile</a>
             <div id="sub-profile" class="submenu" role="menu" aria-label="Profile submenu">
               <a href="/profile/current_topic/">Current Topics</a>
-              <a href="/profile/publication/" aria-current="page">Publication</a>
-              <a href="/profile/presentation/">Presentation</a>
+              <a href="/profile/publication/">Publication</a>
+              <a href="/profile/presentation/" aria-current="page">Presentation</a>
               <a href="/patent/">Patent</a>
               <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
             </div>
