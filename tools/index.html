@@ -5,73 +5,54 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Tools – Frequency–Wavelength–Wavenumber Converter</title>
 
-  <!-- 仅修复下拉菜单悬停，其余保持你原来的结构与功能 -->
   <style>
     :root{
-      --bg:#f5f6fa;
-      --card:#ffffff;
-      --text:#20242a;
-      --muted:#5c6270;
-      --border:#e6e9ef;
-      --shadow:0 8px 24px rgba(23,31,56,.08);
-      --radius:16px;
-
-      /* 供图表取色（脚本里也有兜底） */
-      --primary:#4a90e2;
-      --accent:#212a74;
-      --rose:#d81b60;
-      --grid:#eceef4;
+      --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
+      --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
+      --primary:#4a90e2; --accent:#212a74; --rose:#d81b60; --grid:#eceef4;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      line-height:1.6
-    }
+    body{margin:0;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
     a{color:var(--primary);text-decoration:none}
     a:hover{opacity:.88}
 
-    /* Header（延续你之前的结构） */
+    /* Header */
     .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
     .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
     .brand{display:flex;flex-direction:column}
     .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
     .brand .desc{color:var(--muted);font-size:.92rem}
 
-    /* 主导航 */
+    /* Main nav */
     .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
     .nav a{padding:8px 10px;border-radius:10px}
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
 
-    /* ✅ 下拉菜单（与 presentation 同款缓冲悬停） */
+    /* ✅ 下拉菜单：缓冲悬停（与 presentation 一致的好点到） */
     .nav li{position:relative;padding-bottom:6px}
-    .nav li::after{
-      content:"";
-      position:absolute;left:0;right:0;height:8px;bottom:-8px; /* 鼠标缓冲带，避免中途消失 */
-    }
+    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
     .nav .submenu{
       position:absolute;z-index:50;top:100%;left:0;margin-top:6px;min-width:220px;
       background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
       padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
       transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none
     }
-    .nav li:hover .submenu,
-    .nav li:focus-within .submenu{
+    .nav li:hover .submenu,.nav li:focus-within .submenu{
       opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto
     }
     .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
     .nav .submenu a:hover{background:#f3f6fb}
 
-    /* 页面布局与卡片 */
+    /* Layout & cards */
     .container{max-width:1200px;margin:18px auto;padding:0 20px}
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
     .page-title{font-size:1.6rem;margin:0 0 2px;font-weight:800;color:var(--accent)}
     .title{font-size:1.8em;margin:0 0 6px;font-weight:800;color:#4a90e2}
     .subtitle{margin:0 0 14px;color:var(--muted);font-size:.98rem}
 
-    /* 计算器表单 */
+    /* Calculator */
     .calc-table{display:flex;flex-direction:column;gap:14px}
     .calc-row{display:flex;flex-wrap:wrap;gap:16px}
     .calc-group{display:flex;flex-direction:column;flex:1 1 320px;min-width:280px}
@@ -86,7 +67,7 @@
     /* Chart */
     .chart-block{width:100%;height:560px}
 
-    /* Spectrum block */
+    /* Spectrum */
     .rainbow-bar{width:100%;height:16px;border-radius:999px;margin:0 auto 12px auto;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(7,1fr);overflow:hidden;border:1px solid var(--border)}
     .rainbow-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;align-items:end;font-size:0.98rem}
     .band-title{font-weight:800;color:var(--accent)}
@@ -106,11 +87,10 @@
     }
   </style>
 
-  <!-- Chart.js（保持原功能） -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <!-- Chart.js：如果 CDN 被 CSP 拦截，请把 FALLBACK_CHART_SRC 换成你本地路径 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
 </head>
 <body>
-
   <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
@@ -179,7 +159,6 @@
             <label class="calc-label" for="wavenumber">Wavenumber</label>
             <input type="number" id="wavenumber" step="any" class="calc-input" inputmode="decimal" />
             <select id="wnUnit" class="calc-select" aria-label="Wavenumber unit">
-              <!-- factors relative to cm⁻¹ -->
               <option value="1">cm⁻¹</option>
               <option value="10">mm⁻¹</option>
               <option value="10000">μm⁻¹</option>
@@ -216,44 +195,4 @@
         </div>
         <div>
           <div class="band-title">Microwave</div>
-          <div class="band-range">3 GHz – 300 GHz</div>
-          <div class="band-wl">10 cm – 1 mm</div>
-        </div>
-        <div>
-          <div class="band-title">Infrared</div>
-          <div class="band-range">300 GHz – 400 THz</div>
-          <div class="band-wl">1 mm – 750 nm</div>
-        </div>
-        <div>
-          <div class="band-title" style="color:#ad8a00">Visible</div>
-          <div class="band-range" style="color:#ad8a00;font-weight:700">400 – 750 THz</div>
-          <div class="band-wl" style="font-weight:700">750 – 400 nm</div>
-        </div>
-        <div>
-          <div class="band-title">Ultraviolet</div>
-          <div class="band-range">750 THz – 30 PHz</div>
-          <div class="band-wl">400 – 10 nm</div>
-        </div>
-        <div>
-          <div class="band-title">X-ray</div>
-          <div class="band-range">30 PHz – 30 EHz</div>
-          <div class="band-wl">10 nm – 0.01 nm</div>
-        </div>
-        <div>
-          <div class="band-title">Gamma Ray</div>
-          <div class="band-range">&gt;30 EHz</div>
-          <div class="band-wl">&lt;0.01 nm</div>
-        </div>
-      </div>
-
-      <div class="caption">Electromagnetic spectrum: frequency and wavelength (in vacuum). Ranges are approximate; transitions are gradual.</div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/profile/">Profile</a></li>
+          <div class="band-ran
