@@ -352,10 +352,6 @@
         margin-inline-start: 2em;
         margin-inline-end: 0;
       }
-      .is-layout-constrained > .aligncenter {
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
       .is-layout-constrained
         > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
         max-width: var(--wp--style--global--content-size);
@@ -663,63 +659,99 @@
       name="msapplication-TileImage"
       content="/wp-content/uploads/2022/09/cropped-avatar-270x270.png"
     />
-    <style id="wp-custom-css">
-      /* 背景设置：很浅的灰色 + 淡格纹 */
-      body {
-        background-color: #f4f4f4; /* 很浅的灰色 */
-        background-image: linear-gradient(
-            rgba(0, 0, 0, 0.02) 1px,
-            transparent 1px
-          ),
-          linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-        background-size: 20px 20px;
-        color: #222; /* 深色字体 */
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-      }
 
-      /* 链接样式：保持紫色系 */
-      a {
-        color: #7b3fc4; /* 深紫色 */
-        text-decoration: none;
-        transition: color 0.2s;
+    <!-- 局部样式：仅当前页的主题卡片 -->
+    <style id="current-topic-enhance">
+      .topic-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin: 0 auto;
+        max-width: 900px;
       }
-      a:hover {
-        color: #a76ef8; /* hover时浅紫色高亮 */
+      @media (min-width: 860px) {
+        .topic-grid {
+          grid-template-columns: 1fr 1fr;
+        }
       }
-
-      /* 卡片/内容块样式 */
-      .card,
-      .content-block {
-        background: #ffffff;
+      .topic-card {
+        background: #fff;
         border-radius: 1.2em;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-        padding: 1.4em 2em;
-        margin: 1.5em auto;
-        max-width: 800px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        padding: 18px 20px;
+      }
+      .topic-title {
+        margin: 0 0 6px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+      .topic-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: #f1ecff;
+        color: #5b2bb7;
+      }
+      .keywords {
+        font-size: 12px;
+        color: #666;
+      }
+      .topic-desc {
+        margin: 8px 0 10px;
         color: #222;
+        font-size: 0.98rem;
       }
-
-      /* 滚动条样式 */
-      ::-webkit-scrollbar {
-        width: 8px;
+      details.topic-more {
+        border-top: 1px dashed #e7e7e7;
+        padding-top: 8px;
       }
-      ::-webkit-scrollbar-thumb {
-        background: #bbb;
+      details.topic-more > summary {
+        cursor: pointer;
+        font-size: 0.95rem;
+        color: #7b3fc4;
+        user-select: none;
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .links a {
+        text-decoration: none;
+        border: 1px solid #e9e2ff;
+        padding: 6px 10px;
         border-radius: 8px;
       }
-      ::-webkit-scrollbar-track {
-        background: transparent;
+      .section-title {
+        margin: 22px auto 12px;
+        max-width: 900px;
       }
-
-      /* 响应式：小屏幕时去除格纹 */
-      @media (max-width: 768px) {
-        body {
-          background-image: none;
-        }
+      .prev-topics {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 1.2em;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        padding: 18px 20px;
+      }
+      .prev-topics ul {
+        margin: 10px 0 0 18px;
+      }
+      .updated-note {
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        margin-top: 8px;
       }
     </style>
   </head>
@@ -822,34 +854,77 @@
       </div>
 
       <div class="page-content">
-        <ul class="wp-block-list has-medium-font-size">
-          <li>
-            Wideband Dielectric Property Evaluation of Polyimides for 5G/6G
-            Communication
-          </li>
+        <!-- 当前主题：卡片网格 -->
+        <div class="topic-grid">
+          <!-- Topic 1 -->
+          <article class="topic-card" id="topic-dielectric-polyimide">
+            <h3 class="topic-title">
+              Wideband Dielectric Property Evaluation of Polyimides for 5G/6G Communication
+            </h3>
+            <div class="topic-meta">
+              <span class="badge">In progress</span>
+              <span class="keywords">Keywords: polyimide, ε′/tanδ, mmWave–sub-THz, CPW/RES/RF fixture</span>
+            </div>
+            <p class="topic-desc">
+              面向 5G/6G 高频段，建立从 MHz–GHz 到 mmWave/亚太赫兹的<span lang="en">broadband</span>介电测试流程，
+              结合传输线与谐振法，获得可溯源的介电常数与介质损耗频散，并量化分子结构（含氟/刚性片段/取代基）与配方对性能的影响。
+            </p>
+            <details class="topic-more">
+              <summary>方法与里程碑</summary>
+              <ul>
+                <li>夹具与基准：微带/CPW、共振腔、VNA 与探针台校准；薄膜厚度/表面粗糙度误差传播评估。</li>
+                <li>频段拼接：基于重叠频段与基准材料的跨段拟合与不确定度合成。</li>
+                <li>结构–性能：重原子/含氟度与玻璃化温度、密度、自由体积分数的相关分析。</li>
+                <li>输出：开源处理脚本与可复现报告模板（计划）。</li>
+              </ul>
+              <div class="links">
+                <a href="/profile/publication/">Related publications</a>
+                <a href="/category/posts/">Lab notes</a>
+              </div>
+            </details>
+          </article>
 
-          <li>
-            High-Pressure Optical Property Evaluation of Heavy Atom-Containing
-            Polyimides
-          </li>
-        </ul>
+          <!-- Topic 2 -->
+          <article class="topic-card" id="topic-high-pressure-optics">
+            <h3 class="topic-title">
+              High-Pressure Optical Property Evaluation of Heavy Atom-Containing Polyimides
+            </h3>
+            <div class="topic-meta">
+              <span class="badge">In progress</span>
+              <span class="keywords">Keywords: diamond anvil cell, refractive index, bandgap, heavy atoms</span>
+            </div>
+            <p class="topic-desc">
+              采用金刚石对顶砧（DAC）与原位光谱手段，解析重原子掺入对聚酰亚胺在高压下的折射率、吸收边与发光行为的调控，
+              探索密度与分子堆砌变化对光学常数的贡献，为辐照/极端环境器件材料筛选提供参数。
+            </p>
+            <details class="topic-more">
+              <summary>方法与里程碑</summary>
+              <ul>
+                <li>样品制备：薄膜与微片制备、压力介质与荧光标定。</li>
+                <li>测量通道：透过/反射光谱、显微拉曼/PL；压致跃迁与可逆性分析。</li>
+                <li>建模：<i>n</i>(P,λ) 色散拟合与体模量相关性；与介电频散数据交叉验证。</li>
+              </ul>
+              <div class="links">
+                <a href="/profile/publication/">Related publications</a>
+                <a href="/profile/presentation/">Talks</a>
+              </div>
+            </details>
+          </article>
+        </div>
 
-        <h2 class="wp-block-heading">Previous Topics</h2>
+        <!-- 分节标题 -->
+        <h2 class="section-title wp-block-heading">Previous Topics</h2>
 
-        <ul class="wp-block-list has-medium-font-size">
-          <li>
-            Visualization of Morphology and Stress Distribution in Soft
-            Materials
-          </li>
+        <!-- 过往主题：简洁列表卡片 -->
+        <section class="prev-topics">
+          <ul class="wp-block-list has-medium-font-size">
+            <li>Visualization of Morphology and Stress Distribution in Soft Materials</li>
+            <li>Shape Memory Properties of Hydrogels</li>
+          </ul>
+          <p class="updated-note">Last updated: Jul 2025</p>
+        </section>
 
-          <li>Shape Memory Properties of Hydrogels</li>
-        </ul>
-
-        <div
-          style="height: 10px"
-          aria-hidden="true"
-          class="wp-block-spacer"
-        ></div>
+        <div style="height: 10px" aria-hidden="true" class="wp-block-spacer"></div>
       </div>
     </main>
 
@@ -956,5 +1031,3 @@
     ></script>
   </body>
 </html>
-
-<!-- Page supported by LiteSpeed Cache 7.2 on 2025-07-23 11:16:19 -->
