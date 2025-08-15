@@ -1,171 +1,141 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="profile" href="https://gmpg.org/xfn/11" />
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Presentation – Haonan LIU’s Personal Page</title>
+  <meta name="description" content="Conference and symposium presentations by Haonan Liu and collaborators, organized by year.">
 
-    <title>Patent - Haonan LIU&#039;s Personal Page</title>
-    <link rel="canonical" href="/patent/" />
+  <!-- Self-contained theme (shared with Home/Tools) -->
+  <style>
+    :root{
+      /* Core palette */
+      --bg:#f5f6fa;
+      --card:#ffffff;
+      --text:#20242a;
+      --muted:#5c6270;
+      --border:#e6e9ef;
+      --shadow:0 8px 24px rgba(23,31,56,.08);
+      --radius:16px;
 
-    <!-- 省略：Yoast/WordPress 头部原样保留（如需，可继续放回你现有的 SEO/JSON-LD/emoji 等标签） -->
+      --primary:#4a90e2;
+      --accent:#212a74;
+      --rose:#d81b60;
+      --grid:#eceef4;
 
-    <!-- 主题与组件：保持 WP/Hello Elementor 原链接 -->
-    <link rel="stylesheet" id="wp-block-library-css" href="/wp-includes/css/dist/block-library/style.min.css" media="all" />
-    <link rel="stylesheet" id="hello-elementor-css" href="/wp-content/themes/hello-elementor/assets/css/reset.css?ver=3.4.4" media="all" />
-    <link rel="stylesheet" id="hello-elementor-theme-style-css" href="/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.4" media="all" />
-    <link rel="stylesheet" id="hello-elementor-header-footer-css" href="/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.4" media="all" />
+      /* Spacing scale */
+      --space:24px;
+      --space-sm:16px;
+      --container-y:24px;
+      --card-pad:24px;
+    }
 
-    <!-- ===== 自定义皮肤（与 presentation 一致）===== -->
-    <style>
-      :root{
-        --bg:#f5f6fa;           /* 页面浅灰 */
-        --card:#fff;            /* 卡片底色 */
-        --text:#20242a;         /* 正文 */
-        --muted:#5c6270;        /* 次要文字 */
-        --border:#e6e9ef;       /* 细边 */
-        --shadow:0 8px 24px rgba(23,31,56,.08);
-        --radius:16px;
-        --primary:#4a90e2;      /* 链接主色 */
-        --accent:#212a74;       /* 深蓝标题 */
-      }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      line-height:1.65
+    }
+    a{color:var(--primary);text-decoration:none}
+    a:hover{opacity:.9}
 
-      /* 背景：浅灰 + 细格纹（移动端去除格纹） */
-      body{
-        background:var(--bg);
-        background-image:
-          linear-gradient(rgba(0,0,0,.02) 1px,transparent 1px),
-          linear-gradient(90deg,rgba(0,0,0,.02) 1px,transparent 1px);
-        background-size:20px 20px;
-        color:var(--text);
-        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-        line-height:1.65;
-        margin:0;
-      }
-      @media (max-width:768px){ body{ background-image:none; } }
+    /* Header */
+    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
+    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;flex-direction:column}
+    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
+    .brand .desc{color:var(--muted);font-size:.92rem}
 
-      a{ color:var(--primary); text-decoration:none; }
-      a:hover{ opacity:.9; }
+    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    .nav a{padding:8px 10px;border-radius:10px}
+    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+    .nav li{position:relative;padding-bottom:6px}
 
-      mark.has-inline-color{ color:#bc4166; background:transparent; }
+    /* Accessible submenu */
+    .nav .submenu{
+      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
+      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
+      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+      transition-delay:.12s;pointer-events:none
+    }
+    .nav li:hover .submenu,.nav li:focus-within .submenu{
+      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
+    }
+    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
+    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
+    .nav .submenu a:hover{background:#f3f6fb}
+    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
-      /* ===== Header（与 presentation 同风格）===== */
-      #site-header{
-        position:sticky; top:0; z-index:40;
-        background:#fff; border-bottom:1px solid var(--border);
-      }
-      /* 让 header 内容居中定宽 */
-      #site-header>.site-branding, #site-header>.site-navigation{
-        max-width:1200px; margin:0 auto;
-      }
-      /* 横向排布：用一个 flex 容器包两块（branding + nav） */
-      #site-header{
-        display:flex; justify-content:center;
-      }
-      #site-header .site-branding{
-        width:100%; max-width:1200px;
-        display:flex; align-items:center; justify-content:space-between;
-        padding:14px 20px;
-      }
-      /* 把导航条放到同一行右侧（与 presentation 观感一致） */
-      #site-header .site-navigation{
-        width:100%; max-width:1200px;
-        padding:0 20px 14px 20px;
-      }
+    /* Layout */
+    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
+    .container>section+section{margin-top:var(--space)}
 
-      .site-title a{ font-weight:800; color:var(--accent); font-size:1.15rem; }
-      .site-description{ color:var(--muted); font-size:.92rem; margin:.25rem 0 0; }
+    /* Cards & headings */
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:var(--card-pad)
+    }
+    .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
+    .lead{font-size:1.05rem}
+    .bullets{padding-left:1.1em;margin:0}
+    .bullets li{margin:8px 0}
+    .muted{color:var(--muted)}
+    mark.has-inline-color{color:#bc4166;background:transparent}
 
-      /* 顶部主导航 */
-      .site-navigation ul.menu{
-        list-style:none; margin:0; padding:0;
-        display:flex; gap:18px; align-items:center; flex-wrap:wrap;
-      }
-      .site-navigation ul.menu>li>a{ padding:8px 10px; border-radius:10px; }
-      .site-navigation .current_page_item>a,
-      .site-navigation .current-menu-item>a{ background:rgba(74,144,226,.12); color:var(--accent); font-weight:600; }
+    /* Year nav (local) */
+    .year-nav{display:flex;flex-wrap:wrap;gap:8px}
+    .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+    .year{scroll-margin-top:90px}
 
-      /* ===== 下拉菜单（与 presentation 一致 & 易选中）===== */
-      .site-navigation ul.menu>li{ position:relative; padding-bottom:6px; }
-      /* 在下拉与触发之间留 8px “缓冲带”避免闪烁 */
-      .site-navigation ul.menu>li::after{
-        content:""; position:absolute; left:0; right:0; height:8px; bottom:-8px;
-      }
-      .site-navigation .sub-menu{
-        position:absolute; top:100%; left:0; margin-top:6px; min-width:220px;
-        background:#fff; border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow);
-        padding:8px; opacity:0; visibility:hidden; transform:translateY(6px);
-        transition:opacity .25s, transform .25s, visibility .25s; pointer-events:none; z-index:50;
-      }
-      .site-navigation ul.menu>li:hover .sub-menu,
-      .site-navigation ul.menu>li:focus-within .sub-menu{
-        opacity:1; visibility:visible; transform:translateY(0); pointer-events:auto;
-      }
-      .site-navigation .sub-menu a{
-        display:block; padding:8px 10px; border-radius:8px; white-space:nowrap;
-      }
-      .site-navigation .sub-menu a:hover{ background:#f3f6fb; }
+    /* Footer */
+    .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
+      justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
+    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
+    .copyright{color:var(--muted);font-size:.92rem}
 
-      /* ===== Main ===== */
-      .site-main{ max-width:1200px; margin:18px auto; padding:0 20px; }
-      /* 标题卡片 */
-      .page-header{
-        background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
-        padding:20px; margin-bottom:16px;
-      }
-      .entry-title{ margin:0; font-weight:800; color:var(--accent); }
+    /* Responsive */
+    @media (max-width:960px){
+      :root{--space:20px;--container-y:20px;--card-pad:20px}
+    }
+  </style>
 
-      /* 内容卡片（把专利列表整体包进卡片视觉） */
-      .page-content{
-        background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
-        padding:22px;
-      }
-      .page-content .wp-block-list{ padding-left:1.15em; margin:0; }
-      .page-content .wp-block-list li{ margin:10px 0; }
+  <link rel="icon" href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/wp-content/uploads/2022/09/cropped-avatar-180x180.png">
+</head>
+<body>
 
-      /* ===== Footer ===== */
-      #site-footer{
-        margin-top:28px; border-top:1px solid var(--border); background:#fff;
-      }
-      #site-footer .site-navigation{ max-width:1200px; margin:0 auto; padding:14px 20px; }
-      #menu-bottom{ list-style:none; margin:0; padding:0; display:flex; gap:16px; flex-wrap:wrap; }
-    </style>
-
-    <link rel="icon" href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/wp-content/uploads/2022/09/cropped-avatar-180x180.png" />
-  </head>
-
-  <body class="wp-singular page-template-default page">
-    <a class="skip-link screen-reader-text" href="#content">跳到内容</a>
-
-    <!-- ===== Header 原结构保留 ===== -->
-    <header id="site-header" class="site-header">
-      <div class="site-branding">
-        <div class="site-title">
-          <a href="/" title="主页" rel="home">Haonan LIU&#039;s Personal Page</a>
-        </div>
-        <p class="site-description">Ph.D., Assistant Professor, Institute of Science Tokyo</p>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <a class="title" href="/">Haonan LIU’s Personal Page</a>
+        <div class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</div>
       </div>
-
-      <nav class="site-navigation" aria-label="Main menu">
-        <ul id="menu-main" class="menu">
-          <li class="menu-item menu-item-home"><a href="/">Home</a></li>
-          <li class="menu-item menu-item-has-children current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor">
-            <a href="/profile/">Profile</a>
-            <ul class="sub-menu">
-              <li class="menu-item"><a href="/profile/current_topic/">Current Topics</a></li>
-              <li class="menu-item"><a href="/profile/publication/">Publication</a></li>
-              <li class="menu-item"><a href="/profile/presentation/">Presentation</a></li>
-              <li class="menu-item current-menu-item current_page_item"><a href="/profile/patent/" aria-current="page">Patent</a></li>
-              <li class="menu-item"><a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a></li>
-            </ul>
+      <nav class="nav" aria-label="Main">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="/profile/" aria-haspopup="true" aria-expanded="false" aria-controls="sub-profile">Profile</a>
+            <div id="sub-profile" class="submenu" role="menu" aria-label="Profile submenu">
+              <a href="/profile/current_topic/">Current Topics</a>
+              <a href="/profile/publication/">Publication</a>
+              <a href="/profile/presentation/">Presentation</a>
+              <a href="/profile/patent/" aria-current="page">Patent</a>
+              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
+            </div>
           </li>
-          <li class="menu-item"><a href="/category/posts/">Posts</a></li>
-          <li class="menu-item"><a href="/links/">Links</a></li>
-          <li class="menu-item"><a href="/tools/">Tools</a></li>
+          <li><a href="/category/posts/">Posts</a></li>
+          <li><a href="/links/">Links</a></li>
+          <li><a href="/tools/">Tools</a></li>
         </ul>
       </nav>
-    </header>
+    </div>
+  </header>
 
     <!-- ===== Main ===== -->
     <main id="content" class="site-main post-1624 page type-page status-publish hentry">
