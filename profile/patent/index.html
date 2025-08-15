@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Presentation – Haonan LIU’s Personal Page</title>
-  <meta name="description" content="Conference and symposium presentations by Haonan Liu and collaborators, organized by year.">
+  <title>Patent – Haonan LIU’s Personal Page</title>
+  <meta name="description" content="Patents by Haonan Liu and collaborators, organized by year.">
 
-  <!-- Self-contained theme (shared with Home/Tools) -->
+  <!-- Self-contained theme (exactly the same as Presentation) -->
   <style>
     :root{
       /* Core palette */
@@ -52,7 +52,7 @@
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
     .nav li{position:relative;padding-bottom:6px}
 
-    /* Accessible submenu */
+    /* Accessible submenu (same behavior as Presentation) */
     .nav .submenu{
       position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
       background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
@@ -83,10 +83,6 @@
     .bullets li{margin:8px 0}
     .muted{color:var(--muted)}
     mark.has-inline-color{color:#bc4166;background:transparent}
-
-    /* Year nav (local) */
-    .year-nav{display:flex;flex-wrap:wrap;gap:8px}
-    .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
     .year{scroll-margin-top:90px}
 
     /* Footer */
@@ -109,7 +105,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header (identical structure to Presentation) -->
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
@@ -125,7 +121,7 @@
               <a href="/profile/current_topic/">Current Topics</a>
               <a href="/profile/publication/">Publication</a>
               <a href="/profile/presentation/">Presentation</a>
-              <a href="/profile/patent/" aria-current="page">Patent</a>
+              <a href="/patent/" aria-current="page">Patent</a>
               <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
             </div>
           </li>
@@ -137,41 +133,51 @@
     </div>
   </header>
 
-    <!-- ===== Main ===== -->
-    <main id="content" class="site-main post-1624 page type-page status-publish hentry">
-      <div class="page-header">
-        <h1 class="entry-title">Patent</h1>
-      </div>
+  <!-- Main -->
+  <main class="container">
+    <!-- Page title -->
+    <section class="card">
+      <h1 class="section-title">Patent</h1>
+      <p class="lead muted">Patents by Haonan Liu and collaborators.</p>
+    </section>
 
-      <div class="page-content">
-        <p class="has-medium-font-size"><strong>2025</strong></p>
+    <!-- 2025 -->
+    <section id="y2025" class="card year">
+      <h2 class="section-title">2025</h2>
+      <ul class="bullets">
+        <li>
+          <strong>ブロック共重合体組成物、およびブロック共重合体組成物を成形してなる成形体</strong><br>
+          小田 亮二・加藤 大祐・森田 裕史・細谷 亮平・中嶋 健・梁 暁斌・伊藤 万喜子・
+          <mark class="has-inline-color">劉 浩男</mark><br>
+          <a href="https://www.j-platpat.inpit.go.jp/c1801/PU/JP-2023-123460/10/ja" target="_blank" rel="noreferrer noopener">特開2025-019705</a>, 2025年02月07日
+        </li>
+      </ul>
+    </section>
+  </main>
 
-        <ul class="wp-block-list">
-          <li class="has-medium-font-size">
-            <strong>ブロック共重合体組成物、およびブロック共重合体組成物を成形してなる成形体</strong><br />
-            小田 亮二・加藤 大祐・森田 裕史・細谷 亮平・中嶋 健・梁 暁斌・伊藤 万喜子・
-            <mark class="has-inline-color">劉 浩男</mark><br />
-            <a href="https://www.j-platpat.inpit.go.jp/c1801/PU/JP-2023-123460/10/ja" target="_blank" rel="noreferrer noopener">特開2025-019705</a>, 2025年02月07日
-          </li>
-        </ul>
-      </div>
-    </main>
-
-    <!-- ===== Footer 原结构保留 ===== -->
-    <footer id="site-footer" class="site-footer">
-      <nav class="site-navigation" aria-label="Footer menu">
-        <ul id="menu-bottom" class="menu">
-          <li class="menu-item menu-item-home"><a href="/">Home</a></li>
-          <li class="menu-item"><a href="/profile/">Profile</a></li>
-          <li class="menu-item"><a href="/profile/current_topic/">Current Topics</a></li>
-          <li class="menu-item"><a href="/profile/publication/">Publication</a></li>
-          <li class="menu-item"><a href="/profile/presentation/">Presentation</a></li>
-          <li class="menu-item current-menu-item current_page_item"><a href="/profile/patent/" aria-current="page">Patent</a></li>
-          <li class="menu-item"><a href="/category/posts/">Posts</a></li>
-          <li class="menu-item"><a href="/links/">Links</a></li>
-          <li class="menu-item"><a href="/tools/">Tools</a></li>
+  <!-- Footer (identical structure to Presentation) -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile/">Profile</a></li>
+          <li><a href="/profile/current_topic/">Current Topics</a></li>
+          <li><a href="/profile/publication/">Publication</a></li>
+          <li><a href="/profile/presentation/">Presentation</a></li>
+          <li><a href="/patent/" aria-current="page">Patent</a></li>
+          <li><a href="/category/posts/">Posts</a></li>
+          <li><a href="/links/">Links</a></li>
+          <li><a href="/tools/">Tools</a></li>
         </ul>
       </nav>
-    </footer>
-  </body>
+      <div class="copyright">© <span id="yy"></span> Haonan LIU. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Update footer year
+    document.getElementById('yy').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
