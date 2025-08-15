@@ -36,21 +36,18 @@
     .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
     .brand .desc{color:var(--muted);font-size:.92rem}
 
-     /* Accessible submenu (same behavior as Presentation) */
+    /* Nav + dropdown (仅悬停行为，保持原样式) */
+    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+    .nav a{padding:8px 10px;border-radius:10px}
+    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+    .nav li{position:relative}
     .nav .submenu{
-      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
-      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-      transition-delay:.12s;pointer-events:none
+      display:none;position:absolute;top:36px;left:0;background:#fff;border:1px solid var(--border);
+      border-radius:12px;box-shadow:var(--shadow);min-width:220px;padding:8px;z-index:50
     }
-    .nav li:hover .submenu,.nav li:focus-within .submenu{
-      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
-    }
-    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
+    .nav li:hover .submenu{display:block}
     .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
     .nav .submenu a:hover{background:#f3f6fb}
-    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
     /* Layout */
     .container{max-width:1200px;margin:18px auto;padding:0 20px}
