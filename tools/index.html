@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tools – Frequency–Wavelength–Wavenumber Converter</title>
+  <title>Presentation – Haonan LIU’s Personal Page</title>
+  <meta name="description" content="Conference and symposium presentations by Haonan Liu and collaborators, organized by year.">
 
-  <!-- Self-contained styles (kept light to resemble your homepage) -->
+  <!-- Self-contained theme (shared with Home/Tools) -->
   <style>
     :root{
+      /* Core palette */
       --bg:#f5f6fa;
       --card:#ffffff;
       --text:#20242a;
@@ -16,82 +18,94 @@
       --shadow:0 8px 24px rgba(23,31,56,.08);
       --radius:16px;
 
-      --primary:#4a90e2;   /* accent */
-      --accent:#212a74;    /* deep blue */
-      --rose:#d81b60;      /* wavelength curve */
+      --primary:#4a90e2;
+      --accent:#212a74;
+      --rose:#d81b60;
       --grid:#eceef4;
+
+      /* Spacing scale */
+      --space:24px;
+      --space-sm:16px;
+      --container-y:24px;
+      --card-pad:24px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      line-height:1.65
+    }
     a{color:var(--primary);text-decoration:none}
-    a:hover{opacity:.88}
+    a:hover{opacity:.9}
 
-    /* Header (similar structure to your homepage) */
+    /* Header */
     .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
     .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
     .brand{display:flex;flex-direction:column}
     .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
     .brand .desc{color:var(--muted);font-size:.92rem}
+
     .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
     .nav a{padding:8px 10px;border-radius:10px}
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+    .nav li{position:relative;padding-bottom:6px}
 
-    /* Dropdown under Profile */
-    .nav li{position:relative}
-    .nav .submenu{display:none;position:absolute;top:36px;left:0;background:#fff;border:1px solid var(--border);
-      border-radius:12px;box-shadow:var(--shadow);min-width:220px;padding:8px}
-    .nav li:hover .submenu{display:block}
+    /* Accessible submenu */
+    .nav .submenu{
+      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
+      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
+      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+      transition-delay:.12s;pointer-events:none
+    }
+    .nav li:hover .submenu,.nav li:focus-within .submenu{
+      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
+    }
+    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
     .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
     .nav .submenu a:hover{background:#f3f6fb}
+    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
-    /* Main container */
-    .container{max-width:1200px;margin:18px auto;padding:0 20px}
+    /* Layout */
+    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
+    .container>section+section{margin-top:var(--space)}
 
-    /* Cards */
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .page-title{font-size:1.6rem;margin:0 0 2px;font-weight:800;color:var(--accent)}
-    .title{font-size:1.8em;margin:0 0 6px;font-weight:800;color:#4a90e2}
-    .subtitle{margin:0 0 14px;color:var(--muted);font-size:.98rem}
+    /* Cards & headings */
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:var(--card-pad)
+    }
+    .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
+    .lead{font-size:1.05rem}
+    .bullets{padding-left:1.1em;margin:0}
+    .bullets li{margin:8px 0}
+    .muted{color:var(--muted)}
+    mark.has-inline-color{color:#bc4166;background:transparent}
 
-    /* Tool form */
-    .calc-table{display:flex;flex-direction:column;gap:14px}
-    .calc-row{display:flex;flex-wrap:wrap;gap:16px}
-    .calc-group{display:flex;flex-direction:column;flex:1 1 320px;min-width:280px}
-    .calc-label{font-weight:700;margin-bottom:6px;color:var(--accent)}
-    .calc-input,.calc-select{
-      height:40px;border:1px solid var(--border);border-radius:10px;padding:0 10px;font-size:1rem;background:#fff;outline:none;
-      transition:border-color .15s, box-shadow .15s}
-    .calc-input:focus,.calc-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.14)}
-    .note{font-size:.92rem;color:var(--muted);margin-top:6px}
-
-    /* Chart */
-    .chart-block{width:100%;height:560px}
-
-    /* Spectrum block */
-    .rainbow-bar{width:100%;height:16px;border-radius:999px;margin:0 auto 12px auto;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(7,1fr);overflow:hidden;border:1px solid var(--border)}
-    .rainbow-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;align-items:end;font-size:0.98rem}
-    .band-title{font-weight:800;color:var(--accent)}
-    .band-range{color:#5d616a;margin-bottom:3px}
-    .band-wl{color:var(--rose)}
-    .caption{color:var(--muted);text-align:center;font-size:.95rem;margin-top:8px}
+    /* Year nav (local) */
+    .year-nav{display:flex;flex-wrap:wrap;gap:8px}
+    .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+    .year{scroll-margin-top:90px}
 
     /* Footer */
-    .site-footer{margin-top:28px;border-top:1px solid var(--border);background:#fff}
-    .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
+      justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
     .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
     .copyright{color:var(--muted);font-size:.92rem}
 
-    @media (max-width:720px){
-      .nav ul{gap:10px;flex-wrap:wrap}
-      .rainbow-labels{font-size:.92rem}
+    /* Responsive */
+    @media (max-width:960px){
+      :root{--space:20px;--container-y:20px;--card-pad:20px}
     }
   </style>
 
-  <!-- Chart.js (host locally if your CSP blocks cdn.jsdelivr.net) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <link rel="icon" href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/wp-content/uploads/2022/09/cropped-avatar-180x180.png">
 </head>
 <body>
 
@@ -106,8 +120,8 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li>
-            <a href="/profile/">Profile</a>
-            <div class="submenu" role="menu">
+            <a href="/profile/" aria-haspopup="true" aria-expanded="false" aria-controls="sub-profile">Profile</a>
+            <div id="sub-profile" class="submenu" role="menu" aria-label="Profile submenu">
               <a href="/profile/current_topic/">Current Topics</a>
               <a href="/profile/publication/">Publication</a>
               <a href="/profile/presentation/">Presentation</a>
