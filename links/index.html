@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tools – Haonan LIU’s Personal Page</title>
+  <title>Links – Haonan LIU’s Personal Page</title>
+  <meta name="description" content="Curated links for journals, research tools, societies, suppliers, and campus resources.">
 
+  <!-- Theme -->
   <style>
     :root{
       --bg:#f5f6fa;
@@ -19,8 +21,11 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.65}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      line-height:1.65
+    }
     a{color:var(--primary);text-decoration:none}
     a:hover{opacity:.9}
 
@@ -31,12 +36,11 @@
     .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
     .brand .desc{color:var(--muted);font-size:.92rem}
 
-    /* Main nav */
+    /* Nav + dropdown with hover buffer */
     .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
     .nav a{padding:8px 10px;border-radius:10px}
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
 
-    /* 下拉菜单缓冲悬停 */
     .nav li{position:relative;padding-bottom:6px}
     .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
     .nav .submenu{
@@ -53,8 +57,40 @@
     .nav .submenu a:hover{background:#f3f6fb}
 
     /* Layout */
-    .container{max-width:1200px;margin:18px auto;padding:0 20px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+    .container{max-width:1200px;margin:20px auto;padding:0 20px}
+    .page-title{margin:0 0 14px;font-weight:800;color:var(--accent);font-size:1.6rem}
+
+    /* Card grid (two columns on desktop) */
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      align-items:start;
+    }
+    @media (max-width:960px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* Card */
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 18px 14px;
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size:1.05rem;
+      color:#2b2f36;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .card h3 a{color:#2b2f36}
+    .card .list{margin:0;padding-left:1.1em}
+    .card .list li{margin:6px 0}
+    .muted{color:var(--muted);font-size:.95rem;margin-top:12px}
 
     /* Footer */
     .site-footer{margin-top:28px;border-top:1px solid var(--border);background:#fff}
@@ -89,193 +125,188 @@
             </div>
           </li>
           <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/" aria-current="page">Tools</a></li>
+          <li><a href="/links/" aria-current="page">Links</a></li>
+          <li><a href="/tools/">Tools</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-
   <!-- Main -->
   <main class="container">
-    <section class="card section">
-      <h1 class="heading">Links</h1>
-      <div class="grid">
+    <h1 class="page-title">Links</h1>
 
-        <!-- Left column -->
-        <div class="stack">
-          <div class="group">
-            <h3>Springer Nature</h3>
-            <ul class="list">
-              <li><a href="https://www.nature.com/nature/research-articles" target="_blank" rel="noreferrer noopener"><em>Nature</em></a> (50.5)</li>
-              <li><a href="https://www.nature.com/nnano/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Nanotechnol.</em></a> (38.1)</li>
-              <li><a href="https://www.nature.com/nmat/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Mater.</em></a> (37.2)</li>
-              <li><a href="https://www.nature.com/nchem/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Chem.</em></a> (19.2)</li>
-              <li><a href="https://www.nature.com/ncomms/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Commun.</em></a> (14.7)</li>
-            </ul>
-          </div>
+    <div class="grid">
 
-          <div class="group">
-            <h3>AAAS</h3>
-            <ul class="list">
-              <li><a href="https://www.science.org/toc/science/current" target="_blank" rel="noreferrer noopener"><em>Science</em></a> (44.7)</li>
-              <li><a href="https://www.science.org/toc/sciadv/current" target="_blank" rel="noreferrer noopener"><em>Sci. Adv.</em></a> (11.7)</li>
-            </ul>
-          </div>
+      <!-- Left column cards -->
+      <section class="card">
+        <h3>Springer Nature</h3>
+        <ul class="list">
+          <li><a href="https://www.nature.com/nature/research-articles" target="_blank" rel="noreferrer noopener"><em>Nature</em></a> (50.5)</li>
+          <li><a href="https://www.nature.com/nnano/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Nanotechnol.</em></a> (38.1)</li>
+          <li><a href="https://www.nature.com/nmat/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Mater.</em></a> (37.2)</li>
+          <li><a href="https://www.nature.com/nchem/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Chem.</em></a> (19.2)</li>
+          <li><a href="https://www.nature.com/ncomms/research-articles" target="_blank" rel="noreferrer noopener"><em>Nat. Commun.</em></a> (14.7)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>PNAS</h3>
-            <ul class="list">
-              <li><a href="https://www.pnas.org/toc/pnas/current" target="_blank" rel="noreferrer noopener"><em>PNAS</em></a> (9.4)</li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>AAAS</h3>
+        <ul class="list">
+          <li><a href="https://www.science.org/toc/science/current" target="_blank" rel="noreferrer noopener"><em>Science</em></a> (44.7)</li>
+          <li><a href="https://www.science.org/toc/sciadv/current" target="_blank" rel="noreferrer noopener"><em>Sci. Adv.</em></a> (11.7)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3><a href="https://www.acs.org/" target="_blank" rel="noreferrer noopener">ACS</a></h3>
-            <ul class="list">
-              <li><a href="https://pubs.acs.org/toc/ancac3/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Nano</em></a> (15.8)</li>
-              <li><a href="https://pubs.acs.org/toc/jacsat/0/0" target="_blank" rel="noreferrer noopener"><em>J. Am. Chem. Soc.</em></a> (14.4)</li>
-              <li><a href="https://pubs.acs.org/toc/amlcef/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Mater. Lett.</em></a> (9.6)</li>
-              <li><a href="https://pubs.acs.org/toc/aamick/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Appl. Mater. Interfaces</em></a> (8.3)</li>
-              <li><a href="https://pubs.acs.org/toc/cmatex/0/0" target="_blank" rel="noreferrer noopener"><em>Chem. Mater.</em></a> (7.2)</li>
-              <li><a href="https://pubs.acs.org/toc/amlccd/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Macro Lett.</em></a> (5.1)</li>
-              <li><a href="https://pubs.acs.org/toc/mamobx/0/0" target="_blank" rel="noreferrer noopener"><em>Macromolecules</em></a> (5.1)</li>
-              <li><a href="https://pubs.acs.org/toc/jpclcd/0/0" target="_blank" rel="noreferrer noopener"><em>J. Phys. Chem. Lett.</em></a> (4.8)</li>
-              <li><a href="https://pubs.acs.org/toc/aapmcd/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Appl. Polym. Mater.</em></a> (4.4)</li>
-              <li><a href="https://pubs.acs.org/toc/jpcbfk/0/0" target="_blank" rel="noreferrer noopener"><em>J. Phys. Chem. B</em></a> (2.8)</li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>PNAS</h3>
+        <ul class="list">
+          <li><a href="https://www.pnas.org/toc/pnas/current" target="_blank" rel="noreferrer noopener"><em>PNAS</em></a> (9.4)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>AIP</h3>
-            <ul class="list">
-              <li><a href="https://pubs.aip.org/aip/apl" target="_blank" rel="noreferrer noopener"><em>Appl. Phys. Lett.</em></a> (3.5)</li>
-              <li><a href="https://pubs.aip.org/aip/jcp" target="_blank" rel="noreferrer noopener"><em>J. Chem. Phys.</em></a> (3.1)</li>
-              <li><a href="https://pubs.aip.org/aip/jap" target="_blank" rel="noreferrer noopener"><em>J. Appl. Phys.</em></a> (2.7)</li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3><a href="https://www.acs.org/" target="_blank" rel="noreferrer noopener">ACS</a></h3>
+        <ul class="list">
+          <li><a href="https://pubs.acs.org/toc/ancac3/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Nano</em></a> (15.8)</li>
+          <li><a href="https://pubs.acs.org/toc/jacsat/0/0" target="_blank" rel="noreferrer noopener"><em>J. Am. Chem. Soc.</em></a> (14.4)</li>
+          <li><a href="https://pubs.acs.org/toc/amlcef/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Mater. Lett.</em></a> (9.6)</li>
+          <li><a href="https://pubs.acs.org/toc/aamick/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Appl. Mater. Interfaces</em></a> (8.3)</li>
+          <li><a href="https://pubs.acs.org/toc/cmatex/0/0" target="_blank" rel="noreferrer noopener"><em>Chem. Mater.</em></a> (7.2)</li>
+          <li><a href="https://pubs.acs.org/toc/amlccd/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Macro Lett.</em></a> (5.1)</li>
+          <li><a href="https://pubs.acs.org/toc/mamobx/0/0" target="_blank" rel="noreferrer noopener"><em>Macromolecules</em></a> (5.1)</li>
+          <li><a href="https://pubs.acs.org/toc/jpclcd/0/0" target="_blank" rel="noreferrer noopener"><em>J. Phys. Chem. Lett.</em></a> (4.8)</li>
+          <li><a href="https://pubs.acs.org/toc/aapmcd/0/0" target="_blank" rel="noreferrer noopener"><em>ACS Appl. Polym. Mater.</em></a> (4.4)</li>
+          <li><a href="https://pubs.acs.org/toc/jpcbfk/0/0" target="_blank" rel="noreferrer noopener"><em>J. Phys. Chem. B</em></a> (2.8)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Wiley</h3>
-            <ul class="list">
-              <li><a href="https://onlinelibrary.wiley.com/journal/15214095" target="_blank" rel="noreferrer noopener"><em>Adv. Mater.</em></a> (27.4)</li>
-              <li><a href="https://onlinelibrary.wiley.com/toc/16163028/0/0" target="_blank" rel="noreferrer noopener"><em>Adv. Funct. Mater.</em></a> (18.5)</li>
-              <li><a href="https://onlinelibrary.wiley.com/toc/15213773/0/ja" target="_blank" rel="noreferrer noopener"><em>Angew. Chem. Int. Ed.</em></a> (16.1)</li>
-              <li><a href="https://onlinelibrary.wiley.com/toc/21951071/0/0" target="_blank" rel="noreferrer noopener"><em>Adv. Opt. Mater.</em></a> (8.0)</li>
-              <li><a href="https://onlinelibrary.wiley.com/toc/15213927/0/0" target="_blank" rel="noreferrer noopener"><em>Macromol. Rapid Commun.</em></a> (4.2)</li>
-              <li><a href="https://onlinelibrary.wiley.com/toc/26424169/0/0" target="_blank" rel="noreferrer noopener"><em>J. Polym. Sci.</em></a> (3.9)</li>
-              <li><a href="https://onlinelibrary.wiley.com/toc/15213935/0/ja" target="_blank" rel="noreferrer noopener"><em>Macromol. Chem. Phys.</em></a> (2.5)</li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>AIP</h3>
+        <ul class="list">
+          <li><a href="https://pubs.aip.org/aip/apl" target="_blank" rel="noreferrer noopener"><em>Appl. Phys. Lett.</em></a> (3.5)</li>
+          <li><a href="https://pubs.aip.org/aip/jcp" target="_blank" rel="noreferrer noopener"><em>J. Chem. Phys.</em></a> (3.1)</li>
+          <li><a href="https://pubs.aip.org/aip/jap" target="_blank" rel="noreferrer noopener"><em>J. Appl. Phys.</em></a> (2.7)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>RSC</h3>
-            <ul class="list">
-              <li><a href="https://pubs.rsc.org/en/journals/journalissues/sc#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Chem. Sci.</em></a> (7.6)</li>
-              <li><a href="https://pubs.rsc.org/en/journals/journalissues/tc#!recentarticles" target="_blank" rel="noreferrer noopener"><em>J. Mater. Chem. C</em></a> (5.7)</li>
-              <li><a href="https://pubs.rsc.org/en/journals/journalissues/ma#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Mater. Adv.</em></a> (5.2)</li>
-              <li><a href="https://pubs.rsc.org/en/journals/journalissues/py#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Polym. Chem.</em></a> (4.1)</li>
-              <li><a href="https://pubs.rsc.org/en/journals/journalissues/sm#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Soft Matter</em></a> (2.9)</li>
-              <li><a href="https://pubs.rsc.org/en/journals/journalissues/cp#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Phys. Chem. Chem. Phys.</em></a> (2.9)</li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Wiley</h3>
+        <ul class="list">
+          <li><a href="https://onlinelibrary.wiley.com/journal/15214095" target="_blank" rel="noreferrer noopener"><em>Adv. Mater.</em></a> (27.4)</li>
+          <li><a href="https://onlinelibrary.wiley.com/toc/16163028/0/0" target="_blank" rel="noreferrer noopener"><em>Adv. Funct. Mater.</em></a> (18.5)</li>
+          <li><a href="https://onlinelibrary.wiley.com/toc/15213773/0/ja" target="_blank" rel="noreferrer noopener"><em>Angew. Chem. Int. Ed.</em></a> (16.1)</li>
+          <li><a href="https://onlinelibrary.wiley.com/toc/21951071/0/0" target="_blank" rel="noreferrer noopener"><em>Adv. Opt. Mater.</em></a> (8.0)</li>
+          <li><a href="https://onlinelibrary.wiley.com/toc/15213927/0/0" target="_blank" rel="noreferrer noopener"><em>Macromol. Rapid Commun.</em></a> (4.2)</li>
+          <li><a href="https://onlinelibrary.wiley.com/toc/26424169/0/0" target="_blank" rel="noreferrer noopener"><em>J. Polym. Sci.</em></a> (3.9)</li>
+          <li><a href="https://onlinelibrary.wiley.com/toc/15213935/0/ja" target="_blank" rel="noreferrer noopener"><em>Macromol. Chem. Phys.</em></a> (2.5)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Elsevier</h3>
-            <ul class="list">
-              <li><a href="https://www.sciencedirect.com/journal/european-polymer-journal/articles-in-press" target="_blank" rel="noreferrer noopener"><em>Eur. Polym. J.</em></a> (5.8)</li>
-              <li><a href="https://www.sciencedirect.com/journal/polymer/articles-in-press" target="_blank" rel="noreferrer noopener"><em>Polymer</em></a> (4.1)</li>
-            </ul>
-          </div>
-        </div>
+      <section class="card">
+        <h3>RSC</h3>
+        <ul class="list">
+          <li><a href="https://pubs.rsc.org/en/journals/journalissues/sc#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Chem. Sci.</em></a> (7.6)</li>
+          <li><a href="https://pubs.rsc.org/en/journals/journalissues/tc#!recentarticles" target="_blank" rel="noreferrer noopener"><em>J. Mater. Chem. C</em></a> (5.7)</li>
+          <li><a href="https://pubs.rsc.org/en/journals/journalissues/ma#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Mater. Adv.</em></a> (5.2)</li>
+          <li><a href="https://pubs.rsc.org/en/journals/journalissues/py#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Polym. Chem.</em></a> (4.1)</li>
+          <li><a href="https://pubs.rsc.org/en/journals/journalissues/sm#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Soft Matter</em></a> (2.9)</li>
+          <li><a href="https://pubs.rsc.org/en/journals/journalissues/cp#!recentarticles&adv" target="_blank" rel="noreferrer noopener"><em>Phys. Chem. Chem. Phys.</em></a> (2.9)</li>
+        </ul>
+      </section>
 
-        <!-- Right column -->
-        <div class="stack">
-          <div class="group">
-            <h3><a href="https://www.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Tokyo Tech</a></h3>
-            <ul class="list">
-              <li><a href="https://portal.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Portal</a></li>
-              <li><a href="https://www.envpro.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Envpro</a></li>
-              <li><a href="http://iasor7.envpro.titech.ac.jp/iasor7/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO R7</a></li>
-              <li><a href="http://iasog3.envpro.titech.ac.jp/iasog3/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO G3</a></li>
-              <li><a href="https://www.libra.titech.ac.jp/oa" target="_blank" rel="noreferrer noopener">OA News Libra</a></li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Elsevier</h3>
+        <ul class="list">
+          <li><a href="https://www.sciencedirect.com/journal/european-polymer-journal/articles-in-press" target="_blank" rel="noreferrer noopener"><em>Eur. Polym. J.</em></a> (5.8)</li>
+          <li><a href="https://www.sciencedirect.com/journal/polymer/articles-in-press" target="_blank" rel="noreferrer noopener"><em>Polymer</em></a> (4.1)</li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Research</h3>
-            <ul class="list">
-              <li><a href="https://scifinder-n.cas.org/?referrer=scifinder.cas.org" target="_blank" rel="noreferrer noopener">SciFinder</a></li>
-              <li><a href="https://www.reaxys.com/#/search/quick" target="_blank" rel="noreferrer noopener">Reaxys</a></li>
-              <li><a href="https://www.webofscience.com/wos/woscc/basic-search" target="_blank" rel="noreferrer noopener">Web of Science</a></li>
-              <li><a href="https://sdbs.db.aist.go.jp/" target="_blank" rel="noreferrer noopener">SDBS</a></li>
-              <li><a href="https://toolsforscience.github.io/locator/" target="_blank" rel="noreferrer noopener">Article Locator</a></li>
-              <li><a href="https://chemsearch.kovsky.net/simple.htm" target="_blank" rel="noreferrer noopener">Chem Search</a></li>
-              <li><a href="https://dx.doi.org/" target="_blank" rel="noreferrer noopener">DOI Search</a></li>
-            </ul>
-          </div>
+      <!-- Right column cards -->
+      <section class="card">
+        <h3><a href="https://www.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Tokyo Tech</a></h3>
+        <ul class="list">
+          <li><a href="https://portal.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Portal</a></li>
+          <li><a href="https://www.envpro.titech.ac.jp/" target="_blank" rel="noreferrer noopener">Envpro</a></li>
+          <li><a href="http://iasor7.envpro.titech.ac.jp/iasor7/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO R7</a></li>
+          <li><a href="http://iasog3.envpro.titech.ac.jp/iasog3/fw/FW0000/" target="_blank" rel="noreferrer noopener">IASO G3</a></li>
+          <li><a href="https://www.libra.titech.ac.jp/oa" target="_blank" rel="noreferrer noopener">OA News Libra</a></li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Tools</h3>
-            <ul class="list">
-              <li><a href="https://www.deepl.com/translator" target="_blank" rel="noreferrer noopener">DeepL</a></li>
-              <li><a href="https://chat.openai.com/" target="_blank" rel="noreferrer noopener">ChatGPT</a></li>
-              <li><a href="https://app.editage.jp/?type=individual" target="_blank" rel="noreferrer noopener">Editage</a></li>
-              <li><a href="https://www.english-corpora.org/coca/" target="_blank" rel="noreferrer noopener">COCA</a></li>
-              <li><a href="https://www.overleaf.com/login?" target="_blank" rel="noreferrer noopener">Overleaf</a></li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Research</h3>
+        <ul class="list">
+          <li><a href="https://scifinder-n.cas.org/?referrer=scifinder.cas.org" target="_blank" rel="noreferrer noopener">SciFinder</a></li>
+          <li><a href="https://www.reaxys.com/#/search/quick" target="_blank" rel="noreferrer noopener">Reaxys</a></li>
+          <li><a href="https://www.webofscience.com/wos/woscc/basic-search" target="_blank" rel="noreferrer noopener">Web of Science</a></li>
+          <li><a href="https://sdbs.db.aist.go.jp/" target="_blank" rel="noreferrer noopener">SDBS</a></li>
+          <li><a href="https://toolsforscience.github.io/locator/" target="_blank" rel="noreferrer noopener">Article Locator</a></li>
+          <li><a href="https://chemsearch.kovsky.net/simple.htm" target="_blank" rel="noreferrer noopener">Chem Search</a></li>
+          <li><a href="https://dx.doi.org/" target="_blank" rel="noreferrer noopener">DOI Search</a></li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Publish</h3>
-            <ul class="list">
-              <li><a href="https://acsparagonplus.acs.org/psweb/loginForm?code=1000" target="_blank" rel="noreferrer noopener">ACS Paragon Plus</a></li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Tools</h3>
+        <ul class="list">
+          <li><a href="https://www.deepl.com/translator" target="_blank" rel="noreferrer noopener">DeepL</a></li>
+          <li><a href="https://chat.openai.com/" target="_blank" rel="noreferrer noopener">ChatGPT</a></li>
+          <li><a href="https://app.editage.jp/?type=individual" target="_blank" rel="noreferrer noopener">Editage</a></li>
+          <li><a href="https://www.english-corpora.org/coca/" target="_blank" rel="noreferrer noopener">COCA</a></li>
+          <li><a href="https://www.overleaf.com/login?" target="_blank" rel="noreferrer noopener">Overleaf</a></li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Societies &amp; Meetings</h3>
-            <ul class="list">
-              <li><a href="https://www.spsj.or.jp/" target="_blank" rel="noreferrer noopener">SPSJ, Japan</a></li>
-              <li><a href="https://www.jsap.or.jp/" target="_blank" rel="noreferrer noopener">JSAP, Japan</a></li>
-              <li><a href="https://www.acs.org/meetings/acs-meetings.html" target="_blank" rel="noreferrer noopener">ACS Meetings</a></li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Publish</h3>
+        <ul class="list">
+          <li><a href="https://acsparagonplus.acs.org/psweb/loginForm?code=1000" target="_blank" rel="noreferrer noopener">ACS Paragon Plus</a></li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Suppliers</h3>
-            <ul class="list">
-              <li><a href="https://www.monotaro.com/" target="_blank" rel="noreferrer noopener">Monotaro</a></li>
-              <li><a href="https://www.amazon.co.jp/" target="_blank" rel="noreferrer noopener">Amazon Business</a></li>
-              <li><a href="https://solution.soloel.com/buyer/view/a010/DAA01010.html" target="_blank" rel="noreferrer noopener">Askul</a></li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Societies &amp; Meetings</h3>
+        <ul class="list">
+          <li><a href="https://www.spsj.or.jp/" target="_blank" rel="noreferrer noopener">SPSJ, Japan</a></li>
+          <li><a href="https://www.jsap.or.jp/" target="_blank" rel="noreferrer noopener">JSAP, Japan</a></li>
+          <li><a href="https://www.acs.org/meetings/acs-meetings.html" target="_blank" rel="noreferrer noopener">ACS Meetings</a></li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Chemical Reagents</h3>
-            <ul class="list">
-              <li><a href="https://www.e-nacalai.jp/ec2/EC-srchtop.cfm" target="_blank" rel="noreferrer noopener">e-Nacalai</a></li>
-              <li><a href="https://www.tcichemicals.com/JP/ja/" target="_blank" rel="noreferrer noopener">TCI</a></li>
-              <li><a href="https://cica-web.kanto.co.jp/CicaWeb/servlet/wsj.front.ItemListSvlt" target="_blank" rel="noreferrer noopener">Kanto Kagaku</a></li>
-              <li><a href="https://labchem-wako.fujifilm.com/jp/index.html" target="_blank" rel="noreferrer noopener">FUJIFILM Wako</a></li>
-              <li><a href="https://www.sigmaaldrich.com/JP/ja" target="_blank" rel="noreferrer noopener">Sigma-Aldrich</a></li>
-            </ul>
-          </div>
+      <section class="card">
+        <h3>Suppliers</h3>
+        <ul class="list">
+          <li><a href="https://www.monotaro.com/" target="_blank" rel="noreferrer noopener">Monotaro</a></li>
+          <li><a href="https://www.amazon.co.jp/" target="_blank" rel="noreferrer noopener">Amazon Business</a></li>
+          <li><a href="https://solution.soloel.com/buyer/view/a010/DAA01010.html" target="_blank" rel="noreferrer noopener">Askul</a></li>
+        </ul>
+      </section>
 
-          <div class="group">
-            <h3>Trip</h3>
-            <ul class="list">
-              <li><a href="https://tokyo-ame.jwa.or.jp/" target="_blank" rel="noreferrer noopener">Tokyo-ame</a></li>
-              <li><a href="https://www.railmaps.jp/tokyo/" target="_blank" rel="noreferrer noopener">Railway Map</a></li>
-              <li><a href="https://www.jorudan.co.jp/norikae/" target="_blank" rel="noreferrer noopener">Jorudan</a></li>
-            </ul>
-          </div>
-        </div>
+      <section class="card">
+        <h3>Chemical Reagents</h3>
+        <ul class="list">
+          <li><a href="https://www.e-nacalai.jp/ec2/EC-srchtop.cfm" target="_blank" rel="noreferrer noopener">e-Nacalai</a></li>
+          <li><a href="https://www.tcichemicals.com/JP/ja/" target="_blank" rel="noreferrer noopener">TCI</a></li>
+          <li><a href="https://cica-web.kanto.co.jp/CicaWeb/servlet/wsj.front.ItemListSvlt" target="_blank" rel="noreferrer noopener">Kanto Kagaku</a></li>
+          <li><a href="https://labchem-wako.fujifilm.com/jp/index.html" target="_blank" rel="noreferrer noopener">FUJIFILM Wako</a></li>
+          <li><a href="https://www.sigmaaldrich.com/JP/ja" target="_blank" rel="noreferrer noopener">Sigma-Aldrich</a></li>
+        </ul>
+      </section>
 
-      </div>
-      <div class="muted">Note: Numbers in parentheses are indicative impact factors (for quick reference only).</div>
-    </section>
+      <section class="card">
+        <h3>Trip</h3>
+        <ul class="list">
+          <li><a href="https://tokyo-ame.jwa.or.jp/" target="_blank" rel="noreferrer noopener">Tokyo-ame</a></li>
+          <li><a href="https://www.railmaps.jp/tokyo/" target="_blank" rel="noreferrer noopener">Railway Map</a></li>
+          <li><a href="https://www.jorudan.co.jp/norikae/" target="_blank" rel="noreferrer noopener">Jorudan</a></li>
+        </ul>
+      </section>
+
+    </div>
+
+    <div class="muted">Note: Numbers in parentheses are indicative impact factors (for quick reference only).</div>
   </main>
 
   <!-- Footer -->
@@ -299,7 +330,6 @@
   </footer>
 
   <script>
-    // Footer year
     document.getElementById('yy').textContent = new Date().getFullYear();
   </script>
 </body>
