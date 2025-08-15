@@ -50,14 +50,42 @@
     .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
     .nav a{padding:8px 10px;border-radius:10px}
     .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-    .nav li{position:relative}
+    .nav li{position:relative;padding-bottom:6px} /* extend hover area below trigger */
+
+    /* Accessible, transition-friendly submenu (no display:none) */
     .nav .submenu{
-      display:none;position:absolute;top:36px;left:0;background:#fff;border:1px solid var(--border);
-      border-radius:12px;box-shadow:var(--shadow);min-width:220px;padding:8px
+      position:absolute;z-index:50;
+      top:100%;           /* stick to trigger bottom */
+      left:0;
+      margin-top:6px;     /* small visual gap that still keeps hover continuity */
+      background:#fff;border:1px solid var(--border);
+      border-radius:12px;box-shadow:var(--shadow);
+      min-width:220px;padding:8px;
+
+      opacity:0;visibility:hidden;transform:translateY(6px);
+      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+      transition-delay:.12s;      /* slight delay when hiding to reduce flicker */
+      pointer-events:none;        /* ignore pointer when hidden */
     }
-    .nav li:hover .submenu{display:block}
+    /* Show on hover or keyboard focus */
+    .nav li:hover .submenu,
+    .nav li:focus-within .submenu{
+      opacity:1;visibility:visible;transform:translateY(0);
+      transition-delay:0s;        /* show immediately; raise for appear delay */
+      pointer-events:auto;
+    }
+    /* Invisible hover bridge below the trigger to avoid "falling through" */
+    .nav li::after{
+      content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px;
+    }
+
     .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
     .nav .submenu a:hover{background:#f3f6fb}
+
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce){
+      .nav .submenu{transition:none}
+    }
 
     /* Layout */
     .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
@@ -135,7 +163,7 @@
         <ul>
           <li><a href="/" aria-current="page">Home</a></li>
           <li>
-            <a href="/profile/">Profile</a>
+            <a href="/profile/" aria-haspopup="true">Profile</a>
             <div class="submenu" role="menu">
               <a href="/profile/current_topic/">Current Topics</a>
               <a href="/profile/publication/">Publication</a>
