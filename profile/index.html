@@ -124,6 +124,197 @@
         --card-pad:20px;
       }
     }
+    /* Global mobile layout fix */
+@media (max-width: 700px){
+
+  :root{
+    --space:18px;
+    --container-y:18px;
+    --card-pad:18px;
+  }
+
+  html, body{
+    overflow-x:hidden;
+  }
+
+  body{
+    font-size:16px;
+    line-height:1.65;
+  }
+
+  .site-header{
+    position:static;
+  }
+
+  .header-inner{
+    display:block;
+    padding:16px 18px;
+  }
+
+  .brand{
+    display:block;
+  }
+
+  .brand .title{
+    display:block;
+    font-size:1.35rem;
+    line-height:1.25;
+    max-width:none;
+    word-break:normal;
+    overflow-wrap:normal;
+  }
+
+  .brand .desc{
+    margin-top:6px;
+    font-size:.9rem;
+    line-height:1.45;
+  }
+
+  .nav{
+    margin-top:14px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+
+  .nav::-webkit-scrollbar{
+    display:none;
+  }
+
+  .nav ul{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:10px;
+    min-width:max-content;
+  }
+
+  .nav li{
+    padding-bottom:0;
+  }
+
+  .nav li::after{
+    display:none;
+  }
+
+  .nav a{
+    display:block;
+    padding:7px 10px;
+    white-space:nowrap;
+  }
+
+  .nav .submenu{
+    display:none;
+  }
+
+  .container{
+    max-width:none;
+    margin:18px auto;
+    padding:0 14px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:18px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .stack{
+    gap:18px;
+  }
+
+  .hero{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:14px;
+  }
+
+  .avatar{
+    width:112px;
+    height:112px;
+    border-radius:22px;
+    background:#fff;
+  }
+
+  .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+  }
+
+  .kv{
+    align-items:center;
+    width:100%;
+  }
+
+  .heading-xl,
+  .kv h1{
+    font-size:1.55rem;
+    line-height:1.25;
+    text-align:center;
+  }
+
+  .kv .line,
+  .badges{
+    justify-content:center;
+  }
+
+  .chip{
+    font-size:.88rem;
+    line-height:1.4;
+    padding:4px 10px;
+  }
+
+  .badges a{
+    padding:7px 10px;
+    font-size:.92rem;
+  }
+
+  h1{
+    font-size:1.65rem;
+    line-height:1.25;
+  }
+
+  h2{
+    font-size:1.35rem;
+    line-height:1.3;
+  }
+
+  h3{
+    font-size:1.08rem;
+    line-height:1.35;
+  }
+
+  p{
+    margin-top:0;
+  }
+
+  .list{
+    padding-left:1.2em;
+  }
+
+  .list li{
+    margin:7px 0;
+  }
+
+  .footer-inner{
+    display:block;
+    padding:16px 18px;
+  }
+
+  .footer-nav ul{
+    gap:10px 14px;
+  }
+
+  .copyright{
+    margin-top:10px;
+  }
+}
   </style>
 </head>
 <body>
