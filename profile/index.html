@@ -1,525 +1,732 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Profile – Haonan LIU’s Personal Page</title>
-  <meta name="description" content="Profile of Haonan Liu – Assistant Professor, Institute of Science Tokyo. Research, education, experience, lectures, awards, news, and affiliations.">
-  <link rel="icon" href="/wp-content/uploads/2022/09/avatar_non_bg.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/wp-content/uploads/2022/09/avatar_non_bg.png">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Profile – Haonan LIU’s Personal Page</title>
+    <meta
+      name="description"
+      content="Profile of Haonan Liu – Assistant Professor, Institute of Science Tokyo. Research, education, experience, lectures, awards, news, and affiliations."
+    />
+    <link
+      rel="icon"
+      href="/wp-content/uploads/2022/09/avatar_non_bg.png"
+      sizes="32x32"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/wp-content/uploads/2022/09/avatar_non_bg.png"
+    />
 
-  <!-- Shared theme (aligned with Home). All comments in English -->
-  <style>
-    :root{
-      /* Core palette */
-      --bg:#f5f6fa;
-      --card:#ffffff;
-      --text:#20242a;
-      --muted:#5c6270;
-      --border:#e6e9ef;
-      --shadow:0 8px 24px rgba(23,31,56,.08);
-      --radius:16px;
+    <!-- Shared theme (aligned with Home). All comments in English -->
+    <style>
+          :root{
+            /* Core palette */
+            --bg:#f5f6fa;
+            --card:#ffffff;
+            --text:#20242a;
+            --muted:#5c6270;
+            --border:#e6e9ef;
+            --shadow:0 8px 24px rgba(23,31,56,.08);
+            --radius:16px;
 
-      --primary:#4a90e2;
-      --accent:#212a74;
+            --primary:#4a90e2;
+            --accent:#212a74;
 
-      /* Spacing scale (single source of truth) */
-      --space:24px;        /* default inter-card spacing */
-      --container-y:24px;  /* top/bottom whitespace in main container */
-      --card-pad:24px;     /* internal padding for cards */
-    }
+            /* Spacing scale (single source of truth) */
+            --space:24px;        /* default inter-card spacing */
+            --container-y:24px;  /* top/bottom whitespace in main container */
+            --card-pad:24px;     /* internal padding for cards */
+          }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      line-height:1.7
-    }
-    a{color:var(--primary);text-decoration:none}
-    a:hover{opacity:.9}
-    img{max-width:100%;display:block}
+          *{box-sizing:border-box}
+          html,body{height:100%}
+          body{
+            margin:0;background:var(--bg);color:var(--text);
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+            line-height:1.7
+          }
+          a{color:var(--primary);text-decoration:none}
+          a:hover{opacity:.9}
+          img{max-width:100%;display:block}
 
-    /* Header */
-    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
-    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-    .brand{display:flex;flex-direction:column}
-    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
-    .brand .desc{color:var(--muted);font-size:.92rem}
+          /* Header */
+          .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
+          .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+          .brand{display:flex;flex-direction:column}
+          .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
+          .brand .desc{color:var(--muted);font-size:.92rem}
 
-    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-    .nav a{padding:8px 10px;border-radius:10px}
-    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-    .nav li{position:relative;padding-bottom:6px} /* extend hover zone below trigger */
+          .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+          .nav a{padding:8px 10px;border-radius:10px}
+          .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+          .nav li{position:relative;padding-bottom:6px} /* extend hover zone below trigger */
 
-    /* Submenu uses transitions (not display none) for better access */
-    .nav .submenu{
-      position:absolute;z-index:50;
-      top:100%; left:0; margin-top:6px;
-      background:#fff;border:1px solid var(--border);
-      border-radius:12px;box-shadow:var(--shadow);
-      min-width:220px;padding:8px;
+          /* Submenu uses transitions (not display none) for better access */
+          .nav .submenu{
+            position:absolute;z-index:50;
+            top:100%; left:0; margin-top:6px;
+            background:#fff;border:1px solid var(--border);
+            border-radius:12px;box-shadow:var(--shadow);
+            min-width:220px;padding:8px;
 
-      opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-      transition-delay:.12s; /* slight delay when hiding to reduce flicker */
-      pointer-events:none;
-    }
-    .nav li:hover .submenu,
-    .nav li:focus-within .submenu{
-      opacity:1;visibility:visible;transform:translateY(0);
-      transition-delay:0s; /* show immediately; raise for appear delay if desired */
-      pointer-events:auto;
-    }
-    .nav li::after{ /* invisible bridge to prevent hover drop */
-      content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px;
-    }
-    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
-    .nav .submenu a:hover{background:#f3f6fb}
+            opacity:0;visibility:hidden;transform:translateY(6px);
+            transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+            transition-delay:.12s; /* slight delay when hiding to reduce flicker */
+            pointer-events:none;
+          }
+          .nav li:hover .submenu,
+          .nav li:focus-within .submenu{
+            opacity:1;visibility:visible;transform:translateY(0);
+            transition-delay:0s; /* show immediately; raise for appear delay if desired */
+            pointer-events:auto;
+          }
+          .nav li::after{ /* invisible bridge to prevent hover drop */
+            content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px;
+          }
+          .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
+          .nav .submenu a:hover{background:#f3f6fb}
 
-    @media (prefers-reduced-motion: reduce){
-      .nav .submenu{transition:none}
-    }
+          @media (prefers-reduced-motion: reduce){
+            .nav .submenu{transition:none}
+          }
 
-    /* Layout */
-    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--card-pad)}
-    .container > section + section{margin-top:var(--space)} /* vertical rhythm */
+          /* Layout */
+          .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
+          .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--card-pad)}
+          .container > section + section{margin-top:var(--space)} /* vertical rhythm */
 
-    .heading-xl{font-size:1.6rem;margin:0 0 8px;color:var(--accent);font-weight:800}
-    .muted{color:var(--muted)}
+          .heading-xl{font-size:1.6rem;margin:0 0 8px;color:var(--accent);font-weight:800}
+          .muted{color:var(--muted)}
 
-    .grid{display:grid;grid-template-columns:320px 1fr;gap:var(--space)}
-    .stack{display:flex;flex-direction:column;gap:var(--space)}
+          .grid{display:grid;grid-template-columns:320px 1fr;gap:var(--space)}
+          .stack{display:flex;flex-direction:column;gap:var(--space)}
 
-    .chip{display:inline-block;background:#f0f4fb;border:1px solid var(--border);padding:2px 8px;border-radius:999px;font-size:.85rem;color:#2b2f36}
-    .section{display:flex;flex-direction:column;gap:10px;margin-top:8px}
-    .section h3{margin:6px 0 2px;font-size:1.05rem;color:#2b2f36}
-    .list{margin:0;padding-left:1.1em}
-    .list li{margin:6px 0}
-    .hero{display:flex;gap:16px;align-items:center}
-    .avatar{width:128px;height:128px;border-radius:24px;border:1px solid var(--border);overflow:hidden;flex:0 0 auto}
-    .avatar img{width:100%;height:100%;object-fit:cover;object-position:center;}
-    .kv{display:flex;flex-direction:column;gap:6px}
-    .kv h1{font-size:1.4rem;margin:0 0 2px;color:#2b2f36}
-    .kv .line{display:flex;gap:10px;flex-wrap:wrap}
-    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-    .badges a{border:1px solid var(--border);border-radius:10px;padding:6px 10px;background:#fff}
-    .divider{height:1px;background:var(--border);margin:10px 0}
+          .chip{display:inline-block;background:#f0f4fb;border:1px solid var(--border);padding:2px 8px;border-radius:999px;font-size:.85rem;color:#2b2f36}
+          .section{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+          .section h3{margin:6px 0 2px;font-size:1.05rem;color:#2b2f36}
+          .list{margin:0;padding-left:1.1em}
+          .list li{margin:6px 0}
+          .hero{display:flex;gap:16px;align-items:center}
+          .avatar{width:128px;height:128px;border-radius:24px;border:1px solid var(--border);overflow:hidden;flex:0 0 auto}
+          .avatar img{width:100%;height:100%;object-fit:cover;object-position:center;}
+          .kv{display:flex;flex-direction:column;gap:6px}
+          .kv h1{font-size:1.4rem;margin:0 0 2px;color:#2b2f36}
+          .kv .line{display:flex;gap:10px;flex-wrap:wrap}
+          .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+          .badges a{border:1px solid var(--border);border-radius:10px;padding:6px 10px;background:#fff}
+          .divider{height:1px;background:var(--border);margin:10px 0}
 
-    /* Footer */
-    .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
-    .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
-    .copyright{color:var(--muted);font-size:.92rem}
+          /* Footer */
+          .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
+          .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+          .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
+          .copyright{color:var(--muted);font-size:.92rem}
 
-    /* Responsive */
-    @media (max-width:960px){
-      .grid{grid-template-columns:1fr}
-      .hero{align-items:flex-start}
-      .avatar{width:96px;height:96px;border-radius:18px}
-      :root{
-        --space:20px;
-        --container-y:20px;
-        --card-pad:20px;
+          /* Responsive */
+          @media (max-width:960px){
+            .grid{grid-template-columns:1fr}
+            .hero{align-items:flex-start}
+            .avatar{width:96px;height:96px;border-radius:18px}
+            :root{
+              --space:20px;
+              --container-y:20px;
+              --card-pad:20px;
+            }
+          }
+          /* Global mobile layout fix */
+      @media (max-width: 700px){
+
+        :root{
+          --space:18px;
+          --container-y:18px;
+          --card-pad:18px;
+        }
+
+        html, body{
+          overflow-x:hidden;
+        }
+
+        body{
+          font-size:16px;
+          line-height:1.65;
+        }
+
+        .site-header{
+          position:static;
+        }
+
+        .header-inner{
+          display:block;
+          padding:16px 18px;
+        }
+
+        .brand{
+          display:block;
+        }
+
+        .brand .title{
+          display:block;
+          font-size:1.35rem;
+          line-height:1.25;
+          max-width:none;
+          word-break:normal;
+          overflow-wrap:normal;
+        }
+
+        .brand .desc{
+          margin-top:6px;
+          font-size:.9rem;
+          line-height:1.45;
+        }
+
+        .nav{
+          margin-top:14px;
+          overflow-x:auto;
+          -webkit-overflow-scrolling:touch;
+          scrollbar-width:none;
+        }
+
+        .nav::-webkit-scrollbar{
+          display:none;
+        }
+
+        .nav ul{
+          display:flex;
+          flex-wrap:nowrap;
+          gap:10px;
+          min-width:max-content;
+        }
+
+        .nav li{
+          padding-bottom:0;
+        }
+
+        .nav li::after{
+          display:none;
+        }
+
+        .nav a{
+          display:block;
+          padding:7px 10px;
+          white-space:nowrap;
+        }
+
+        .nav .submenu{
+          display:none;
+        }
+
+        .container{
+          max-width:none;
+          margin:18px auto;
+          padding:0 14px;
+        }
+
+        .card{
+          padding:18px;
+          border-radius:18px;
+        }
+
+        .grid{
+          grid-template-columns:1fr;
+          gap:18px;
+        }
+
+        .stack{
+          gap:18px;
+        }
+
+        .hero{
+          flex-direction:column;
+          align-items:center;
+          text-align:center;
+          gap:14px;
+        }
+
+        .avatar{
+          width:112px;
+          height:112px;
+          border-radius:22px;
+          background:#fff;
+        }
+
+        .avatar img{
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          object-position:center;
+        }
+
+        .kv{
+          align-items:center;
+          width:100%;
+        }
+
+        .heading-xl,
+        .kv h1{
+          font-size:1.55rem;
+          line-height:1.25;
+          text-align:center;
+        }
+
+        .kv .line,
+        .badges{
+          justify-content:center;
+        }
+
+        .chip{
+          font-size:.88rem;
+          line-height:1.4;
+          padding:4px 10px;
+        }
+
+        .badges a{
+          padding:7px 10px;
+          font-size:.92rem;
+        }
+
+        h1{
+          font-size:1.65rem;
+          line-height:1.25;
+        }
+
+        h2{
+          font-size:1.35rem;
+          line-height:1.3;
+        }
+
+        h3{
+          font-size:1.08rem;
+          line-height:1.35;
+        }
+
+        p{
+          margin-top:0;
+        }
+
+        .list{
+          padding-left:1.2em;
+        }
+
+        .list li{
+          margin:7px 0;
+        }
+
+        .footer-inner{
+          display:block;
+          padding:16px 18px;
+        }
+
+        .footer-nav ul{
+          gap:10px 14px;
+        }
+
+        .copyright{
+          margin-top:10px;
+        }
       }
-    }
-    /* Global mobile layout fix */
-@media (max-width: 700px){
-
-  :root{
-    --space:18px;
-    --container-y:18px;
-    --card-pad:18px;
-  }
-
-  html, body{
-    overflow-x:hidden;
-  }
-
-  body{
-    font-size:16px;
-    line-height:1.65;
-  }
-
-  .site-header{
-    position:static;
-  }
-
-  .header-inner{
-    display:block;
-    padding:16px 18px;
-  }
-
-  .brand{
-    display:block;
-  }
-
-  .brand .title{
-    display:block;
-    font-size:1.35rem;
-    line-height:1.25;
-    max-width:none;
-    word-break:normal;
-    overflow-wrap:normal;
-  }
-
-  .brand .desc{
-    margin-top:6px;
-    font-size:.9rem;
-    line-height:1.45;
-  }
-
-  .nav{
-    margin-top:14px;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-
-  .nav::-webkit-scrollbar{
-    display:none;
-  }
-
-  .nav ul{
-    display:flex;
-    flex-wrap:nowrap;
-    gap:10px;
-    min-width:max-content;
-  }
-
-  .nav li{
-    padding-bottom:0;
-  }
-
-  .nav li::after{
-    display:none;
-  }
-
-  .nav a{
-    display:block;
-    padding:7px 10px;
-    white-space:nowrap;
-  }
-
-  .nav .submenu{
-    display:none;
-  }
-
-  .container{
-    max-width:none;
-    margin:18px auto;
-    padding:0 14px;
-  }
-
-  .card{
-    padding:18px;
-    border-radius:18px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-
-  .stack{
-    gap:18px;
-  }
-
-  .hero{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    gap:14px;
-  }
-
-  .avatar{
-    width:112px;
-    height:112px;
-    border-radius:22px;
-    background:#fff;
-  }
-
-  .avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-  }
-
-  .kv{
-    align-items:center;
-    width:100%;
-  }
-
-  .heading-xl,
-  .kv h1{
-    font-size:1.55rem;
-    line-height:1.25;
-    text-align:center;
-  }
-
-  .kv .line,
-  .badges{
-    justify-content:center;
-  }
-
-  .chip{
-    font-size:.88rem;
-    line-height:1.4;
-    padding:4px 10px;
-  }
-
-  .badges a{
-    padding:7px 10px;
-    font-size:.92rem;
-  }
-
-  h1{
-    font-size:1.65rem;
-    line-height:1.25;
-  }
-
-  h2{
-    font-size:1.35rem;
-    line-height:1.3;
-  }
-
-  h3{
-    font-size:1.08rem;
-    line-height:1.35;
-  }
-
-  p{
-    margin-top:0;
-  }
-
-  .list{
-    padding-left:1.2em;
-  }
-
-  .list li{
-    margin:7px 0;
-  }
-
-  .footer-inner{
-    display:block;
-    padding:16px 18px;
-  }
-
-  .footer-nav ul{
-    gap:10px 14px;
-  }
-
-  .copyright{
-    margin-top:10px;
-  }
-}
-  </style>
-</head>
-<body>
-
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <a class="title" href="/">Haonan LIU’s Personal Page</a>
-        <div class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</div>
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <a class="title" href="/">Haonan LIU’s Personal Page</a>
+          <div class="desc">
+            Ph.D., Assistant Professor, Institute of Science Tokyo
+          </div>
+        </div>
+        <nav class="nav" aria-label="Main">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+              <a href="/profile/" aria-current="page" aria-haspopup="true"
+                >Profile</a
+              >
+              <div class="submenu" role="menu">
+                <a href="/profile/current_topic/">Current Topics</a>
+                <a href="/profile/publication/">Publication</a>
+                <a href="/profile/presentation/">Presentation</a>
+                <a href="/profile/patent/">Patent</a>
+                <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf"
+                  >Chinese CV</a
+                >
+              </div>
+            </li>
+            <li><a href="/category/posts/">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/">Tools</a></li>
+          </ul>
+        </nav>
       </div>
-      <nav class="nav" aria-label="Main">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li>
-            <a href="/profile/" aria-current="page" aria-haspopup="true">Profile</a>
-            <div class="submenu" role="menu">
-              <a href="/profile/current_topic/">Current Topics</a>
-              <a href="/profile/publication/">Publication</a>
-              <a href="/profile/presentation/">Presentation</a>
-              <a href="/profile/patent/">Patent</a>
-              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+      <section class="card stack">
+        <div class="hero">
+          <div class="avatar">
+            <img
+              src="/wp-content/uploads/2022/09/avatar_non_bg.png"
+              alt="Avatar of Haonan Liu"
+              width="128"
+              height="128"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="kv">
+            <h1 class="heading-xl">Haonan LIU</h1>
+            <div class="line">
+              <span class="chip">Assistant Professor</span>
+              <span class="chip"
+                >Department of Chemical Science and Engineering</span
+              >
+              <span class="chip">Institute of Science Tokyo</span>
             </div>
-          </li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Main -->
-  <main class="container">
-    <section class="card stack">
-      <div class="hero">
-        <div class="avatar">
-          <img src="/wp-content/uploads/2022/09/avatar_non_bg.png" alt="Avatar of Haonan Liu" width="128" height="128" loading="lazy" decoding="async">
+            <div class="badges">
+              <a
+                href="https://strdb.s.isct.ac.jp/html/100003365_ja.html"
+                target="_blank"
+                rel="noreferrer noopener"
+                >STRDB</a
+              >
+              <a
+                href="https://scholar.google.com/citations?user=Nmc7HqQAAAAJ&hl=en&authuser=1"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Google Scholar</a
+              >
+              <a
+                href="https://orcid.org/0000-0001-8989-7173"
+                target="_blank"
+                rel="noreferrer noopener"
+                >ORCID</a
+              >
+              <a
+                href="https://www.webofscience.com/wos/author/record/GPX-0805-2022"
+                target="_blank"
+                rel="noreferrer noopener"
+                >WoS ResearcherID</a
+              >
+              <a
+                href="https://researchmap.jp/hryu"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Researchmap</a
+              >
+              <a
+                href="https://t2r2.star.titech.ac.jp/cgi-bin/researcherinfo.cgi?q_researcher_content_number=a676578f79503d9aa88a47485536365f"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Science Tokyo T2R2</a
+              >
+            </div>
+          </div>
         </div>
-        <div class="kv">
-          <h1 class="heading-xl">Haonan LIU</h1>
-          <div class="line">
-            <span class="chip">Assistant Professor</span>
-            <span class="chip">Department of Chemical Science and Engineering</span>
-            <span class="chip">Institute of Science Tokyo</span>
+
+        <div class="grid">
+          <!-- Left side (quick facts) -->
+          <aside class="stack">
+            <div>
+              <h3>Contact</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li><strong>E-mail:</strong> liu(at)mct.isct.ac.jp</li>
+                <li>
+                  <strong>Address:</strong> Main Bldg. (H-133), 2-12-1 Ookayama,
+                  Meguro, Tokyo 152-8552, Japan
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3>Bio</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>
+                  <strong>Date & place of birth:</strong> 28 May 1994, Taiyuan
+                  03-0006, China
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3>Affiliations</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>The Society of Polymer Science, Japan</li>
+                <li>The Japan Society of Applied Physics</li>
+                <li>Chinese Chemical Society</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Quick Links</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li><a href="/profile/publication/">Publication</a></li>
+                <li><a href="/profile/presentation/">Presentation</a></li>
+                <li><a href="/profile/patent/">Patent</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Right side (content) -->
+          <div class="stack">
+            <div>
+              <h3>About</h3>
+              <div class="divider"></div>
+              <p>
+                Haonan Liu is an Assistant Professor at the Department of
+                Chemical Science and Engineering, Institute of Science Tokyo.
+                After earning his B.Eng. in Chemical Engineering and Technology
+                from Zhejiang University in 2016, Liu moved to Japan to continue
+                his studies at Tokyo Institute of Technology. He obtained his
+                M.Eng. in 2019 and his Ph.D. in 2022. Following a one-year
+                postdoctoral position, he became an assistant professor at Tokyo
+                Institute of Technology in 2023. Liu’s research interests center
+                on polymer analysis, particularly their nanomechanical,
+                high-pressure optical, and high-frequency dielectric behaviors.
+              </p>
+            </div>
+
+            <div>
+              <h3>Work Experience</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>
+                  Asst. Prof.,
+                  <a
+                    href="http://nanomech.cap.mct.isct.ac.jp/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Nakajima Lab</a
+                  >, Science Tokyo, <strong>Apr. 2026 – Present</strong>
+                </li>
+                <li>
+                  Asst. Prof.,
+                  <a
+                    href="http://www.ando-cap.mac.titech.ac.jp/index.html"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Ando Lab</a
+                  >, Science Tokyo, <strong>Oct. 2024 – Mar. 2026</strong>
+                </li>
+                <li>
+                  Asst. Prof.,
+                  <a
+                    href="http://www.ando-cap.mac.titech.ac.jp/index.html"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Ando Lab</a
+                  >, Tokyo Tech, <strong>Apr. 2023 – Sept. 2024</strong>
+                </li>
+                <li>
+                  Postdoc.,
+                  <a
+                    href="http://nanomech.cap.mct.isct.ac.jp/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Nakajima Lab</a
+                  >, Tokyo Tech, <strong>Apr. 2022 – Mar. 2023</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Education</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>
+                  <strong>Dr. Eng.</strong>, Dept. of Chem. Sci. & Eng., Tokyo
+                  Tech, <strong>2022</strong> (supervised by
+                  <a
+                    href="https://t2r2.star.titech.ac.jp/cgi-bin/researcherinfo.cgi?q_researcher_content_number=f99aef303fe30002570ef440f6ff8b6d"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Prof. Ken Nakajima</a
+                  >)<br />
+                  <strong>Thesis:</strong> Morphological and nanomechanical
+                  characterization of block copolymer-based thermoplastic
+                  elastomers
+                </li>
+                <li>
+                  <strong>MEng.</strong>, Dept. of Chem. Sci. & Eng., Tokyo
+                  Tech, <strong>2019</strong> (supervised by
+                  <a
+                    href="https://t2r2.star.titech.ac.jp/cgi-bin/researcherinfo.cgi?q_researcher_content_number=CTT100616151"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Prof. Takanori Fukushima</a
+                  >)<br />
+                  <strong>Thesis:</strong> Synthesis, structure, and physical
+                  properties of tripodal triptycene-appended vinylic polymers
+                  and copolymers
+                </li>
+                <li>
+                  <strong>BEng.</strong>, Chem. Eng. & Tech., Zhejiang Univ.,
+                  <strong>2016</strong> (supervised by
+                  <a
+                    href="https://person.zju.edu.cn/pjpan"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Prof. Pengju Pan</a
+                  >)<br />
+                  <strong>Thesis:</strong> Thermoresponsive gels with
+                  crystallizable side chains
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Lectures</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>
+                  <a
+                    href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202302323&Nendo=2023&vid=03&lang=EN"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Polymer Chemistry Laboratory I</a
+                  >, <strong>2023</strong>
+                </li>
+                <li>
+                  <a
+                    href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202302326&Nendo=2023&vid=03&lang=EN"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Polymer Chemistry Laboratory II</a
+                  >, <strong>2023</strong>
+                </li>
+                <li>
+                  <a
+                    href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202302340&Nendo=2023&vid=03&lang=EN"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Chemical Science and Engineering Laboratory III</a
+                  >, <strong>2023</strong>
+                </li>
+                <li>
+                  <a
+                    href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=7&KamokuCD=110610&KougiCD=202436263&Nendo=2024&LeftTab=graduate&vid=03&lang=EN"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Doctoral Strategy for Balancing Career, Personality and
+                    Lifestyle B</a
+                  >, <strong>2024</strong>
+                </li>
+                <li>
+                  <a
+                    href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202436176&Nendo=2024&vid=03&lang=EN"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Chemical Science and Engineering Laboratory IV</a
+                  >, <strong>2024</strong>
+                </li>
+                <li>
+                  <a
+                    href="https://syllabus.s.isct.ac.jp/courses/-/-/-/202536174?hl=en"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Chemical Science and Engineering Laboratory I</a
+                  >, <strong>2025</strong>
+                </li>
+                <li>
+                  <a
+                    href="https://syllabus.s.isct.ac.jp/courses/-/-/-/202536263?hl=en"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Doctoral Strategy for Balancing Career, Personality and
+                    Lifestyle B</a
+                  >, <strong>2025</strong>
+                </li>
+                <li>
+                  <a
+                    href="https://syllabus.s.isct.ac.jp/courses/-/-/-/202536176?hl=en"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Chemical Science and Engineering Laboratory IV</a
+                  >, <strong>2025</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>Awards & Recognition</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>
+                  JST SPRING Fellowship, <strong>Oct. 2021 – Mar. 2022</strong>
+                </li>
+                <li>
+                  Best Poster Award, 27th International Colloquium on Scanning
+                  Probe Microscopy, <strong>Dec. 2019</strong>
+                </li>
+                <li>
+                  Tokyo Tech Tsubame Scholarship,
+                  <strong>Apr. 2019 – Sept. 2021</strong>
+                </li>
+                <li>
+                  Monbukagakusho Honors Scholarship,
+                  <strong>Apr. 2017 – Mar. 2018</strong>;
+                  <strong>Oct. 2021 – Mar. 2022</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>News & Press</h3>
+              <div class="divider"></div>
+              <ul class="list">
+                <li>
+                  <a
+                    href="https://www.titech.ac.jp/english/news/2024/068876"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >Career support seminar guides international doctoral
+                    students</a
+                  >, Tokyo Tech News, <strong>Apr. 2024</strong>
+                </li>
+                <li>
+                  <a
+                    href="https://www.eurekalert.org/news-releases/1052695"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    >A deep dive into polyimides for high-frequency wireless
+                    telecommunications</a
+                  >, EurekAlert, <strong>Jul. 2024</strong>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="badges">
-            <a href="https://strdb.s.isct.ac.jp/html/100003365_ja.html" target="_blank" rel="noreferrer noopener">STRDB</a>
-            <a href="https://scholar.google.com/citations?user=Nmc7HqQAAAAJ&hl=en&authuser=1" target="_blank" rel="noreferrer noopener">Google Scholar</a>
-            <a href="https://orcid.org/0000-0001-8989-7173" target="_blank" rel="noreferrer noopener">ORCID</a>
-            <a href="https://www.webofscience.com/wos/author/record/GPX-0805-2022" target="_blank" rel="noreferrer noopener">WoS ResearcherID</a>
-            <a href="https://researchmap.jp/hryu" target="_blank" rel="noreferrer noopener">Researchmap</a>
-            <a href="https://t2r2.star.titech.ac.jp/cgi-bin/researcherinfo.cgi?q_researcher_content_number=a676578f79503d9aa88a47485536365f" target="_blank" rel="noreferrer noopener">Science Tokyo T2R2</a>
-          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <nav class="footer-nav" aria-label="Footer">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/" aria-current="page">Profile</a></li>
+            <li><a href="/profile/current_topic/">Current Topics</a></li>
+            <li><a href="/profile/publication/">Publication</a></li>
+            <li><a href="/profile/presentation/">Presentation</a></li>
+            <li><a href="/profile/patent/">Patent</a></li>
+            <li><a href="/category/posts/">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/">Tools</a></li>
+          </ul>
+        </nav>
+        <div class="copyright">
+          © <span id="yy"></span> Haonan LIU. All rights reserved.
         </div>
       </div>
+    </footer>
 
-      <div class="grid">
-        <!-- Left side (quick facts) -->
-        <aside class="stack">
-          <div>
-            <h3>Contact</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li><strong>E-mail:</strong> liu(at)mct.isct.ac.jp</li>
-              <li><strong>Address:</strong> Main Bldg. (H-133), 2-12-1 Ookayama, Meguro, Tokyo 152-8552, Japan</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Bio</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li><strong>Date & place of birth:</strong> 28 May 1994, Taiyuan 03-0006, China</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Affiliations</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li>The Society of Polymer Science, Japan</li>
-              <li>The Japan Society of Applied Physics</li>
-              <li>Chinese Chemical Society</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Quick Links</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li><a href="/profile/publication/">Publication</a></li>
-              <li><a href="/profile/presentation/">Presentation</a></li>
-              <li><a href="/profile/patent/">Patent</a></li>
-            </ul>
-          </div>
-        </aside>
-
-        <!-- Right side (content) -->
-        <div class="stack">
-          <div>
-            <h3>About</h3>
-            <div class="divider"></div>
-            <p>
-              Haonan Liu is an Assistant Professor at the Department of Chemical Science and Engineering, Institute of Science Tokyo.
-              After earning his B.Eng. in Chemical Engineering and Technology from Zhejiang University in 2016, Liu moved to Japan to
-              continue his studies at Tokyo Institute of Technology. He obtained his M.Eng. in 2019 and his Ph.D. in 2022.
-              Following a one-year postdoctoral position, he became an assistant professor at Tokyo Institute of Technology in 2023.
-              Liu’s research interests center on polymer analysis, particularly their nanomechanical, high-pressure optical, and
-              high-frequency dielectric behaviors.
-            </p>
-          </div>
-
-          <div>
-            <h3>Work Experience</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li>Asst. Prof., <a href="http://nanomech.cap.mct.isct.ac.jp/" target="_blank" rel="noreferrer noopener">Nakajima Lab</a>, Science Tokyo, <strong>Apr. 2026 – Present</strong></li>
-              <li>Asst. Prof., <a href="http://www.ando-cap.mac.titech.ac.jp/index.html" target="_blank" rel="noreferrer noopener">Ando Lab</a>, Science Tokyo, <strong>Oct. 2024 – Mar. 2026</strong></li>
-              <li>Asst. Prof., <a href="http://www.ando-cap.mac.titech.ac.jp/index.html" target="_blank" rel="noreferrer noopener">Ando Lab</a>, Tokyo Tech, <strong>Apr. 2023 – Sept. 2024</strong></li>
-              <li>Postdoc., <a href="http://nanomech.cap.mct.isct.ac.jp/" target="_blank" rel="noreferrer noopener">Nakajima Lab</a>, Tokyo Tech, <strong>Apr. 2022 – Mar. 2023</strong></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Education</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li>
-                <strong>Dr. Eng.</strong>, Dept. of Chem. Sci. & Eng., Tokyo Tech, <strong>2022</strong>
-                (supervised by <a href="https://t2r2.star.titech.ac.jp/cgi-bin/researcherinfo.cgi?q_researcher_content_number=f99aef303fe30002570ef440f6ff8b6d" target="_blank" rel="noreferrer noopener">Prof. Ken Nakajima</a>)<br>
-                <strong>Thesis:</strong> Morphological and nanomechanical characterization of block copolymer-based thermoplastic elastomers
-              </li>
-              <li>
-                <strong>MEng.</strong>, Dept. of Chem. Sci. & Eng., Tokyo Tech, <strong>2019</strong>
-                (supervised by <a href="https://t2r2.star.titech.ac.jp/cgi-bin/researcherinfo.cgi?q_researcher_content_number=CTT100616151" target="_blank" rel="noreferrer noopener">Prof. Takanori Fukushima</a>)<br>
-                <strong>Thesis:</strong> Synthesis, structure, and physical properties of tripodal triptycene-appended vinylic polymers and copolymers
-              </li>
-              <li>
-                <strong>BEng.</strong>, Chem. Eng. & Tech., Zhejiang Univ., <strong>2016</strong>
-                (supervised by <a href="https://person.zju.edu.cn/pjpan" target="_blank" rel="noreferrer noopener">Prof. Pengju Pan</a>)<br>
-                <strong>Thesis:</strong> Thermoresponsive gels with crystallizable side chains
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Lectures</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li><a href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202302323&Nendo=2023&vid=03&lang=EN" target="_blank" rel="noreferrer noopener">Polymer Chemistry Laboratory I</a>, <strong>2023</strong></li>
-              <li><a href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202302326&Nendo=2023&vid=03&lang=EN" target="_blank" rel="noreferrer noopener">Polymer Chemistry Laboratory II</a>, <strong>2023</strong></li>
-              <li><a href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202302340&Nendo=2023&vid=03&lang=EN" target="_blank" rel="noreferrer noopener">Chemical Science and Engineering Laboratory III</a>, <strong>2023</strong></li>
-              <li><a href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=7&KamokuCD=110610&KougiCD=202436263&Nendo=2024&LeftTab=graduate&vid=03&lang=EN" target="_blank" rel="noreferrer noopener">Doctoral Strategy for Balancing Career, Personality and Lifestyle B</a>, <strong>2024</strong></li>
-              <li><a href="http://www.ocw.titech.ac.jp/index.php?module=General&action=T0300&GakubuCD=3&GakkaCD=332100&KeiCD=21&KougiCD=202436176&Nendo=2024&vid=03&lang=EN" target="_blank" rel="noreferrer noopener">Chemical Science and Engineering Laboratory IV</a>, <strong>2024</strong></li>
-              <li><a href="https://syllabus.s.isct.ac.jp/courses/-/-/-/202536174?hl=en" target="_blank" rel="noreferrer noopener">Chemical Science and Engineering Laboratory I</a>, <strong>2025</strong></li>
-              <li><a href="https://syllabus.s.isct.ac.jp/courses/-/-/-/202536263?hl=en" target="_blank" rel="noreferrer noopener">Doctoral Strategy for Balancing Career, Personality and Lifestyle B</a>, <strong>2025</strong></li>
-              <li><a href="https://syllabus.s.isct.ac.jp/courses/-/-/-/202536176?hl=en" target="_blank" rel="noreferrer noopener">Chemical Science and Engineering Laboratory IV</a>, <strong>2025</strong></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Awards & Recognition</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li>JST SPRING Fellowship, <strong>Oct. 2021 – Mar. 2022</strong></li>
-              <li>Best Poster Award, 27th International Colloquium on Scanning Probe Microscopy, <strong>Dec. 2019</strong></li>
-              <li>Tokyo Tech Tsubame Scholarship, <strong>Apr. 2019 – Sept. 2021</strong></li>
-              <li>Monbukagakusho Honors Scholarship, <strong>Apr. 2017 – Mar. 2018</strong>; <strong>Oct. 2021 – Mar. 2022</strong></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>News & Press</h3>
-            <div class="divider"></div>
-            <ul class="list">
-              <li><a href="https://www.titech.ac.jp/english/news/2024/068876" target="_blank" rel="noreferrer noopener">Career support seminar guides international doctoral students</a>, Tokyo Tech News, <strong>Apr. 2024</strong></li>
-              <li><a href="https://www.eurekalert.org/news-releases/1052695" target="_blank" rel="noreferrer noopener">A deep dive into polyimides for high-frequency wireless telecommunications</a>, EurekAlert, <strong>Jul. 2024</strong></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/profile/" aria-current="page">Profile</a></li>
-          <li><a href="/profile/current_topic/">Current Topics</a></li>
-          <li><a href="/profile/publication/">Publication</a></li>
-          <li><a href="/profile/presentation/">Presentation</a></li>
-          <li><a href="/profile/patent/">Patent</a></li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
-        </ul>
-      </nav>
-      <div class="copyright">© <span id="yy"></span> Haonan LIU. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <script>
-    // Footer year
-    document.getElementById('yy').textContent = new Date().getFullYear();
-  </script>
-</body>
+    <script>
+      // Footer year
+      document.getElementById('yy').textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
