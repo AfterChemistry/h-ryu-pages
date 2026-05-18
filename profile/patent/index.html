@@ -1,190 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Patent – Haonan LIU’s Personal Page</title>
-  <meta name="description" content="Patents by Haonan Liu and collaborators, organized by year.">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Patent – Haonan LIU’s Personal Page</title>
+    <meta
+      name="description"
+      content="Patents by Haonan Liu and collaborators, organized by year."
+    />
 
-  <!-- Self-contained theme (exactly the same as Presentation) -->
-  <style>
-    :root{
-      /* Core palette */
-      --bg:#f5f6fa;
-      --card:#ffffff;
-      --text:#20242a;
-      --muted:#5c6270;
-      --border:#e6e9ef;
-      --shadow:0 8px 24px rgba(23,31,56,.08);
-      --radius:16px;
+    <!-- Self-contained theme (exactly the same as Presentation) -->
+    <style>
+      :root{
+        /* Core palette */
+        --bg:#f5f6fa;
+        --card:#ffffff;
+        --text:#20242a;
+        --muted:#5c6270;
+        --border:#e6e9ef;
+        --shadow:0 8px 24px rgba(23,31,56,.08);
+        --radius:16px;
 
-      --primary:#4a90e2;
-      --accent:#212a74;
-      --rose:#d81b60;
-      --grid:#eceef4;
+        --primary:#4a90e2;
+        --accent:#212a74;
+        --rose:#d81b60;
+        --grid:#eceef4;
 
-      /* Spacing scale */
-      --space:24px;
-      --space-sm:16px;
-      --container-y:24px;
-      --card-pad:24px;
-    }
+        /* Spacing scale */
+        --space:24px;
+        --space-sm:16px;
+        --container-y:24px;
+        --card-pad:24px;
+      }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      line-height:1.65
-    }
-    a{color:var(--primary);text-decoration:none}
-    a:hover{opacity:.9}
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;background:var(--bg);color:var(--text);
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        line-height:1.65
+      }
+      a{color:var(--primary);text-decoration:none}
+      a:hover{opacity:.9}
 
-    /* Header */
-    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
-    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-    .brand{display:flex;flex-direction:column}
-    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
-    .brand .desc{color:var(--muted);font-size:.92rem}
+      /* Header */
+      .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
+      .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+      .brand{display:flex;flex-direction:column}
+      .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
+      .brand .desc{color:var(--muted);font-size:.92rem}
 
-    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-    .nav a{padding:8px 10px;border-radius:10px}
-    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-    .nav li{position:relative;padding-bottom:6px}
+      .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
+      .nav a{padding:8px 10px;border-radius:10px}
+      .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+      .nav li{position:relative;padding-bottom:6px}
 
-    /* Accessible submenu (same behavior as Presentation) */
-    .nav .submenu{
-      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
-      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-      transition-delay:.12s;pointer-events:none
-    }
-    .nav li:hover .submenu,.nav li:focus-within .submenu{
-      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
-    }
-    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
-    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
-    .nav .submenu a:hover{background:#f3f6fb}
-    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
+      /* Accessible submenu (same behavior as Presentation) */
+      .nav .submenu{
+        position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
+        background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
+        min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
+        transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+        transition-delay:.12s;pointer-events:none
+      }
+      .nav li:hover .submenu,.nav li:focus-within .submenu{
+        opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
+      }
+      .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
+      .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
+      .nav .submenu a:hover{background:#f3f6fb}
+      @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
-    /* Layout */
-    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
-    .container>section+section{margin-top:var(--space)}
+      /* Layout */
+      .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
+      .container>section+section{margin-top:var(--space)}
 
-    /* Cards & headings */
-    .card{
-      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:var(--card-pad)
-    }
-    .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
-    .lead{font-size:1.05rem}
-    .bullets{padding-left:1.1em;margin:0}
-    .bullets li{margin:8px 0}
-    .muted{color:var(--muted)}
-    mark.has-inline-color{color:#bc4166;background:transparent}
-    .year{scroll-margin-top:90px}
+      /* Cards & headings */
+      .card{
+        background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:var(--card-pad)
+      }
+      .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
+      .lead{font-size:1.05rem}
+      .bullets{padding-left:1.1em;margin:0}
+      .bullets li{margin:8px 0}
+      .muted{color:var(--muted)}
+      mark.has-inline-color{color:#bc4166;background:transparent}
+      .year{scroll-margin-top:90px}
 
-    /* Year nav (local) */
-    .year-nav{display:flex;flex-wrap:wrap;gap:8px}
-    .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
-    .year{scroll-margin-top:90px}
+      /* Year nav (local) */
+      .year-nav{display:flex;flex-wrap:wrap;gap:8px}
+      .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
+      .year{scroll-margin-top:90px}
 
-    /* Footer */
-    .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
-    .footer-inner{
-      max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
-      justify-content:space-between;gap:12px;flex-wrap:wrap
-    }
-    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
-    .copyright{color:var(--muted);font-size:.92rem}
+      /* Footer */
+      .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
+      .footer-inner{
+        max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
+        justify-content:space-between;gap:12px;flex-wrap:wrap
+      }
+      .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
+      .copyright{color:var(--muted);font-size:.92rem}
 
-    /* Responsive */
-    @media (max-width:960px){
-      :root{--space:20px;--container-y:20px;--card-pad:20px}
-    }
-  </style>
+      /* Responsive */
+      @media (max-width:960px){
+        :root{--space:20px;--container-y:20px;--card-pad:20px}
+      }
+    </style>
 
-  <link rel="icon" href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/wp-content/uploads/2022/09/cropped-avatar-180x180.png">
-</head>
-<body>
-
-  <!-- Header (identical structure to Presentation) -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <a class="title" href="/">Haonan LIU’s Personal Page</a>
-        <div class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</div>
+    <link
+      rel="icon"
+      href="/wp-content/uploads/2022/09/cropped-avatar-32x32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/wp-content/uploads/2022/09/cropped-avatar-180x180.png"
+    />
+  </head>
+  <body>
+    <!-- Header (identical structure to Presentation) -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <a class="title" href="/">Haonan LIU’s Personal Page</a>
+          <div class="desc">
+            Ph.D., Assistant Professor, Institute of Science Tokyo
+          </div>
+        </div>
+        <nav class="nav" aria-label="Main">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+              <a
+                href="/profile/"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="sub-profile"
+                >Profile</a
+              >
+              <div
+                id="sub-profile"
+                class="submenu"
+                role="menu"
+                aria-label="Profile submenu"
+              >
+                <a href="/profile/current_topic/">Current Topics</a>
+                <a href="/profile/publication/">Publication</a>
+                <a href="/profile/presentation/">Presentation</a>
+                <a href="/profile/patent/" aria-current="page">Patent</a>
+                <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf"
+                  >Chinese CV</a
+                >
+              </div>
+            </li>
+            <li><a href="/category/posts/">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/">Tools</a></li>
+          </ul>
+        </nav>
       </div>
-      <nav class="nav" aria-label="Main">
-        <ul>
-          <li><a href="/">Home</a></li>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+      <!-- Page title -->
+      <section class="card">
+        <h1 class="section-title">Patent</h1>
+        <div class="year-nav">
+          <a href="#y2025">2025</a>
+        </div>
+      </section>
+
+      <!-- 2025 -->
+      <section id="y2025" class="card year">
+        <h2 class="section-title">2025</h2>
+        <ul class="bullets">
           <li>
-            <a href="/profile/" aria-haspopup="true" aria-expanded="false" aria-controls="sub-profile">Profile</a>
-            <div id="sub-profile" class="submenu" role="menu" aria-label="Profile submenu">
-              <a href="/profile/current_topic/">Current Topics</a>
-              <a href="/profile/publication/">Publication</a>
-              <a href="/profile/presentation/">Presentation</a>
-              <a href="/profile/patent/" aria-current="page">Patent</a>
-              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
-            </div>
+            <strong
+              >ブロック共重合体組成物、およびブロック共重合体組成物を成形してなる成形体</strong
+            ><br />
+            小田 亮二・加藤 大祐・森田 裕史・細谷 亮平・中嶋 健・梁 暁斌・伊藤
+            万喜子・
+            <mark class="has-inline-color">劉 浩男</mark><br />
+            <a
+              href="https://www.j-platpat.inpit.go.jp/c1801/PU/JP-2023-123460/10/ja"
+              target="_blank"
+              rel="noreferrer noopener"
+              >特開2025-019705</a
+            >, 2025年02月07日
           </li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
         </ul>
-      </nav>
-    </div>
-  </header>
+      </section>
+    </main>
 
-  <!-- Main -->
-  <main class="container">
-    <!-- Page title -->
-    <section class="card">
-      <h1 class="section-title">Patent</h1>
-      <div class="year-nav">
-        <a href="#y2025">2025</a>
+    <!-- Footer (identical structure to Presentation) -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <nav class="footer-nav" aria-label="Footer">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/">Profile</a></li>
+            <li><a href="/profile/current_topic/">Current Topics</a></li>
+            <li><a href="/profile/publication/">Publication</a></li>
+            <li><a href="/profile/presentation/">Presentation</a></li>
+            <li><a href="/profile/patent/" aria-current="page">Patent</a></li>
+            <li><a href="/category/posts/">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/">Tools</a></li>
+          </ul>
+        </nav>
+        <div class="copyright">
+          © <span id="yy"></span> Haonan LIU. All rights reserved.
+        </div>
       </div>
-    </section>
+    </footer>
 
-    <!-- 2025 -->
-    <section id="y2025" class="card year">
-      <h2 class="section-title">2025</h2>
-      <ul class="bullets">
-        <li>
-          <strong>ブロック共重合体組成物、およびブロック共重合体組成物を成形してなる成形体</strong><br>
-          小田 亮二・加藤 大祐・森田 裕史・細谷 亮平・中嶋 健・梁 暁斌・伊藤 万喜子・
-          <mark class="has-inline-color">劉 浩男</mark><br>
-          <a href="https://www.j-platpat.inpit.go.jp/c1801/PU/JP-2023-123460/10/ja" target="_blank" rel="noreferrer noopener">特開2025-019705</a>, 2025年02月07日
-        </li>
-      </ul>
-    </section>
-  </main>
-
-  <!-- Footer (identical structure to Presentation) -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/profile/">Profile</a></li>
-          <li><a href="/profile/current_topic/">Current Topics</a></li>
-          <li><a href="/profile/publication/">Publication</a></li>
-          <li><a href="/profile/presentation/">Presentation</a></li>
-          <li><a href="/profile/patent/" aria-current="page">Patent</a></li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
-        </ul>
-      </nav>
-      <div class="copyright">© <span id="yy"></span> Haonan LIU. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <script>
-    // Update footer year
-    document.getElementById('yy').textContent = new Date().getFullYear();
-  </script>
-</body>
+    <script>
+      // Update footer year
+      document.getElementById('yy').textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
