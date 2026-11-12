@@ -431,10 +431,26 @@
       .skip-link:focus { transform: none; }
       .nav a { display: inline-block; }
       .nav .submenu a { display: block; }
-      .submenu-toggle { display: none; border: 1px solid var(--border);
-        border-radius: 8px; background: white; color: var(--accent);
-        min-width: 44px; min-height: 44px; cursor: pointer; font: inherit; }
-      .js .submenu-toggle { display: inline-block; }
+      .submenu-toggle {
+        display: none; align-items: center; justify-content: center;
+        vertical-align: middle; padding: 0; margin-left: -6px;
+        width: 32px; height: 44px; border: 0; border-radius: 8px;
+        background: transparent; color: var(--accent); cursor: pointer;
+      }
+      .submenu-toggle::before {
+        content: ""; width: 7px; height: 7px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+      }
+      .submenu-toggle[aria-expanded="true"]::before {
+        transform: translateY(2px) rotate(225deg);
+      }
+      .submenu-toggle:hover { background: rgba(74, 144, 226, 0.08); }
+      .js .submenu-toggle { display: inline-flex; }
+      @media (pointer: coarse) {
+        .submenu-toggle { width: 44px; }
+      }
       .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
       .hero-actions a { border: 1px solid var(--border); border-radius: 9px;
         padding: 7px 14px; font-weight: 600; }
@@ -472,7 +488,7 @@
             <li><a href="/" aria-current="page">Home</a></li>
             <li>
               <a href="/profile/">Profile</a>
-              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu">▾</button>
+              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu"></button>
               <ul class="submenu" id="profile-submenu">
                 <li><a href="/profile/current_topic/">Current Topics</a></li>
                 <li><a href="/profile/publication/">Publications</a></li>
