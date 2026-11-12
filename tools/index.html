@@ -5,133 +5,286 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Tools – Frequency–Wavelength–Wavenumber Converter</title>
 
+  <meta name="description" content="Convert frequency, vacuum wavelength, and spectroscopic wavenumber with logarithmic charts and an electromagnetic spectrum reference.">
   <style>
-    :root{
-      --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
-      --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
-      --primary:#4a90e2; --accent:#212a74; --rose:#d81b60; --grid:#eceef4;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
-    a{color:var(--primary);text-decoration:none}
-    a:hover{opacity:.88}
+      :root { --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
+        --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
+        --primary:#2468b4; --accent:#212a74; --space:24px; --container-y:24px; --card-pad:24px; }
+      * { box-sizing:border-box; }
+      html, body { min-height:100%; }
+      body { margin:0; background:var(--bg); color:var(--text);
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        line-height:1.7; }
+      a { color:var(--primary); text-decoration:none; }
+      a:hover { opacity:.9; }
+      main a:hover { text-decoration:underline; }
+      a:focus-visible, button:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
+      img { max-width:100%; display:block; }
+      .skip-link { position:fixed; top:8px; left:8px; z-index:100; padding:10px 16px;
+        background:white; transform:translateY(-160%); }
+      .skip-link:focus { transform:none; }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+      }
 
-    /* Header */
-    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
-    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-    .brand{display:flex;flex-direction:column}
-    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
-    .brand .desc{color:var(--muted);font-size:.92rem}
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+      }
 
-    /* Main nav */
-    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-    .nav a{padding:8px 10px;border-radius:10px}
-    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
+      .brand {
+        display: flex;
+        flex-direction: column;
+      }
 
-    /* ✅ 下拉菜单：缓冲悬停（与 presentation 一致的好点到） */
-    .nav li{position:relative;padding-bottom:6px}
-    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
-    .nav .submenu{
-      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;min-width:220px;
-      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-      padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s,transform .25s,visibility .25s;pointer-events:none
-    }
-    .nav li:hover .submenu,.nav li:focus-within .submenu{
-      opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto
-    }
-    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
-    .nav .submenu a:hover{background:#f3f6fb}
+      .brand .title {
+        font-weight: 800;
+        color: var(--accent);
+        font-size: 1.15rem;
+        margin: 0;
+      }
 
-    /* Layout & cards */
-    .container{max-width:1200px;margin:18px auto;padding:0 20px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:20px}
-    .page-title{font-size:1.6rem;margin:0 0 2px;font-weight:800;color:var(--accent)}
-    .title{font-size:1.8em;margin:0 0 6px;font-weight:800;color:#4a90e2}
-    .subtitle{margin:0 0 14px;color:var(--muted);font-size:.98rem}
+      .brand .desc {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
 
-    /* Calculator */
-    .calc-table{display:flex;flex-direction:column;gap:14px}
-    .calc-row{display:flex;flex-wrap:wrap;gap:16px}
-    .calc-group{display:flex;flex-direction:column;flex:1 1 320px;min-width:280px}
-    .calc-label{font-weight:700;margin-bottom:6px;color:var(--accent)}
-    .calc-input,.calc-select{
-      height:40px;border:1px solid var(--border);border-radius:10px;padding:0 10px;font-size:1rem;background:#fff;outline:none;
-      transition:border-color .15s, box-shadow .15s
-    }
-    .calc-input:focus,.calc-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(74,144,226,.14)}
-    .note{font-size:.92rem;color:var(--muted);margin-top:6px}
+      .nav > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
 
-    /* Chart */
-    .chart-block{width:100%;height:560px}
+      .nav a {
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
 
-    /* Spectrum */
-    .rainbow-bar{width:100%;height:16px;border-radius:999px;margin:0 auto 12px auto;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(7,1fr);overflow:hidden;border:1px solid var(--border)}
-    .rainbow-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;align-items:end;font-size:0.98rem}
-    .band-title{font-weight:800;color:var(--accent)}
-    .band-range{color:#5d616a;margin-bottom:3px}
-    .band-wl{color:var(--rose)}
-    .caption{color:var(--muted);text-align:center;font-size:.95rem;margin-top:8px}
+      .nav a[aria-current="page"] {
+        background: rgba(74, 144, 226, 0.12);
+        color: var(--accent);
+        font-weight: 600;
+      }
 
-    /* Footer */
-    .site-footer{margin-top:28px;border-top:1px solid var(--border);background:#fff}
-    .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
-    .copyright{color:var(--muted);font-size:.92rem}
+      .nav li {
+        position: relative;
+        padding-bottom: 6px;
+      }
 
-    @media (max-width:720px){
-      .nav ul{gap:10px;flex-wrap:wrap}
-      .rainbow-labels{font-size:.92rem}
-    }
+      .nav .submenu {
+        position: absolute;
+        z-index: 50;
+        top: 100%;
+        left: 0;
+        margin-top: 6px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        min-width: 220px;
+        padding: 8px;
+        list-style: none;
+
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(6px);
+        transition: opacity 0.25s ease, transform 0.25s ease,
+          visibility 0.25s ease;
+        transition-delay: 0.12s;
+        pointer-events: none;
+      }
+
+      .nav .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        position: static;
+      }
+      .js .nav .submenu { position: absolute; }
+      .nav .submenu[hidden] { display: none; }
+
+      .nav > ul > li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 8px;
+        bottom: -8px;
+      }
+
+      .nav .submenu li {
+        padding-bottom: 0;
+      }
+
+      .nav .submenu a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+
+      .nav .submenu a:hover {
+        background: #f3f6fb;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .nav .submenu {
+          transition: none;
+        }
+      }
+
+      .submenu-toggle {
+        display: none; align-items: center; justify-content: center;
+        vertical-align: middle; padding: 0; margin-left: -6px;
+        width: 32px; height: 44px; border: 0; border-radius: 8px;
+        background: transparent; color: var(--accent); cursor: pointer;
+      }
+      .submenu-toggle::before {
+        content: ""; width: 7px; height: 7px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+      }
+      .submenu-toggle[aria-expanded="true"]::before {
+        transform: translateY(2px) rotate(225deg);
+      }
+      .submenu-toggle:hover { background: rgba(74, 144, 226, 0.08); }
+      .js .submenu-toggle { display: inline-flex; }
+      @media (pointer: coarse) {
+        .submenu-toggle { width: 44px; }
+      }
+
+      .container { max-width:1200px; margin:var(--container-y) auto; padding:0 20px; }
+      .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:var(--card-pad); }
+      .site-footer { margin-top:var(--space); border-top:1px solid var(--border); background:#fff; }
+      .footer-inner { max-width:1200px; margin:0 auto; padding:14px 20px; display:flex;
+        align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+      .footer-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:16px; flex-wrap:wrap; }
+      .copyright { color:var(--muted); font-size:.92rem; }
+      @media (max-width:960px) {
+        :root { --space:20px; --container-y:20px; --card-pad:20px; }
+        .header-inner { align-items:flex-start; flex-direction:column; gap:12px; }
+        .nav > ul { flex-wrap:wrap; gap:10px; }
+      }
+      @media (max-width:600px) {
+        :root { --space:18px; --container-y:18px; --card-pad:18px; }
+        .site-header { position:static; }
+        .header-inner { padding:14px 18px; }
+        .nav > ul { gap:4px; }
+        .js .nav .submenu { position:static; min-width:0; }
+        .container { padding:0 14px; }
+        main, .section-title[id] { scroll-margin-top:16px; }
+      }
+      @media (prefers-reduced-motion:reduce) { .nav .submenu { transition:none; } }
+    
+
+      :root { --rose:#d81b60; --grid:#eceef4; }
+      .card { margin-bottom:var(--space); }
+      .title { font-size:clamp(1.45rem,3.2vw,1.9rem); margin:0 0 8px;
+        line-height:1.3; font-weight:800; color:var(--accent); overflow-wrap:anywhere; }
+      .section-title { margin:0 0 16px; font-size:1.15rem; color:var(--accent); }
+      .subtitle { margin:0 0 20px; color:var(--muted); font-size:.98rem; }
+      .calc-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+      .calc-group { display:flex; flex-direction:column; gap:8px; min-width:0; }
+      .calc-label { font-weight:700; color:var(--accent); }
+      .calc-input,.calc-select { width:100%; min-width:0; height:44px;
+        border:1px solid var(--border); border-radius:10px; padding:0 12px;
+        color:var(--text); font:inherit; font-size:1rem; background:white; }
+      .calc-input:focus,.calc-select:focus { outline:2px solid var(--primary); outline-offset:2px; }
+      .note { font-size:.9rem; color:var(--muted); margin-top:12px; }
+      .note:empty { display:none; }
+      #calc-status { color:#ae244f; }
+      details { margin-top:12px; color:var(--muted); font-size:.9rem; }
+      summary { cursor:pointer; color:var(--primary); width:fit-content; }
+      summary:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
+      .chart-scroll,.spectrum-scroll { overflow-x:auto; }
+      .chart-scroll:focus-visible,.spectrum-scroll:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
+      .chart-block { position:relative; width:100%; min-width:660px; height:500px; }
+      .spectrum-inner { min-width:900px; }
+      .rainbow-bar { width:100%; height:16px; border-radius:999px; margin:0 0 12px;
+        display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); overflow:hidden; border:1px solid var(--border); }
+      .rainbow-labels { display:grid; grid-template-columns:repeat(7,minmax(0,1fr));
+        gap:8px; text-align:center; font-size:.9rem; }
+      .band-title { font-weight:800; color:var(--accent); }
+      .band-range { color:var(--muted); margin:4px 0; }
+      .band-wl { color:var(--rose); }
+      .caption { color:var(--muted); text-align:left; font-size:.9rem; margin-top:14px; }
+      [hidden] { display:none !important; }
+      @media (max-width:760px) {
+        .calc-row { grid-template-columns:1fr; gap:20px; }
+        .chart-block { height:420px; }
+      }
+
   </style>
 
   <!-- Chart.js：如果 CDN 被 CSP 拦截，请把 FALLBACK_CHART_SRC 换成你本地路径 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to main content</a>
   <!-- Header -->
   <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <a class="title" href="/">Haonan LIU’s Personal Page</a>
-        <div class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</div>
+      <div class="header-inner">
+        <div class="brand">
+          <a class="title" href="/">Haonan Liu’s Personal Page</a>
+          <div class="desc">
+            Ph.D., Assistant Professor, Institute of Science Tokyo
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+              <a href="/profile/">Profile</a>
+              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu"></button>
+              <ul class="submenu" id="profile-submenu">
+                <li><a href="/profile/current_topic/">Current Topics</a></li>
+                <li><a href="/profile/publication/">Publications</a></li>
+                <li><a href="/profile/presentation/">Presentations</a></li>
+                <li><a href="/profile/patent/">Patents</a></li>
+                <li>
+                  <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">
+                    Chinese CV
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="/category/posts/">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/" aria-current="page">Tools</a></li>
+          </ul>
+        </nav>
       </div>
-      <nav class="nav" aria-label="Main">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li>
-            <a href="/profile/">Profile</a>
-            <div class="submenu" role="menu" aria-label="Profile submenu">
-              <a href="/profile/current_topic/">Current Topics</a>
-              <a href="/profile/publication/">Publication</a>
-              <a href="/profile/presentation/">Presentation</a>
-              <a href="/profile/patent/">Patent</a>
-              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
-            </div>
-          </li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/" aria-current="page">Tools</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    </header>
 
   <!-- Main -->
-  <main class="container">
+  <main class="container" id="content" tabindex="-1">
 
     <!-- Converter -->
     <section class="card">
       <h1 class="title">Frequency–Wavelength–Wavenumber Converter</h1>
-      <p class="subtitle">Calculated in vacuum (c = 299,792,458 m/s). Enter any field and the others will update automatically.</p>
+      <p class="subtitle">Vacuum · c = 299,792,458 m/s. Enter any value to convert.</p>
 
       <form class="calc-table" autocomplete="off" onsubmit="return false;">
         <div class="calc-row">
           <div class="calc-group">
             <label class="calc-label" for="freq">Frequency</label>
-            <input type="number" id="freq" step="any" class="calc-input" inputmode="decimal" />
+            <input min="0" type="number" id="freq" step="any" class="calc-input" inputmode="decimal" aria-describedby="calc-status" />
             <select id="freqUnit" class="calc-select" aria-label="Frequency unit">
               <option value="1">Hz</option>
               <option value="1e3">kHz</option>
@@ -143,7 +296,7 @@
 
           <div class="calc-group">
             <label class="calc-label" for="wavelength">Wavelength</label>
-            <input type="number" id="wavelength" step="any" class="calc-input" inputmode="decimal" />
+            <input min="0" type="number" id="wavelength" step="any" class="calc-input" inputmode="decimal" aria-describedby="calc-status" />
             <select id="wlUnit" class="calc-select" aria-label="Wavelength unit">
               <option value="1e-6">μm</option>
               <option value="1e-3">mm</option>
@@ -154,7 +307,7 @@
 
           <div class="calc-group">
             <label class="calc-label" for="wavenumber">Spectroscopic wavenumber</label>
-            <input type="number" id="wavenumber" step="any" class="calc-input" inputmode="decimal" />
+            <input min="0" type="number" id="wavenumber" step="any" class="calc-input" inputmode="decimal" aria-describedby="calc-status" />
             <select id="wnUnit" class="calc-select" aria-label="Wavenumber unit">
               <option value="1">cm⁻¹</option>
               <option value="10">mm⁻¹</option>
@@ -164,19 +317,22 @@
         </div>
       </form>
 
-      <div class="note">Tip: Supports decimals and scientific notation (e.g., 3e2). Units auto-convert when changed. Enter a positive, finite value; results use 8 significant digits.</div>
-      <div class="note">Vacuum relations: λ = c/f; spectroscopic wavenumber ν̃ = 1/λ = f/c (not angular wavenumber k = 2π/λ). In a medium, λ = c/(nf), using the phase refractive index n.</div>
+      <div class="note">λ = c/f · ν̃ = 1/λ (spectroscopic wavenumber)</div>
       <div id="calc-status" class="note" role="status" aria-live="polite"></div>
     </section>
 
     <!-- Chart -->
     <section class="card">
-      <div class="chart-block"><canvas id="chart" role="img" aria-label="Vacuum wavelength and spectroscopic wavenumber versus frequency on logarithmic axes"></canvas></div>
-      <div class="caption">Vacuum conversion curves, 0.5 GHz–200 THz (not the full spectrum). All axes are logarithmic; each curve uses its own labeled vertical axis.</div>
+      <h2 class="section-title">Conversion curves</h2>
+      <p id="chart-status" class="note" role="status">Loading chart…</p>
+      <div class="chart-scroll" role="region" aria-label="Conversion chart; scroll horizontally on small screens" tabindex="0"><div class="chart-block"><canvas id="chart" role="img" aria-label="Vacuum wavelength and spectroscopic wavenumber versus frequency on logarithmic axes"></canvas></div></div>
+      <div class="caption">Logarithmic axes · 0.5 GHz–200 THz</div>
     </section>
 
     <!-- Spectrum -->
     <section class="card">
+      <h2 class="section-title">Electromagnetic spectrum</h2>
+      <div class="spectrum-scroll" role="region" aria-label="Spectrum reference; scroll horizontally on small screens" tabindex="0"><div class="spectrum-inner">
       <div class="rainbow-bar" aria-hidden="true">
         <div style="background:linear-gradient(to right,#a9b9d9,#60cfc7)"></div>
         <div style="background:linear-gradient(to right,#60cfc7,#f4e57d)"></div>
@@ -204,8 +360,8 @@
           <div class="band-wl">1 mm – 750 nm</div>
         </div>
         <div>
-          <div class="band-title" style="color:#ad8a00">Visible</div>
-          <div class="band-range" style="color:#ad8a00;font-weight:700">400 – 750 THz</div>
+          <div class="band-title" style="color:#896d00">Visible</div>
+          <div class="band-range" style="color:#896d00;font-weight:700">400 – 750 THz</div>
           <div class="band-wl" style="font-weight:700">750 – 400 nm</div>
         </div>
         <div>
@@ -225,30 +381,34 @@
         </div>
       </div>
 
-      <div class="caption">Electromagnetic spectrum in vacuum. All boundaries are approximate conventions; visible light is shown here as 400–750 nm. Microwaves are a subset of radio waves, displayed separately here using a 3 GHz boundary. X-ray and gamma-ray ranges can overlap; their distinction also depends on origin. Equal-width bands are schematic, not a linear or logarithmic scale; colors outside the visible band are illustrative.</div>
+      </div></div>
+      <div class="caption">Approximate vacuum ranges · Bands are schematic, not to scale. Microwaves are part of radio; X-ray and gamma-ray ranges overlap.</div>
+      
     </section>
-    <div class="note">Scientific references: <a href="https://www.nist.gov/pml/special-publication-330/sp-330-section-2">NIST: SI constants</a>; <a href="https://goldbook.iupac.org/terms/view/W06664">IUPAC: wavenumber</a>; <a href="https://imagine.gsfc.nasa.gov/science/toolbox/spectrum_chart.html">NASA: approximate spectral ranges</a>.</div>
+    
   </main>
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/profile/">Profile</a></li>
-          <li><a href="/profile/current_topic/" aria-current="page">Current Topics</a></li>
-          <li><a href="/profile/publication/">Publication</a></li>
-          <li><a href="/profile/presentation/">Presentation</a></li>
-          <li><a href="/profile/patent/">Patent</a></li>
-          <li><a href="/category/posts/">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
-        </ul>
-      </nav>
-      <div class="copyright">© <span id="yy"></span> Haonan LIU. All rights reserved.</div>
-    </div>
-  </footer>
+      <div class="footer-inner">
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/">Profile</a></li>
+            <li><a href="/profile/current_topic/">Current Topics</a></li>
+            <li><a href="/profile/publication/">Publications</a></li>
+            <li><a href="/profile/presentation/">Presentations</a></li>
+            <li><a href="/profile/patent/">Patents</a></li>
+            <li><a href="/category/posts/">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/" aria-current="page">Tools</a></li>
+          </ul>
+        </nav>
+        <div class="copyright">
+          © <span id="yy"></span> Haonan Liu. All rights reserved.
+        </div>
+      </div>
+    </footer>
 
   <!-- 功能脚本：保证计算器独立可用；Chart.js 若可用则绘图 -->
   <script>
@@ -272,7 +432,11 @@
       const start = Date.now();
       (function loop(){
         if (check()) return cb();
-        if (Date.now()-start>timeout) return console.warn('Chart.js failed to load, skip chart.');
+        if (Date.now()-start>timeout) {
+          document.getElementById('chart-status').textContent = 'Chart unavailable. The converter above is ready to use.';
+          document.querySelector('.chart-scroll').hidden = true;
+          return;
+        }
         setTimeout(loop, 50);
       })();
     }
@@ -420,6 +584,7 @@
             }
           }]
         });
+        document.getElementById('chart-status').hidden = true;
       }
 
       // 若 CDN 失败，尝试加载本地，随后等待 Chart 可用再初始化
@@ -427,5 +592,29 @@
       whenReady(()=>window.Chart, initChart);
     });
   </script>
+<script>
+      document.getElementById("yy").textContent = new Date().getFullYear();
+      const toggle = document.querySelector('.submenu-toggle');
+      const submenu = document.getElementById('profile-submenu');
+      const group = toggle.parentElement;
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        submenu.hidden = !open;
+      }
+      setMenu(false);
+      document.documentElement.classList.add('js');
+      toggle.addEventListener('click', () => setMenu(submenu.hidden));
+      document.addEventListener('click', event => {
+        if (!group.contains(event.target)) setMenu(false);
+      });
+      group.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !submenu.hidden) {
+          setMenu(false); toggle.focus(); event.preventDefault();
+        }
+      });
+      group.addEventListener('focusout', event => {
+        if (!group.contains(event.relatedTarget)) setMenu(false);
+      });
+    </script>
 </body>
 </html>
