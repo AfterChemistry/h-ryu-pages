@@ -68,7 +68,7 @@
         --shadow: 0 8px 24px rgba(23, 31, 56, 0.08);
         --radius: 16px;
 
-        --primary: #4a90e2;
+        --primary: #2468b4;
         --accent: #212a74;
 
         --space: 24px;
@@ -137,7 +137,7 @@
         font-size: 0.92rem;
       }
 
-      .nav ul {
+      .nav > ul {
         list-style: none;
         margin: 0;
         padding: 0;
@@ -186,16 +186,17 @@
         pointer-events: none;
       }
 
-      .nav li:hover .submenu,
-      .nav li:focus-within .submenu {
+      .nav .submenu {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
-        transition-delay: 0s;
+        transform: none;
         pointer-events: auto;
+        position: static;
       }
+      .js .nav .submenu { position: absolute; }
+      .nav .submenu[hidden] { display: none; }
 
-      .nav li::after {
+      .nav > ul > li::after {
         content: "";
         position: absolute;
         left: 0;
@@ -402,7 +403,7 @@
           gap: 12px;
         }
 
-        .nav ul {
+        .nav > ul {
           flex-wrap: wrap;
           gap: 10px;
         }
@@ -421,14 +422,46 @@
           align-items: flex-start;
         }
       }
+      a:focus-visible, button:focus-visible, summary:focus-visible {
+        outline: 3px solid var(--primary); outline-offset: 4px;
+      }
+      main a:hover { text-decoration: underline; }
+      .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100;
+        padding: 10px 16px; background: white; transform: translateY(-160%); }
+      .skip-link:focus { transform: none; }
+      .nav a { display: inline-block; }
+      .nav .submenu a { display: block; }
+      .submenu-toggle { display: none; border: 1px solid var(--border);
+        border-radius: 8px; background: white; color: var(--accent);
+        min-width: 44px; min-height: 44px; cursor: pointer; font: inherit; }
+      .js .submenu-toggle { display: inline-block; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+      .hero-actions a { border: 1px solid var(--border); border-radius: 9px;
+        padding: 7px 14px; font-weight: 600; }
+      .hero-actions a:first-child { color: white; background: var(--accent); }
+      .grid > aside { align-self: start; }
+      .grid > *, .cols > *, .grid-3 > * { min-width: 0; }
+      .stack { margin: 0; padding-left: 1.1em; }
+      address { font-style: normal; overflow-wrap: anywhere; }
+      #contact, #main-content { scroll-margin-top: 150px; }
+      .earlier-news { margin-top: 16px; }
+      .earlier-news summary { color: var(--primary); cursor: pointer; font-weight: 600; }
+      .earlier-news ul { margin-top: 10px; }
+      @media (max-width: 600px) {
+        .js .nav .submenu { position: static; min-width: 0; }
+        .nav > ul { gap: 4px; }
+        .site-header { position: static; }
+        #contact, #main-content { scroll-margin-top: 16px; }
+      }
     </style>
   </head>
 
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <header class="site-header">
       <div class="header-inner">
         <div class="brand">
-          <a class="title" href="/">Haonan LIU’s Personal Page</a>
+          <a class="title" href="/">Haonan Liu’s Personal Page</a>
           <div class="desc">
             Ph.D., Assistant Professor, Institute of Science Tokyo
           </div>
@@ -438,12 +471,13 @@
           <ul>
             <li><a href="/" aria-current="page">Home</a></li>
             <li>
-              <a href="/profile/" aria-haspopup="true">Profile</a>
-              <ul class="submenu">
+              <a href="/profile/">Profile</a>
+              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu">▾</button>
+              <ul class="submenu" id="profile-submenu">
                 <li><a href="/profile/current_topic/">Current Topics</a></li>
-                <li><a href="/profile/publication/">Publication</a></li>
-                <li><a href="/profile/presentation/">Presentation</a></li>
-                <li><a href="/profile/patent/">Patent</a></li>
+                <li><a href="/profile/publication/">Publications</a></li>
+                <li><a href="/profile/presentation/">Presentations</a></li>
+                <li><a href="/profile/patent/">Patents</a></li>
                 <li>
                   <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">
                     Chinese CV
@@ -459,7 +493,7 @@
       </div>
     </header>
 
-    <main class="container">
+    <main class="container" id="main-content" tabindex="-1">
       <section class="card hero">
         <div>
           <h1>Haonan Liu</h1>
@@ -472,6 +506,11 @@
             terahertz spectroscopy, and high-frequency dielectric properties of
             polymer materials.
           </p>
+          <div class="hero-actions">
+            <a href="/profile/current_topic/">Research</a>
+            <a href="/profile/publication/">Publications</a>
+            <a href="#contact">Contact</a>
+          </div>
         </div>
       </section>
 
@@ -479,7 +518,7 @@
         <div class="card">
           <h2 class="section-title">Recent News</h2>
           <ul class="bullets">
-            <li>
+<li>
               13–17 July 2026, presented at
               <a
                 href="https://pp2026.meeting666.com"
@@ -488,7 +527,7 @@
                 >PP 2026</a
               >, Lanzhou, China.
             </li>
-            <li>
+<li>
              8–12 July 2026, invited talk at
               <a
                 href="http://ipic2026.cpsjournals.cn/index.php?m=232"
@@ -497,7 +536,7 @@
                 >IPIC 2026</a
               >, Guangzhou, China.
             </li>
-            <li>
+<li>
               13 Mar 2026, final lecture of Prof. Shinji ANDO
               (<a
                 href="http://www.ando-cap.mac.titech.ac.jp/Final_Lecture_Prof.SAndo.html"
@@ -506,7 +545,7 @@
                 >Link</a
               >).
             </li>
-            <li>
+<li>
               21 Oct 2025, new publication in
               <em>ACS Applied Polymer Materials</em>
               (<a
@@ -517,7 +556,7 @@
                 >DOI</a
               >).
             </li>
-            <li>
+<li>
               30 Sept 2025, new publication in
               <em>Journal of Physical Chemistry B</em>
               (<a
@@ -527,8 +566,8 @@
                 aria-label="DOI link for Journal of Physical Chemistry B publication"
                 >DOI</a
               >).
-            </li>
-            <li>
+            </li></ul>
+          <details class="earlier-news"><summary>Earlier news</summary><ul class="bullets"><li>
               14–18 July 2025, presented at
               <a
                 href="https://www.wcce12.com/"
@@ -537,7 +576,7 @@
                 >WCCE 12 & APCChE 2025</a
               >, Beijing, China.
             </li>
-            <li>
+<li>
               9–12 July 2025, invited talk at
               <a
                 href="https://2025polyimide.intseek.cn/"
@@ -546,7 +585,7 @@
                 >IPIC 2025</a
               >, Shanghai, China.
             </li>
-            <li>
+<li>
               24 June 2025, new publication in <em>Soft Matter</em>
               (<a
                 href="https://doi.org/10.1039/d5sm00394f"
@@ -555,7 +594,7 @@
                 >DOI</a
               >).
             </li>
-            <li>
+<li>
               17 June 2025, new publication in <em>Macromolecules</em>
               (<a
                 href="https://doi.org/10.1021/acs.macromol.5c00844"
@@ -564,7 +603,7 @@
                 >DOI</a
               >).
             </li>
-            <li>
+<li>
               4–8 May 2025, presented at
               <a
                 href="https://www.apme2025.com/"
@@ -572,8 +611,7 @@
                 rel="noreferrer noopener"
                 >APME 2025</a
               >, Catania, Italy.
-            </li>
-          </ul>
+            </li></ul></details>
         </div>
 
         <aside class="card">
@@ -614,12 +652,13 @@
             <h3>
               <a
                 href="/draw-a-random-polymer-network-by-matlab-a-simple-approach/"
-                >Draw a Random Polymer Network by Matlab – a Simple Approach</a
+                >Draw a Random Polymer Network by MATLAB – a Simple Approach</a
               >
             </h3>
             <div class="excerpt">
-              A simple code can be used to depict the schematic diagram…
+              A simple MATLAB approach to drawing a schematic polymer network.
             </div>
+            <!-- Original numeric date retained: day/month order needs confirmation. -->
             <div class="date">05/06/2022</div>
           </article>
 
@@ -629,7 +668,8 @@
                 >A Note of “Historical Notes in Polymer Physics”</a
               >
             </h3>
-            <div class="excerpt">Wait for updating.</div>
+            <div class="excerpt">Content coming soon.</div>
+            <!-- Original numeric date retained: day/month order needs confirmation. -->
             <div class="date">05/07/2021</div>
           </article>
 
@@ -642,13 +682,14 @@
             <div class="excerpt">
               A short note on installing and running LAMMPS on macOS.
             </div>
+            <!-- Original numeric date retained: day/month order needs confirmation. -->
             <div class="date">01/08/2021</div>
           </article>
         </div>
       </section>
 
-      <section class="card">
-        <h2 class="section-title">Access</h2>
+      <section class="card" id="contact">
+        <h2 class="section-title">Access &amp; Contact</h2>
         <div class="cols">
           <div>
             <iframe
@@ -663,7 +704,7 @@
           </div>
 
           <address class="mini">
-            <p><strong>Haonan LIU, Ph.D., Assistant Professor</strong></p>
+            <p><strong>Haonan Liu, Ph.D., Assistant Professor</strong></p>
             <p>Nakajima Laboratory</p>
             <p>Department of Chemical Science and Engineering</p>
             <p>School of Materials and Chemical Technology</p>
@@ -672,8 +713,8 @@
               Room 383, Main Bldg. (H-133), 2-12-1 Ookayama, Meguro, Tokyo
               152-8552, Japan
             </p>
-            <p>Tel: 03-5734-2944 (ext. 2944)</p>
-            <p>Email: liu(at)mct.isct.ac.jp</p>
+            <p>Tel: <a href="tel:+81357342944">+81-3-5734-2944</a> (ext. 2944)</p>
+            <p>Email: <a href="mailto:liu@mct.isct.ac.jp">liu@mct.isct.ac.jp</a></p>
             <p>
               HP:
               <a
@@ -695,22 +736,43 @@
             <li><a href="/" aria-current="page">Home</a></li>
             <li><a href="/profile/">Profile</a></li>
             <li><a href="/profile/current_topic/">Current Topics</a></li>
-            <li><a href="/profile/publication/">Publication</a></li>
-            <li><a href="/profile/presentation/">Presentation</a></li>
-            <li><a href="/profile/patent/">Patent</a></li>
+            <li><a href="/profile/publication/">Publications</a></li>
+            <li><a href="/profile/presentation/">Presentations</a></li>
+            <li><a href="/profile/patent/">Patents</a></li>
             <li><a href="/category/posts/">Posts</a></li>
             <li><a href="/links/">Links</a></li>
             <li><a href="/tools/">Tools</a></li>
           </ul>
         </nav>
         <div class="copyright">
-          © <span id="yy"></span> Haonan LIU. All rights reserved.
+          © <span id="yy"></span> Haonan Liu. All rights reserved.
         </div>
       </div>
     </footer>
 
     <script>
       document.getElementById("yy").textContent = new Date().getFullYear();
+      const toggle = document.querySelector('.submenu-toggle');
+      const submenu = document.getElementById('profile-submenu');
+      const group = toggle.parentElement;
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        submenu.hidden = !open;
+      }
+      setMenu(false);
+      document.documentElement.classList.add('js');
+      toggle.addEventListener('click', () => setMenu(submenu.hidden));
+      document.addEventListener('click', event => {
+        if (!group.contains(event.target)) setMenu(false);
+      });
+      group.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !submenu.hidden) {
+          setMenu(false); toggle.focus(); event.preventDefault();
+        }
+      });
+      group.addEventListener('focusout', event => {
+        if (!group.contains(event.relatedTarget)) setMenu(false);
+      });
     </script>
   </body>
 </html>
