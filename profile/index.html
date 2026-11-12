@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Profile – Haonan LIU’s Personal Page</title>
+    <title>Profile – Haonan Liu’s Personal Page</title>
     <meta
       name="description"
       content="Profile of Haonan Liu – Assistant Professor, Institute of Science Tokyo. Research, education, experience, lectures, awards, news, and affiliations."
     />
+    <link rel="canonical" href="https://h-ryu.com/profile/" />
     <link
       rel="icon"
       href="/wp-content/uploads/2022/09/avatar_non_bg.png"
@@ -20,339 +21,254 @@
 
     <!-- Shared theme (aligned with Home). All comments in English -->
     <style>
-          :root{
-            /* Core palette */
-            --bg:#f5f6fa;
-            --card:#ffffff;
-            --text:#20242a;
-            --muted:#5c6270;
-            --border:#e6e9ef;
-            --shadow:0 8px 24px rgba(23,31,56,.08);
-            --radius:16px;
+      :root { --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
+        --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
+        --primary:#2468b4; --accent:#212a74; --space:24px; --container-y:24px; --card-pad:24px; }
+      * { box-sizing:border-box; }
+      html, body { min-height:100%; }
+      body { margin:0; background:var(--bg); color:var(--text);
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        line-height:1.7; }
+      a { color:var(--primary); text-decoration:none; }
+      a:hover { opacity:.9; }
+      main a:hover { text-decoration:underline; }
+      a:focus-visible, button:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
+      img { max-width:100%; display:block; }
+      .skip-link { position:fixed; top:8px; left:8px; z-index:100; padding:10px 16px;
+        background:white; transform:translateY(-160%); }
+      .skip-link:focus { transform:none; }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+      }
 
-            --primary:#4a90e2;
-            --accent:#212a74;
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+      }
 
-            /* Spacing scale (single source of truth) */
-            --space:24px;        /* default inter-card spacing */
-            --container-y:24px;  /* top/bottom whitespace in main container */
-            --card-pad:24px;     /* internal padding for cards */
-          }
+      .brand {
+        display: flex;
+        flex-direction: column;
+      }
 
-          *{box-sizing:border-box}
-          html,body{height:100%}
-          body{
-            margin:0;background:var(--bg);color:var(--text);
-            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-            line-height:1.7
-          }
-          a{color:var(--primary);text-decoration:none}
-          a:hover{opacity:.9}
-          img{max-width:100%;display:block}
+      .brand .title {
+        font-weight: 800;
+        color: var(--accent);
+        font-size: 1.15rem;
+        margin: 0;
+      }
 
-          /* Header */
-          .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
-          .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-          .brand{display:flex;flex-direction:column}
-          .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
-          .brand .desc{color:var(--muted);font-size:.92rem}
+      .brand .desc {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
 
-          .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-          .nav a{padding:8px 10px;border-radius:10px}
-          .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-          .nav li{position:relative;padding-bottom:6px} /* extend hover zone below trigger */
+      .nav > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
 
-          /* Submenu uses transitions (not display none) for better access */
-          .nav .submenu{
-            position:absolute;z-index:50;
-            top:100%; left:0; margin-top:6px;
-            background:#fff;border:1px solid var(--border);
-            border-radius:12px;box-shadow:var(--shadow);
-            min-width:220px;padding:8px;
+      .nav a {
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
 
-            opacity:0;visibility:hidden;transform:translateY(6px);
-            transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-            transition-delay:.12s; /* slight delay when hiding to reduce flicker */
-            pointer-events:none;
-          }
-          .nav li:hover .submenu,
-          .nav li:focus-within .submenu{
-            opacity:1;visibility:visible;transform:translateY(0);
-            transition-delay:0s; /* show immediately; raise for appear delay if desired */
-            pointer-events:auto;
-          }
-          .nav li::after{ /* invisible bridge to prevent hover drop */
-            content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px;
-          }
-          .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
-          .nav .submenu a:hover{background:#f3f6fb}
+      .nav a[aria-current="page"] {
+        background: rgba(74, 144, 226, 0.12);
+        color: var(--accent);
+        font-weight: 600;
+      }
 
-          @media (prefers-reduced-motion: reduce){
-            .nav .submenu{transition:none}
-          }
+      .nav li {
+        position: relative;
+        padding-bottom: 6px;
+      }
 
-          /* Layout */
-          .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
-          .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--card-pad)}
-          .container > section + section{margin-top:var(--space)} /* vertical rhythm */
+      .nav .submenu {
+        position: absolute;
+        z-index: 50;
+        top: 100%;
+        left: 0;
+        margin-top: 6px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        min-width: 220px;
+        padding: 8px;
+        list-style: none;
 
-          .heading-xl{font-size:1.6rem;margin:0 0 8px;color:var(--accent);font-weight:800}
-          .muted{color:var(--muted)}
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(6px);
+        transition: opacity 0.25s ease, transform 0.25s ease,
+          visibility 0.25s ease;
+        transition-delay: 0.12s;
+        pointer-events: none;
+      }
 
-          .grid{display:grid;grid-template-columns:320px 1fr;gap:var(--space)}
-          .stack{display:flex;flex-direction:column;gap:var(--space)}
+      .nav .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        position: static;
+      }
+      .js .nav .submenu { position: absolute; }
+      .nav .submenu[hidden] { display: none; }
 
-          .chip{display:inline-block;background:#f0f4fb;border:1px solid var(--border);padding:2px 8px;border-radius:999px;font-size:.85rem;color:#2b2f36}
-          .section{display:flex;flex-direction:column;gap:10px;margin-top:8px}
-          .section h3{margin:6px 0 2px;font-size:1.05rem;color:#2b2f36}
-          .list{margin:0;padding-left:1.1em}
-          .list li{margin:6px 0}
-          .hero{display:flex;gap:16px;align-items:center}
-          .avatar{width:128px;height:128px;border-radius:24px;border:1px solid var(--border);overflow:hidden;flex:0 0 auto}
-          .avatar img{width:100%;height:100%;object-fit:cover;object-position:center;}
-          .kv{display:flex;flex-direction:column;gap:6px}
-          .kv h1{font-size:1.4rem;margin:0 0 2px;color:#2b2f36}
-          .kv .line{display:flex;gap:10px;flex-wrap:wrap}
-          .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-          .badges a{border:1px solid var(--border);border-radius:10px;padding:6px 10px;background:#fff}
-          .divider{height:1px;background:var(--border);margin:10px 0}
+      .nav > ul > li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 8px;
+        bottom: -8px;
+      }
 
-          /* Footer */
-          .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
-          .footer-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-          .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
-          .copyright{color:var(--muted);font-size:.92rem}
+      .nav .submenu li {
+        padding-bottom: 0;
+      }
 
-          /* Responsive */
-          @media (max-width:960px){
-            .grid{grid-template-columns:1fr}
-            .hero{align-items:flex-start}
-            .avatar{width:96px;height:96px;border-radius:18px}
-            :root{
-              --space:20px;
-              --container-y:20px;
-              --card-pad:20px;
-            }
-          }
-          /* Global mobile layout fix */
-      @media (max-width: 700px){
+      .nav .submenu a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
 
-        :root{
-          --space:18px;
-          --container-y:18px;
-          --card-pad:18px;
-        }
+      .nav .submenu a:hover {
+        background: #f3f6fb;
+      }
 
-        html, body{
-          overflow-x:hidden;
-        }
-
-        body{
-          font-size:16px;
-          line-height:1.65;
-        }
-
-        .site-header{
-          position:static;
-        }
-
-        .header-inner{
-          display:block;
-          padding:16px 18px;
-        }
-
-        .brand{
-          display:block;
-        }
-
-        .brand .title{
-          display:block;
-          font-size:1.35rem;
-          line-height:1.25;
-          max-width:none;
-          word-break:normal;
-          overflow-wrap:normal;
-        }
-
-        .brand .desc{
-          margin-top:6px;
-          font-size:.9rem;
-          line-height:1.45;
-        }
-
-        .nav{
-          margin-top:14px;
-          overflow-x:auto;
-          -webkit-overflow-scrolling:touch;
-          scrollbar-width:none;
-        }
-
-        .nav::-webkit-scrollbar{
-          display:none;
-        }
-
-        .nav ul{
-          display:flex;
-          flex-wrap:nowrap;
-          gap:10px;
-          min-width:max-content;
-        }
-
-        .nav li{
-          padding-bottom:0;
-        }
-
-        .nav li::after{
-          display:none;
-        }
-
-        .nav a{
-          display:block;
-          padding:7px 10px;
-          white-space:nowrap;
-        }
-
-        .nav .submenu{
-          display:none;
-        }
-
-        .container{
-          max-width:none;
-          margin:18px auto;
-          padding:0 14px;
-        }
-
-        .card{
-          padding:18px;
-          border-radius:18px;
-        }
-
-        .grid{
-          grid-template-columns:1fr;
-          gap:18px;
-        }
-
-        .stack{
-          gap:18px;
-        }
-
-        .hero{
-          flex-direction:column;
-          align-items:center;
-          text-align:center;
-          gap:14px;
-        }
-
-        .avatar{
-          width:112px;
-          height:112px;
-          border-radius:22px;
-          background:#fff;
-        }
-
-        .avatar img{
-          width:100%;
-          height:100%;
-          object-fit:cover;
-          object-position:center;
-        }
-
-        .kv{
-          align-items:center;
-          width:100%;
-        }
-
-        .heading-xl,
-        .kv h1{
-          font-size:1.55rem;
-          line-height:1.25;
-          text-align:center;
-        }
-
-        .kv .line,
-        .badges{
-          justify-content:center;
-        }
-
-        .chip{
-          font-size:.88rem;
-          line-height:1.4;
-          padding:4px 10px;
-        }
-
-        .badges a{
-          padding:7px 10px;
-          font-size:.92rem;
-        }
-
-        h1{
-          font-size:1.65rem;
-          line-height:1.25;
-        }
-
-        h2{
-          font-size:1.35rem;
-          line-height:1.3;
-        }
-
-        h3{
-          font-size:1.08rem;
-          line-height:1.35;
-        }
-
-        p{
-          margin-top:0;
-        }
-
-        .list{
-          padding-left:1.2em;
-        }
-
-        .list li{
-          margin:7px 0;
-        }
-
-        .footer-inner{
-          display:block;
-          padding:16px 18px;
-        }
-
-        .footer-nav ul{
-          gap:10px 14px;
-        }
-
-        .copyright{
-          margin-top:10px;
+      @media (prefers-reduced-motion: reduce) {
+        .nav .submenu {
+          transition: none;
         }
       }
+
+      .submenu-toggle {
+        display: none; align-items: center; justify-content: center;
+        vertical-align: middle; padding: 0; margin-left: -6px;
+        width: 32px; height: 44px; border: 0; border-radius: 8px;
+        background: transparent; color: var(--accent); cursor: pointer;
+      }
+      .submenu-toggle::before {
+        content: ""; width: 7px; height: 7px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+      }
+      .submenu-toggle[aria-expanded="true"]::before {
+        transform: translateY(2px) rotate(225deg);
+      }
+      .submenu-toggle:hover { background: rgba(74, 144, 226, 0.08); }
+      .js .submenu-toggle { display: inline-flex; }
+      @media (pointer: coarse) {
+        .submenu-toggle { width: 44px; }
+      }
+
+      .container { max-width:1200px; margin:var(--container-y) auto; padding:0 20px; }
+      .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:var(--card-pad); }
+      .grid { display:grid; grid-template-columns:280px minmax(0,1fr); gap:32px; }
+      .grid > *, .hero > *, .kv { min-width:0; }
+      .stack { display:flex; flex-direction:column; gap:var(--space); }
+      .heading-xl { font-size:1.6rem; margin:0 0 8px; color:var(--accent); font-weight:800; }
+      .muted { color:var(--muted); }
+      .hero { display:flex; gap:24px; align-items:center; }
+      .avatar { width:128px; height:128px; border-radius:24px; border:1px solid var(--border);
+        overflow:hidden; flex:0 0 auto; background:#fff; }
+      .avatar img { width:100%; height:100%; object-fit:cover; object-position:center; }
+      .kv { display:flex; flex-direction:column; gap:6px; }
+      .kv h1 { margin:0 0 2px; font-size:1.8rem; color:var(--accent); }
+      .kv .line, .badges { display:flex; gap:8px; flex-wrap:wrap; }
+      .chip { display:inline-block; background:#f0f4fb; border:1px solid var(--border);
+        padding:3px 9px; border-radius:999px; font-size:.85rem; color:#2b2f36; }
+      .badges { margin-top:8px; }
+      .badges a { border:1px solid var(--border); border-radius:10px; padding:6px 10px; background:#fff; }
+      .section-title { margin:0; font-size:1.15rem; color:var(--accent); }
+      .divider { height:1px; background:var(--border); margin:10px 0 14px; }
+      .list { margin:0; padding-left:1.15em; }
+      .list li { margin:8px 0; }
+      p { margin:0; }
+      .grid a, .grid li { overflow-wrap:anywhere; }
+      .section-nav { display:flex; flex-wrap:wrap; gap:8px 18px;
+        border-block:1px solid var(--border); padding:12px 0; font-size:.94rem; }
+      .section-nav a { padding:4px 0; }
+      main, .section-title[id] { scroll-margin-top:130px; }
+      .site-footer { margin-top:var(--space); border-top:1px solid var(--border); background:#fff; }
+      .footer-inner { max-width:1200px; margin:0 auto; padding:14px 20px; display:flex;
+        align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+      .footer-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:16px; flex-wrap:wrap; }
+      .copyright { color:var(--muted); font-size:.92rem; }
+      @media (max-width:960px) {
+        :root { --space:20px; --container-y:20px; --card-pad:20px; }
+        .header-inner { align-items:flex-start; flex-direction:column; gap:12px; }
+        .nav > ul { flex-wrap:wrap; gap:10px; }
+        .grid { grid-template-columns:1fr; gap:28px; }
+        .grid > aside { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+      }
+      @media (max-width:600px) {
+        :root { --space:18px; --container-y:18px; --card-pad:18px; }
+        .site-header { position:static; }
+        .header-inner { padding:14px 18px; }
+        .nav > ul { gap:4px; }
+        .js .nav .submenu { position:static; min-width:0; }
+        .container { padding:0 14px; }
+        .hero { flex-direction:column; align-items:center; text-align:center; gap:16px; }
+        .avatar { width:112px; height:112px; border-radius:22px; }
+        .kv { align-items:center; width:100%; }
+        .kv .line, .badges { justify-content:center; }
+        .grid > aside { display:flex; }
+        main, .section-title[id] { scroll-margin-top:16px; }
+        .section-nav { gap:6px 16px; }
+      }
+      @media (prefers-reduced-motion:reduce) { .nav .submenu { transition:none; } }
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <!-- Header -->
     <header class="site-header">
       <div class="header-inner">
         <div class="brand">
-          <a class="title" href="/">Haonan LIU’s Personal Page</a>
+          <a class="title" href="/">Haonan Liu’s Personal Page</a>
           <div class="desc">
             Ph.D., Assistant Professor, Institute of Science Tokyo
           </div>
         </div>
-        <nav class="nav" aria-label="Main">
+
+        <nav class="nav" aria-label="Main navigation">
           <ul>
             <li><a href="/">Home</a></li>
             <li>
-              <a href="/profile/" aria-current="page" aria-haspopup="true"
-                >Profile</a
-              >
-              <div class="submenu" role="menu">
-                <a href="/profile/current_topic/">Current Topics</a>
-                <a href="/profile/publication/">Publication</a>
-                <a href="/profile/presentation/">Presentation</a>
-                <a href="/profile/patent/">Patent</a>
-                <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf"
-                  >Chinese CV</a
-                >
-              </div>
+              <a href="/profile/" aria-current="page">Profile</a>
+              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu"></button>
+              <ul class="submenu" id="profile-submenu">
+                <li><a href="/profile/current_topic/">Current Topics</a></li>
+                <li><a href="/profile/publication/">Publications</a></li>
+                <li><a href="/profile/presentation/">Presentations</a></li>
+                <li><a href="/profile/patent/">Patents</a></li>
+                <li>
+                  <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">
+                    Chinese CV
+                  </a>
+                </li>
+              </ul>
             </li>
             <li><a href="/category/posts/">Posts</a></li>
             <li><a href="/links/">Links</a></li>
@@ -363,7 +279,7 @@
     </header>
 
     <!-- Main -->
-    <main class="container">
+    <main class="container" id="main-content" tabindex="-1">
       <section class="card stack">
         <div class="hero">
           <div class="avatar">
@@ -372,12 +288,12 @@
               alt="Avatar of Haonan Liu"
               width="128"
               height="128"
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
           </div>
           <div class="kv">
-            <h1 class="heading-xl">Haonan LIU</h1>
+            <h1 class="heading-xl">Haonan Liu</h1>
             <div class="line">
               <span class="chip">Assistant Professor</span>
               <span class="chip"
@@ -390,10 +306,10 @@
                 href="https://strdb.s.isct.ac.jp/html/100003365_ja.html"
                 target="_blank"
                 rel="noreferrer noopener"
-                >STRDB</a
+                >Science Tokyo Profile</a
               >
               <a
-                href="https://scholar.google.com/citations?user=Nmc7HqQAAAAJ&hl=en&authuser=1"
+                href="https://scholar.google.com/citations?user=Nmc7HqQAAAAJ&hl=en"
                 target="_blank"
                 rel="noreferrer noopener"
                 >Google Scholar</a
@@ -426,14 +342,16 @@
           </div>
         </div>
 
+        <nav class="section-nav" aria-label="Profile sections"><a href="#about">About</a><a href="#experience">Work Experience</a><a href="#education">Education</a><a href="#lectures">Lectures</a><a href="#awards">Awards &amp; Recognition</a><a href="#news">News &amp; Press</a></nav>
+
         <div class="grid">
           <!-- Left side (quick facts) -->
           <aside class="stack">
             <div>
-              <h3>Contact</h3>
+              <h2 class="section-title" id="contact">Contact</h2>
               <div class="divider"></div>
               <ul class="list">
-                <li><strong>E-mail:</strong> liu(at)mct.isct.ac.jp</li>
+                <li><strong>E-mail:</strong> <a href="mailto:liu@mct.isct.ac.jp">liu@mct.isct.ac.jp</a></li>
                 <li>
                   <strong>Address:</strong> Main Bldg. (H-133), 2-12-1 Ookayama,
                   Meguro, Tokyo 152-8552, Japan
@@ -441,7 +359,7 @@
               </ul>
             </div>
             <div>
-              <h3>Bio</h3>
+              <h2 class="section-title" id="bio">Bio</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>
@@ -451,7 +369,7 @@
               </ul>
             </div>
             <div>
-              <h3>Affiliations</h3>
+              <h2 class="section-title" id="affiliations">Affiliations</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>The Society of Polymer Science, Japan</li>
@@ -460,12 +378,12 @@
               </ul>
             </div>
             <div>
-              <h3>Quick Links</h3>
+              <h2 class="section-title" id="quick-links">Quick Links</h2>
               <div class="divider"></div>
               <ul class="list">
-                <li><a href="/profile/publication/">Publication</a></li>
-                <li><a href="/profile/presentation/">Presentation</a></li>
-                <li><a href="/profile/patent/">Patent</a></li>
+                <li><a href="/profile/publication/">Publications</a></li>
+                <li><a href="/profile/presentation/">Presentations</a></li>
+                <li><a href="/profile/patent/">Patents</a></li>
               </ul>
             </div>
           </aside>
@@ -473,7 +391,7 @@
           <!-- Right side (content) -->
           <div class="stack">
             <div>
-              <h3>About</h3>
+              <h2 class="section-title" id="about">About</h2>
               <div class="divider"></div>
               <p>
                 Haonan Liu is an Assistant Professor at the Department of
@@ -483,14 +401,14 @@
                 his studies at Tokyo Institute of Technology. He obtained his
                 M.Eng. in 2019 and his Ph.D. in 2022. Following a one-year
                 postdoctoral position, he became an assistant professor at Tokyo
-                Institute of Technology in 2023. Liu’s research interests center
-                on polymer analysis, particularly their nanomechanical,
-                high-pressure optical, and high-frequency dielectric behaviors.
+                Institute of Technology in 2023. Liu’s research focuses on polymer analysis, particularly
+                nanomechanical properties, optical properties under high pressure,
+                and high-frequency dielectric behavior of polymers.
               </p>
             </div>
 
             <div>
-              <h3>Work Experience</h3>
+              <h2 class="section-title" id="experience">Work Experience</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>
@@ -533,7 +451,7 @@
             </div>
 
             <div>
-              <h3>Education</h3>
+              <h2 class="section-title" id="education">Education</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>
@@ -578,7 +496,7 @@
             </div>
 
             <div>
-              <h3>Lectures</h3>
+              <h2 class="section-title" id="lectures">Lectures</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>
@@ -651,7 +569,7 @@
             </div>
 
             <div>
-              <h3>Awards & Recognition</h3>
+              <h2 class="section-title" id="awards">Awards & Recognition</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>
@@ -674,7 +592,7 @@
             </div>
 
             <div>
-              <h3>News & Press</h3>
+              <h2 class="section-title" id="news">News & Press</h2>
               <div class="divider"></div>
               <ul class="list">
                 <li>
@@ -705,28 +623,48 @@
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <nav class="footer-nav" aria-label="Footer">
+        <nav class="footer-nav" aria-label="Footer navigation">
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/profile/" aria-current="page">Profile</a></li>
             <li><a href="/profile/current_topic/">Current Topics</a></li>
-            <li><a href="/profile/publication/">Publication</a></li>
-            <li><a href="/profile/presentation/">Presentation</a></li>
-            <li><a href="/profile/patent/">Patent</a></li>
+            <li><a href="/profile/publication/">Publications</a></li>
+            <li><a href="/profile/presentation/">Presentations</a></li>
+            <li><a href="/profile/patent/">Patents</a></li>
             <li><a href="/category/posts/">Posts</a></li>
             <li><a href="/links/">Links</a></li>
             <li><a href="/tools/">Tools</a></li>
           </ul>
         </nav>
         <div class="copyright">
-          © <span id="yy"></span> Haonan LIU. All rights reserved.
+          © <span id="yy"></span> Haonan Liu. All rights reserved.
         </div>
       </div>
     </footer>
 
     <script>
-      // Footer year
-      document.getElementById('yy').textContent = new Date().getFullYear();
+      document.getElementById("yy").textContent = new Date().getFullYear();
+      const toggle = document.querySelector('.submenu-toggle');
+      const submenu = document.getElementById('profile-submenu');
+      const group = toggle.parentElement;
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        submenu.hidden = !open;
+      }
+      setMenu(false);
+      document.documentElement.classList.add('js');
+      toggle.addEventListener('click', () => setMenu(submenu.hidden));
+      document.addEventListener('click', event => {
+        if (!group.contains(event.target)) setMenu(false);
+      });
+      group.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !submenu.hidden) {
+          setMenu(false); toggle.focus(); event.preventDefault();
+        }
+      });
+      group.addEventListener('focusout', event => {
+        if (!group.contains(event.relatedTarget)) setMenu(false);
+      });
     </script>
   </body>
 </html>
