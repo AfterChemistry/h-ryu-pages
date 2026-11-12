@@ -153,7 +153,7 @@
           </div>
 
           <div class="calc-group">
-            <label class="calc-label" for="wavenumber">Wavenumber</label>
+            <label class="calc-label" for="wavenumber">Spectroscopic wavenumber</label>
             <input type="number" id="wavenumber" step="any" class="calc-input" inputmode="decimal" />
             <select id="wnUnit" class="calc-select" aria-label="Wavenumber unit">
               <option value="1">cm⁻¹</option>
@@ -164,12 +164,15 @@
         </div>
       </form>
 
-      <div class="note">Tip: Supports decimals and scientific notation (e.g., 3e2). Units auto-convert when changed.</div>
+      <div class="note">Tip: Supports decimals and scientific notation (e.g., 3e2). Units auto-convert when changed. Enter a positive, finite value; results use 8 significant digits.</div>
+      <div class="note">Vacuum relations: λ = c/f; spectroscopic wavenumber ν̃ = 1/λ = f/c (not angular wavenumber k = 2π/λ). In a medium, λ = c/(nf), using the phase refractive index n.</div>
+      <div id="calc-status" class="note" role="status" aria-live="polite"></div>
     </section>
 
     <!-- Chart -->
     <section class="card">
-      <div class="chart-block"><canvas id="chart"></canvas></div>
+      <div class="chart-block"><canvas id="chart" role="img" aria-label="Vacuum wavelength and spectroscopic wavenumber versus frequency on logarithmic axes"></canvas></div>
+      <div class="caption">Vacuum conversion curves, 0.5 GHz–200 THz (not the full spectrum). All axes are logarithmic; each curve uses its own labeled vertical axis.</div>
     </section>
 
     <!-- Spectrum -->
@@ -187,8 +190,8 @@
       <div class="rainbow-labels">
         <div>
           <div class="band-title">Radio</div>
-          <div class="band-range">~1 Hz – 3 GHz</div>
-          <div class="band-wl">~3×10⁸ – 10 cm</div>
+          <div class="band-range">&lt;~3 GHz</div>
+          <div class="band-wl">&gt;~10 cm</div>
         </div>
         <div>
           <div class="band-title">Microwave</div>
@@ -222,8 +225,9 @@
         </div>
       </div>
 
-      <div class="caption">Electromagnetic spectrum: frequency and wavelength (in vacuum). Ranges are approximate; transitions are gradual.</div>
+      <div class="caption">Electromagnetic spectrum in vacuum. All boundaries are approximate conventions; visible light is shown here as 400–750 nm. Microwaves are a subset of radio waves, displayed separately here using a 3 GHz boundary. X-ray and gamma-ray ranges can overlap; their distinction also depends on origin. Equal-width bands are schematic, not a linear or logarithmic scale; colors outside the visible band are illustrative.</div>
     </section>
+    <div class="note">Scientific references: <a href="https://www.nist.gov/pml/special-publication-330/sp-330-section-2">NIST: SI constants</a>; <a href="https://goldbook.iupac.org/terms/view/W06664">IUPAC: wavenumber</a>; <a href="https://imagine.gsfc.nasa.gov/science/toolbox/spectrum_chart.html">NASA: approximate spectral ranges</a>.</div>
   </main>
 
   <!-- Footer -->
@@ -287,50 +291,42 @@
       const wlUnit    = document.getElementById('wlUnit');
       const wnUnit    = document.getElementById('wnUnit');
 
-      let lock=false;
-      function fromFrequency(){
-        if(lock) return; lock=true;
-        const f = parseFloat(freqInput.value) * parseFloat(freqUnit.value);
-        if (isFinite(f) && f>0){
-          const lambda_m = c / f;
-          wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(8);
-          const wn_cm = 1 / (lambda_m * 100);
-          wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(8);
-        } else { wlInput.value=''; wnInput.value=''; }
-        lock=false;
+      // Keep an unrounded physical value so unit changes do not reinterpret input.
+      const fields = [freqInput, wlInput, wnInput];
+      const units = [freqUnit, wlUnit, wnUnit];
+      const status = document.getElementById('calc-status');
+      let frequencyHz = null;
+      function valuesFor(f){
+        return [f / Number(freqUnit.value),
+                (c / f) / Number(wlUnit.value),
+                (f / c / 100) / Number(wnUnit.value)];
       }
-      function fromWavelength(){
-        if(lock) return; lock=true;
-        const lambda_m = parseFloat(wlInput.value) * parseFloat(wlUnit.value);
-        if (isFinite(lambda_m) && lambda_m>0){
-          const f = c / lambda_m;
-          freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(8);
-          const wn_cm = 1 / (lambda_m * 100);
-          wnInput.value = (wn_cm / parseFloat(wnUnit.value)).toPrecision(8);
-        } else { freqInput.value=''; wnInput.value=''; }
-        lock=false;
+      function render(skip = -1){
+        const values = frequencyHz === null ? null : valuesFor(frequencyHz);
+        fields.forEach((field, i) => {
+          if (i !== skip) field.value = values ? values[i].toPrecision(8) : '';
+        });
       }
-      function fromWavenumber(){
-        if(lock) return; lock=true;
-        const wn_cm = parseFloat(wnInput.value) * parseFloat(wnUnit.value);
-        if (isFinite(wn_cm) && wn_cm>0){
-          const lambda_m = 1 / (wn_cm * 100);
-          wlInput.value = (lambda_m / parseFloat(wlUnit.value)).toPrecision(8);
-          const f = c / lambda_m;
-          freqInput.value = (f / parseFloat(freqUnit.value)).toPrecision(8);
-        } else { wlInput.value=''; freqInput.value=''; }
-        lock=false;
+      function update(index){
+        const value = Number(fields[index].value);
+        const scaled = value * Number(units[index].value);
+        const f = index === 0 ? scaled : index === 1 ? c / scaled : scaled * 100 * c;
+        const valid = fields[index].value.trim() !== '' && value > 0 &&
+          Number.isFinite(scaled) && scaled > 0 && Number.isFinite(f) && f > 0 &&
+          valuesFor(f).every(v => Number.isFinite(v) && v > 0);
+        frequencyHz = valid ? f : null;
+        status.textContent = valid || fields[index].value === '' ? '' :
+          'Enter a positive value within the supported numeric range.';
+        render(index);
       }
-
-      // 事件绑定（存在性保护，防止选择器为空时报错）
-      if (freqInput && wlInput && wnInput && freqUnit && wlUnit && wnUnit){
-        freqInput.addEventListener('input', fromFrequency);
-        wlInput.addEventListener('input', fromWavelength);
-        wnInput.addEventListener('input', fromWavenumber);
-        freqUnit.addEventListener('change', fromFrequency);
-        wlUnit.addEventListener('change', fromWavelength);
-        wnUnit.addEventListener('change', fromWavenumber);
-      }
+      fields.forEach((field, i) => field.addEventListener('input', () => update(i)));
+      units.forEach(unit => unit.addEventListener('change', () => {
+        if (frequencyHz !== null && !valuesFor(frequencyHz).every(v => Number.isFinite(v) && v > 0)) {
+          frequencyHz = null;
+          status.textContent = 'Value is outside the supported numeric range for these units.';
+        }
+        render();
+      }));
 
       // ===== Chart：仅当 Chart.js 可用时绘制；否则不影响上面的计算器 =====
       function initChart(){
@@ -339,9 +335,10 @@
         if (!el) return;
         const ctx = el.getContext('2d');
 
-        const cval = 299792458;
+        const cval = c;
         const freqFine = [];
-        for (let exp=9; exp<=14; exp+=0.007) freqFine.push(Math.pow(10, exp));
+        const fMin = 0.5e9, fMax = 2e14;
+        for (let i=0; i<=800; i++) freqFine.push(fMin * Math.pow(fMax / fMin, i / 800));
 
         const freqTicks  = [0.5,1,2,5,10,20,50,100,200,500,1e3,2e3,5e3,1e4,2e4,5e4,1e5,2e5];
         const freqLabels = freqTicks.map(v => v < 1e3 ? v + 'GHz' : (v/1e3) + 'THz');
@@ -362,17 +359,17 @@
         new Chart(ctx, {
           type: 'line',
           data: {
-            labels: freqFine.map(f => f / 1e9),
+            
             datasets: [
-              { label:`Wavelength (${wlUnitChart.label})`, data:wavelengthY, yAxisID:'y1', borderWidth:2, tension:0.08, pointRadius:0, borderColor:rose },
-              { label:`Wavenumber (${wnUnitChart.label})`, data:wavenumberY, yAxisID:'y2', borderWidth:2, borderDash:[7,7], tension:0.08, pointRadius:0, borderColor:navy }
+              { label:`Wavelength (${wlUnitChart.label})`, data:freqFine.map((f,i) => ({x:f/1e9, y:wavelengthY[i]})), yAxisID:'y1', borderWidth:2, tension:0, pointRadius:0, borderColor:rose },
+              { label:`Wavenumber (${wnUnitChart.label})`, data:freqFine.map((f,i) => ({x:f/1e9, y:wavenumberY[i]})), yAxisID:'y2', borderWidth:2, borderDash:[7,7], tension:0, pointRadius:0, borderColor:navy }
             ]
           },
           options: {
             maintainAspectRatio:false, responsive:true,
             layout:{ padding:{ right:24, left:8, top:8, bottom:8 } },
             plugins:{
-              legend:{ display:false },
+              legend:{ display:true },
               tooltip:{
                 mode:'index', intersect:false, backgroundColor:'#fff', borderColor:'#e5e7ef', borderWidth:1,
                 titleColor:'#111', bodyColor:'#111', titleFont:{size:14,weight:'700'}, bodyFont:{size:13}, padding:10,
@@ -382,20 +379,20 @@
             scales:{
               x:{
                 type:'logarithmic', min:0.5, max:2e5, grid:{color:gridC}, border:{color:'#dde0ea'},
-                title:{ display:true, text:'Frequency (GHz → THz)', color:navy, font:{size:15,weight:'700'} },
+                title:{ display:true, text:'Frequency (log scale; GHz / THz)' , color:navy, font:{size:15,weight:'700'} },
                 afterBuildTicks(axis){ axis.ticks = freqTicks.map(v=>({value:v})); return axis.ticks; },
                 ticks:{ color:'#3a3e46', callback(val){ const i=freqTicks.indexOf(val); return i!==-1? freqLabels[i] : ''; } }
               },
               y1:{
                 type:'logarithmic', position:'left',
-                min:Math.min(...wavelengthY)*0.9, max:Math.max(...wavelengthY)*1.1,
+                min:(cval/fMax)/1e-6, max:(cval/fMin)/1e-6,
                 grid:{color:gridC}, border:{color:'#dde0ea'},
                 title:{ display:true, text:`Wavelength (${wlUnitChart.label})`, color:rose, font:{size:14,weight:'700'} },
                 ticks:{ color:rose, callback(v){ if(v<1||v>=1e4) return Number(v).toExponential(1); if(v>=1e3) return (v/1e3).toFixed(1)+'k'; return Number(v).toFixed(0); } }
               },
               y2:{
                 type:'logarithmic', position:'right',
-                min:Math.min(...wavenumberY)*0.7, max:Math.max(...wavenumberY)*1.3,
+                min:fMin/cval/100, max:fMax/cval/100,
                 grid:{ drawOnChartArea:false }, border:{color:'#dde0ea'},
                 title:{ display:true, text:`Wavenumber (${wnUnitChart.label})`, color:navy, font:{size:14,weight:'700'} },
                 ticks:{ color:navy, callback(v){ if(v<1||v>=1e4) return Number(v).toExponential(1); return Number(v).toFixed(0); } }
