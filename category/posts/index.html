@@ -1,141 +1,249 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Posts - Haonan LIU’s Personal Page</title>
-  <meta name="description" content="Posts 归档列表">
+  <title>Posts - Haonan Liu’s Personal Page</title>
+  <meta name="description" content="Notes on polymer science, MATLAB, and molecular simulation by Haonan Liu.">
+
+  <link rel="canonical" href="https://h-ryu.com/category/posts/">
 
   <style>
-    :root{
-      /* Core palette */
-      --bg:#f5f6fa;
-      --card:#ffffff;
-      --text:#20242a;
-      --muted:#5c6270;
-      --border:#e6e9ef;
-      --shadow:0 8px 24px rgba(23,31,56,.08);
-      --radius:16px;
+      :root { --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
+        --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
+        --primary:#2468b4; --accent:#212a74; --space:24px; --container-y:24px; --card-pad:24px; }
+      * { box-sizing:border-box; }
+      html, body { min-height:100%; }
+      body { margin:0; background:var(--bg); color:var(--text);
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        line-height:1.7; }
+      a { color:var(--primary); text-decoration:none; }
+      a:hover { opacity:.9; }
+      main a:hover { text-decoration:underline; }
+      a:focus-visible, button:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
+      img { max-width:100%; display:block; }
+      .skip-link { position:fixed; top:8px; left:8px; z-index:100; padding:10px 16px;
+        background:white; transform:translateY(-160%); }
+      .skip-link:focus { transform:none; }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+      }
 
-      --primary:#4a90e2;
-      --accent:#212a74;
-      --rose:#d81b60;
-      --grid:#eceef4;
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
+      }
 
-      /* Spacing scale */
-      --space:24px;
-      --space-sm:16px;
-      --container-y:24px;
-      --card-pad:24px;
-    }
+      .brand {
+        display: flex;
+        flex-direction: column;
+      }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;background:var(--bg);color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      line-height:1.65
-    }
-    a{color:var(--primary);text-decoration:none}
-    a:hover{opacity:.9}
+      .brand .title {
+        font-weight: 800;
+        color: var(--accent);
+        font-size: 1.15rem;
+        margin: 0;
+      }
 
-    /* Header */
-    .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
-    .header-inner{
-      max-width:1200px;margin:0 auto;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 20px
-    }
-    .brand{display:flex;flex-direction:column}
-    .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
-    .brand .desc{color:var(--muted);font-size:.92rem;margin:2px 0 0}
+      .brand .desc {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
 
-    /* Nav (accessible submenu) */
-    .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-    .nav a{padding:8px 10px;border-radius:10px}
-    .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-    .nav li{position:relative;padding-bottom:6px}
+      .nav > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+      }
 
-    .nav .submenu{
-      position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
-      background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-      min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-      transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-      transition-delay:.12s;pointer-events:none
-    }
-    .nav li:hover .submenu,
-    .nav li:focus-within .submenu{
-      opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
-    }
-    .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
-    .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
-    .nav .submenu a:hover{background:#f3f6fb}
-    @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
+      .nav a {
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
 
-    /* Layout: 单栏容器 */
-    .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
-    .main{max-width:800px;margin:0 auto}
-    .page-header{margin:0 0 var(--space-sm)}
-    .page-title{margin:0;font-weight:800;color:var(--accent)}
-    .muted{color:var(--muted)}
+      .nav a[aria-current="page"] {
+        background: rgba(74, 144, 226, 0.12);
+        color: var(--accent);
+        font-weight: 600;
+      }
 
-    /* Cards & list */
-    .card{
-      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:var(--card-pad)
-    }
-    .post-card + .post-card{margin-top:var(--space-sm)}
-    .post-title{margin:0 0 6px;font-size:1.1rem;color:var(--accent)}
-    .post-excerpt{margin:0;color:var(--text)}
+      .nav li {
+        position: relative;
+        padding-bottom: 6px;
+      }
 
-    /* Footer */
-    .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
-    .footer-inner{
-      max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
-      justify-content:space-between;gap:12px;flex-wrap:wrap
-    }
-    .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
-    .copyright{color:var(--muted);font-size:.92rem}
+      .nav .submenu {
+        position: absolute;
+        z-index: 50;
+        top: 100%;
+        left: 0;
+        margin-top: 6px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        min-width: 220px;
+        padding: 8px;
+        list-style: none;
 
-    /* Responsive */
-    @media (max-width:960px){
-      :root{--space:20px;--container-y:20px;--card-pad:20px}
-    }
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(6px);
+        transition: opacity 0.25s ease, transform 0.25s ease,
+          visibility 0.25s ease;
+        transition-delay: 0.12s;
+        pointer-events: none;
+      }
+
+      .nav .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        position: static;
+      }
+      .js .nav .submenu { position: absolute; }
+      .nav .submenu[hidden] { display: none; }
+
+      .nav > ul > li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 8px;
+        bottom: -8px;
+      }
+
+      .nav .submenu li {
+        padding-bottom: 0;
+      }
+
+      .nav .submenu a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+
+      .nav .submenu a:hover {
+        background: #f3f6fb;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .nav .submenu {
+          transition: none;
+        }
+      }
+
+      .submenu-toggle {
+        display: none; align-items: center; justify-content: center;
+        vertical-align: middle; padding: 0; margin-left: -6px;
+        width: 32px; height: 44px; border: 0; border-radius: 8px;
+        background: transparent; color: var(--accent); cursor: pointer;
+      }
+      .submenu-toggle::before {
+        content: ""; width: 7px; height: 7px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+      }
+      .submenu-toggle[aria-expanded="true"]::before {
+        transform: translateY(2px) rotate(225deg);
+      }
+      .submenu-toggle:hover { background: rgba(74, 144, 226, 0.08); }
+      .js .submenu-toggle { display: inline-flex; }
+      @media (pointer: coarse) {
+        .submenu-toggle { width: 44px; }
+      }
+
+      .container { max-width:1200px; margin:var(--container-y) auto; padding:0 20px; }
+      .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:var(--card-pad); }
+      .site-footer { margin-top:var(--space); border-top:1px solid var(--border); background:#fff; }
+      .footer-inner { max-width:1200px; margin:0 auto; padding:14px 20px; display:flex;
+        align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+      .footer-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:16px; flex-wrap:wrap; }
+      .copyright { color:var(--muted); font-size:.92rem; }
+      @media (max-width:960px) {
+        :root { --space:20px; --container-y:20px; --card-pad:20px; }
+        .header-inner { align-items:flex-start; flex-direction:column; gap:12px; }
+        .nav > ul { flex-wrap:wrap; gap:10px; }
+      }
+      @media (max-width:600px) {
+        :root { --space:18px; --container-y:18px; --card-pad:18px; }
+        .site-header { position:static; }
+        .header-inner { padding:14px 18px; }
+        .nav > ul { gap:4px; }
+        .js .nav .submenu { position:static; min-width:0; }
+        .container { padding:0 14px; }
+        main, .section-title[id] { scroll-margin-top:16px; }
+      }
+      @media (prefers-reduced-motion:reduce) { .nav .submenu { transition:none; } }
+    
+      .main { max-width:800px; margin:0 auto; }
+      .page-header { margin:0 0 var(--space); }
+      .page-title { margin:0; font-size:1.9rem; font-weight:800; color:var(--accent); }
+      .post-card + .post-card { margin-top:16px; }
+      .post-title { margin:0 0 8px; font-size:1.15rem; line-height:1.45; }
+      .post-excerpt { margin:0; color:var(--muted); }
+      .post-card { min-width:0; overflow-wrap:anywhere; }
+      #content { scroll-margin-top:130px; }
+      @media (max-width:600px) { #content { scroll-margin-top:16px; } }
+
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to main content</a>
 
   <header class="site-header">
-    <div class="header-inner">
-      <div class="brand">
-        <p class="title brand title">Haonan LIU’s Personal Page</p>
-        <p class="desc">Ph.D., Assistant Professor, Institute of Science Tokyo</p>
+      <div class="header-inner">
+        <div class="brand">
+          <a class="title" href="/">Haonan Liu’s Personal Page</a>
+          <div class="desc">
+            Ph.D., Assistant Professor, Institute of Science Tokyo
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li>
+              <a href="/profile/">Profile</a>
+              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu"></button>
+              <ul class="submenu" id="profile-submenu">
+                <li><a href="/profile/current_topic/">Current Topics</a></li>
+                <li><a href="/profile/publication/">Publications</a></li>
+                <li><a href="/profile/presentation/">Presentations</a></li>
+                <li><a href="/profile/patent/">Patents</a></li>
+                <li>
+                  <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">
+                    Chinese CV
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="/category/posts/" aria-current="page">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/">Tools</a></li>
+          </ul>
+        </nav>
       </div>
+    </header>
 
-      <nav class="nav" aria-label="Main">
-        <ul>
-          <li><a href="/">Home</a></li>
-
-          <li>
-            <a href="/profile/" aria-haspopup="true">Profile</a>
-            <div class="submenu" role="menu" aria-label="Profile submenu">
-              <a href="/profile/current_topic/">Current Topics</a>
-              <a href="/profile/publication/">Publication</a>
-              <a href="/profile/presentation/">Presentation</a>
-              <a href="/patent/">Patent</a>
-              <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">Chinese CV</a>
-            </div>
-          </li>
-
-          <li><a href="/category/posts/" aria-current="page">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="content" class="container">
+  <main id="content" class="container" tabindex="-1">
     <div class="main">
       <header class="page-header">
         <h1 class="page-title"><span>Posts</span></h1>
@@ -145,56 +253,76 @@
       <article class="post-card card">
         <h2 class="post-title">
           <a href="/draw-a-random-polymer-network-by-matlab-a-simple-approach/">
-            Draw a random polymer network by Matlab – a simple approach
+            Draw a Random Polymer Network by MATLAB – a Simple Approach
           </a>
         </h2>
-        <p class="post-excerpt">A simple code can be used to depict the schematic diagr [&hellip;]</p>
+        <p class="post-excerpt">A simple MATLAB approach to drawing a schematic polymer network.</p>
       </article>
 
       <article class="post-card card">
         <h2 class="post-title">
           <a href="/a-note-of-historical-notes-in-polymer-physics/">
-            A note of ‘HISTORICAL NOTES IN POLYMER PHYSICS’
+            A Note of “Historical Notes in Polymer Physics”
           </a>
         </h2>
-        <p class="post-excerpt">Wait for updating.</p>
+        <p class="post-excerpt">Content coming soon.</p>
       </article>
 
       <article class="post-card card">
         <h2 class="post-title">
           <a href="/mac-lammps/">
-            Install &amp; run LAMMPS for Mac – a simple approach (stable 2020-10-29)
+            Install &amp; Run LAMMPS for Mac – a Simple Approach (stable 2020-10-29)
           </a>
         </h2>
-        <p class="post-excerpt">1. INSTALL 2. RUN Let’s try with an example file: [&hellip;]</p>
+        <p class="post-excerpt">A short note on installing LAMMPS on macOS and running an example simulation.</p>
       </article>
     </div>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/profile/">Profile</a></li>
-          <li><a href="/profile/current_topic/">Current Topics</a></li>
-          <li><a href="/profile/publication/">Publication</a></li>
-          <li><a href="/profile/presentation/">Presentation</a></li>
-          <li><a href="/patent/">Patent</a></li>
-          <li><a href="/category/posts/" aria-current="page">Posts</a></li>
-          <li><a href="/links/">Links</a></li>
-          <li><a href="/tools/">Tools</a></li>
-        </ul>
-      </nav>
-      <div class="copyright">
-        © <span id="y"></span> Haonan LIU
+      <div class="footer-inner">
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile/">Profile</a></li>
+            <li><a href="/profile/current_topic/">Current Topics</a></li>
+            <li><a href="/profile/publication/">Publications</a></li>
+            <li><a href="/profile/presentation/">Presentations</a></li>
+            <li><a href="/profile/patent/">Patents</a></li>
+            <li><a href="/category/posts/" aria-current="page">Posts</a></li>
+            <li><a href="/links/">Links</a></li>
+            <li><a href="/tools/">Tools</a></li>
+          </ul>
+        </nav>
+        <div class="copyright">
+          © <span id="yy"></span> Haonan Liu. All rights reserved.
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
   <script>
-    // 年份
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+      document.getElementById("yy").textContent = new Date().getFullYear();
+      const toggle = document.querySelector('.submenu-toggle');
+      const submenu = document.getElementById('profile-submenu');
+      const group = toggle.parentElement;
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        submenu.hidden = !open;
+      }
+      setMenu(false);
+      document.documentElement.classList.add('js');
+      toggle.addEventListener('click', () => setMenu(submenu.hidden));
+      document.addEventListener('click', event => {
+        if (!group.contains(event.target)) setMenu(false);
+      });
+      group.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !submenu.hidden) {
+          setMenu(false); toggle.focus(); event.preventDefault();
+        }
+      });
+      group.addEventListener('focusout', event => {
+        if (!group.contains(event.relatedTarget)) setMenu(false);
+      });
+    </script>
 </body>
 </html>
