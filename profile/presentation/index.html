@@ -3,108 +3,232 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Presentation – Haonan LIU’s Personal Page</title>
+    <title>Presentations – Haonan Liu’s Personal Page</title>
     <meta
       name="description"
       content="Conference and symposium presentations by Haonan Liu and collaborators, organized by year."
     />
 
+    <link rel="canonical" href="https://h-ryu.com/profile/presentation/" />
+
     <!-- Self-contained theme (shared with Home/Tools) -->
     <style>
-      :root{
-        /* Core palette */
-        --bg:#f5f6fa;
-        --card:#ffffff;
-        --text:#20242a;
-        --muted:#5c6270;
-        --border:#e6e9ef;
-        --shadow:0 8px 24px rgba(23,31,56,.08);
-        --radius:16px;
-
-        --primary:#4a90e2;
-        --accent:#212a74;
-        --rose:#d81b60;
-        --grid:#eceef4;
-
-        /* Spacing scale */
-        --space:24px;
-        --space-sm:16px;
-        --container-y:24px;
-        --card-pad:24px;
-      }
-
-      *{box-sizing:border-box}
-      html,body{height:100%}
-      body{
-        margin:0;background:var(--bg);color:var(--text);
+      :root { --bg:#f5f6fa; --card:#fff; --text:#20242a; --muted:#5c6270;
+        --border:#e6e9ef; --shadow:0 8px 24px rgba(23,31,56,.08); --radius:16px;
+        --primary:#2468b4; --accent:#212a74; --space:24px; --container-y:24px; --card-pad:24px; }
+      * { box-sizing:border-box; }
+      html, body { min-height:100%; }
+      body { margin:0; background:var(--bg); color:var(--text);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-        line-height:1.65
+        line-height:1.7; }
+      a { color:var(--primary); text-decoration:none; }
+      a:hover { opacity:.9; }
+      main a:hover { text-decoration:underline; }
+      a:focus-visible, button:focus-visible { outline:3px solid var(--primary); outline-offset:4px; }
+      img { max-width:100%; display:block; }
+      .skip-link { position:fixed; top:8px; left:8px; z-index:100; padding:10px 16px;
+        background:white; transform:translateY(-160%); }
+      .skip-link:focus { transform:none; }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
       }
-      a{color:var(--primary);text-decoration:none}
-      a:hover{opacity:.9}
 
-      /* Header */
-      .site-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--border)}
-      .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-      .brand{display:flex;flex-direction:column}
-      .brand .title{font-weight:800;color:var(--accent);font-size:1.15rem;margin:0}
-      .brand .desc{color:var(--muted);font-size:.92rem}
-
-      .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;align-items:center}
-      .nav a{padding:8px 10px;border-radius:10px}
-      .nav a[aria-current="page"]{background:rgba(74,144,226,.12);color:var(--accent);font-weight:600}
-      .nav li{position:relative;padding-bottom:6px}
-
-      /* Accessible submenu */
-      .nav .submenu{
-        position:absolute;z-index:50;top:100%;left:0;margin-top:6px;
-        background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);
-        min-width:220px;padding:8px;opacity:0;visibility:hidden;transform:translateY(6px);
-        transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
-        transition-delay:.12s;pointer-events:none
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px;
       }
-      .nav li:hover .submenu,.nav li:focus-within .submenu{
-        opacity:1;visibility:visible;transform:translateY(0);transition-delay:0s;pointer-events:auto
+
+      .brand {
+        display: flex;
+        flex-direction: column;
       }
-      .nav li::after{content:"";position:absolute;left:0;right:0;height:8px;bottom:-8px}
-      .nav .submenu a{display:block;padding:8px 10px;border-radius:8px;white-space:nowrap}
-      .nav .submenu a:hover{background:#f3f6fb}
-      @media (prefers-reduced-motion: reduce){.nav .submenu{transition:none}}
 
-      /* Layout */
-      .container{max-width:1200px;margin:var(--container-y) auto;padding:0 20px}
-      .container>section+section{margin-top:var(--space)}
-
-      /* Cards & headings */
-      .card{
-        background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-        box-shadow:var(--shadow);padding:var(--card-pad)
+      .brand .title {
+        font-weight: 800;
+        color: var(--accent);
+        font-size: 1.15rem;
+        margin: 0;
       }
-      .section-title{margin:0 0 8px;font-weight:800;color:var(--accent)}
-      .lead{font-size:1.05rem}
-      .bullets{padding-left:1.1em;margin:0}
-      .bullets li{margin:8px 0}
-      .muted{color:var(--muted)}
-      mark.has-inline-color{color:#bc4166;background:transparent}
 
-      /* Year nav (local) */
-      .year-nav{display:flex;flex-wrap:wrap;gap:8px}
-      .year-nav a{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px}
-      .year{scroll-margin-top:90px}
-
-      /* Footer */
-      .site-footer{margin-top:var(--space);border-top:1px solid var(--border);background:#fff}
-      .footer-inner{
-        max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;
-        justify-content:space-between;gap:12px;flex-wrap:wrap
+      .brand .desc {
+        color: var(--muted);
+        font-size: 0.92rem;
       }
-      .footer-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap}
-      .copyright{color:var(--muted);font-size:.92rem}
 
-      /* Responsive */
-      @media (max-width:960px){
-        :root{--space:20px;--container-y:20px;--card-pad:20px}
+      .nav > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 18px;
+        align-items: center;
       }
+
+      .nav a {
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
+
+      .nav a[aria-current="page"] {
+        background: rgba(74, 144, 226, 0.12);
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .nav li {
+        position: relative;
+        padding-bottom: 6px;
+      }
+
+      .nav .submenu {
+        position: absolute;
+        z-index: 50;
+        top: 100%;
+        left: 0;
+        margin-top: 6px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        min-width: 220px;
+        padding: 8px;
+        list-style: none;
+
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(6px);
+        transition: opacity 0.25s ease, transform 0.25s ease,
+          visibility 0.25s ease;
+        transition-delay: 0.12s;
+        pointer-events: none;
+      }
+
+      .nav .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        position: static;
+      }
+      .js .nav .submenu { position: absolute; }
+      .nav .submenu[hidden] { display: none; }
+
+      .nav > ul > li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 8px;
+        bottom: -8px;
+      }
+
+      .nav .submenu li {
+        padding-bottom: 0;
+      }
+
+      .nav .submenu a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+
+      .nav .submenu a:hover {
+        background: #f3f6fb;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .nav .submenu {
+          transition: none;
+        }
+      }
+
+      .submenu-toggle {
+        display: none; align-items: center; justify-content: center;
+        vertical-align: middle; padding: 0; margin-left: -6px;
+        width: 32px; height: 44px; border: 0; border-radius: 8px;
+        background: transparent; color: var(--accent); cursor: pointer;
+      }
+      .submenu-toggle::before {
+        content: ""; width: 7px; height: 7px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+      }
+      .submenu-toggle[aria-expanded="true"]::before {
+        transform: translateY(2px) rotate(225deg);
+      }
+      .submenu-toggle:hover { background: rgba(74, 144, 226, 0.08); }
+      .js .submenu-toggle { display: inline-flex; }
+      @media (pointer: coarse) {
+        .submenu-toggle { width: 44px; }
+      }
+
+      .container { max-width:1200px; margin:var(--container-y) auto; padding:0 20px; }
+      .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:var(--card-pad); }
+      .site-footer { margin-top:var(--space); border-top:1px solid var(--border); background:#fff; }
+      .footer-inner { max-width:1200px; margin:0 auto; padding:14px 20px; display:flex;
+        align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+      .footer-nav ul { list-style:none; margin:0; padding:0; display:flex; gap:16px; flex-wrap:wrap; }
+      .copyright { color:var(--muted); font-size:.92rem; }
+      @media (max-width:960px) {
+        :root { --space:20px; --container-y:20px; --card-pad:20px; }
+        .header-inner { align-items:flex-start; flex-direction:column; gap:12px; }
+        .nav > ul { flex-wrap:wrap; gap:10px; }
+      }
+      @media (max-width:600px) {
+        :root { --space:18px; --container-y:18px; --card-pad:18px; }
+        .site-header { position:static; }
+        .header-inner { padding:14px 18px; }
+        .nav > ul { gap:4px; }
+        .js .nav .submenu { position:static; min-width:0; }
+        .container { padding:0 14px; }
+        main, .section-title[id] { scroll-margin-top:16px; }
+      }
+      @media (prefers-reduced-motion:reduce) { .nav .submenu { transition:none; } }
+    
+
+      .container > section + section { margin-top:var(--space); }
+      .section-title { margin:0 0 16px; color:var(--accent); font-weight:800; line-height:1.35; }
+      h1.section-title { font-size:1.9rem; }
+      h2.section-title { font-size:1.25rem; }
+      .bullets { margin:0; padding-left:1.2em; }
+      .bullets li { padding-left:4px; line-height:1.7; overflow-wrap:anywhere; }
+      .bullets li + li { margin-top:14px; }
+      .bullets li::marker { color:var(--primary); }
+      .nav a.section-active { background:rgba(74,144,226,.12); color:var(--accent); font-weight:600; }
+      #content { scroll-margin-top:130px; }
+      @media (max-width:600px) {
+        h1.section-title { font-size:1.6rem; }
+        #content { scroll-margin-top:16px; }
+      }
+
+    
+      .year-nav { display:flex; flex-wrap:wrap; gap:8px; }
+      .year-nav a { display:inline-block; padding:5px 12px; border:1px solid var(--border);
+        border-radius:999px; font-size:.94rem; }
+      .year-nav a:hover { background:#f0f4fb; }
+      .year { scroll-margin-top:140px; }
+      .presentations { margin:0; padding:0; list-style:none; }
+      .presentation + .presentation { border-top:1px solid var(--border); margin-top:20px; padding-top:20px; }
+      .presentation { min-width:0; overflow-wrap:anywhere; }
+      .presentation-title { margin:0 0 8px; font-size:1.04rem; line-height:1.65; font-weight:700; color:var(--text); }
+      .presentation-title[lang="ja"] { line-break:strict; }
+      .presentation-authors { margin:0 0 6px; color:var(--muted); font-size:.95rem; line-height:1.7; }
+      .presentation-author { color:#a63258; font-weight:600; }
+      .presentation-event { margin:0; color:var(--muted); font-size:.92rem; line-height:1.7; }
+      @media (max-width:600px) { .year { scroll-margin-top:16px; } }
+
     </style>
 
     <link
@@ -118,42 +242,34 @@
     />
   </head>
   <body>
+    <a class="skip-link" href="#content">Skip to main content</a>
     <!-- Header -->
     <header class="site-header">
       <div class="header-inner">
         <div class="brand">
-          <a class="title" href="/">Haonan LIU’s Personal Page</a>
+          <a class="title" href="/">Haonan Liu’s Personal Page</a>
           <div class="desc">
             Ph.D., Assistant Professor, Institute of Science Tokyo
           </div>
         </div>
-        <nav class="nav" aria-label="Main">
+
+        <nav class="nav" aria-label="Main navigation">
           <ul>
             <li><a href="/">Home</a></li>
             <li>
-              <a
-                href="/profile/"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="sub-profile"
-                >Profile</a
-              >
-              <div
-                id="sub-profile"
-                class="submenu"
-                role="menu"
-                aria-label="Profile submenu"
-              >
-                <a href="/profile/current_topic/">Current Topics</a>
-                <a href="/profile/publication/">Publication</a>
-                <a href="/profile/presentation/" aria-current="page"
-                  >Presentation</a
-                >
-                <a href="/profile/patent/">Patent</a>
-                <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf"
-                  >Chinese CV</a
-                >
-              </div>
+              <a href="/profile/" class="section-active">Profile</a>
+              <button class="submenu-toggle" type="button" aria-label="Toggle profile links" aria-expanded="true" aria-controls="profile-submenu"></button>
+              <ul class="submenu" id="profile-submenu">
+                <li><a href="/profile/current_topic/">Current Topics</a></li>
+                <li><a href="/profile/publication/">Publications</a></li>
+                <li><a href="/profile/presentation/" aria-current="page">Presentations</a></li>
+                <li><a href="/profile/patent/">Patents</a></li>
+                <li>
+                  <a href="/wp-content/uploads/2025/03/Chinese_CV.pdf">
+                    Chinese CV
+                  </a>
+                </li>
+              </ul>
             </li>
             <li><a href="/category/posts/">Posts</a></li>
             <li><a href="/links/">Links</a></li>
@@ -164,11 +280,11 @@
     </header>
 
     <!-- Main -->
-    <main class="container">
+    <main class="container" id="content" tabindex="-1">
       <!-- Page title & quick year jump -->
       <section class="card">
-        <h1 class="section-title">Presentation</h1>
-        <div class="year-nav">
+        <h1 class="section-title">Presentations</h1>
+        <nav class="year-nav" aria-label="Browse presentations by year">
           <a href="#y2025">2025</a>
           <a href="#y2024">2024</a>
           <a href="#y2023">2023</a>
@@ -177,290 +293,282 @@
           <a href="#y2020">2020</a>
           <a href="#y2019">2019</a>
           <a href="#y2018">2018</a>
-        </div>
+        </nav>
       </section>
 
       <!-- 2025 -->
       <section id="y2025" class="card year">
         <h2 class="section-title">2025</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              >含硫黄ポリイミドの高周波数帯 (20 GHz)
-              における光学・誘電物性</strong
-            ><br />
-            久保田大貴・津留崎義元・澤田梨々花・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">含硫黄ポリイミドの高周波数帯 (20 GHz)
+              における光学・誘電物性</h3>
+            <p class="presentation-authors">久保田大貴・津留崎義元・澤田梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学</p>
           </li>
 
-          <li>
-            <strong
-              >燐光性イミド化合物を用いた低温域の酸素透過性と高分子局所運動性の相関解析</strong
-            ><br />渡部 梨花・宋 雨薪・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・庄 永兵・安藤 慎治<br />第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">燐光性イミド化合物を用いた低温域の酸素透過性と高分子局所運動性の相関解析</h3>
+            <p class="presentation-authors">渡部 梨花・宋 雨薪・<span class="presentation-author">劉 浩男</span
+            >・庄 永兵・安藤 慎治</p>
+            <p class="presentation-event">第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学</p>
           </li>
 
-          <li>
-            <strong
-              >赤外分光分析による吸湿量および水和構造解析に基づくポリイミドの10
-              GHz帯誘電物性における湿度依存性の機構解明</strong
-            ><br />澤田 梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">赤外分光分析による吸湿量および水和構造解析に基づくポリイミドの10
+              GHz帯誘電物性における湿度依存性の機構解明</h3>
+            <p class="presentation-authors">澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学</p>
           </li>
 
-          <li>
-            <strong
-              >励起状態分子内プロトン移動能を有するチオール基含有イミド化合物の長波長蛍光特性</strong
-            ><br />太田 理久・安藤 悠花・渡部 梨花・榧木 啓人・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">励起状態分子内プロトン移動能を有するチオール基含有イミド化合物の長波長蛍光特性</h3>
+            <p class="presentation-authors">太田 理久・安藤 悠花・渡部 梨花・榧木 啓人・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学</p>
           </li>
 
-          <li>
-            <strong
-              >テラヘルツ分光を用いたポリイミドの1–10
-              THz帯吸収特性の解析</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark
-            >・澤田梨々花・保科 宏道・安藤 慎治<br />第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">テラヘルツ分光を用いたポリイミドの1–10
+              THz帯吸収特性の解析</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span
+            >・澤田梨々花・保科 宏道・安藤 慎治</p>
+            <p class="presentation-event">第33回日本ポリイミド・芳香族系高分子会議　10月25日　東邦大学</p>
           </li>
 
-          <li>
-            <strong
-              >赤外分光分析を用いた種々のポリイミドの吸湿量および水和構造の解析と10
-              GHzにおける誘電物性との相関</strong
-            ><br />澤田 梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第74回高分子討論会　9月16日〜18日　関西大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">赤外分光分析を用いた種々のポリイミドの吸湿量および水和構造の解析と10
+              GHzにおける誘電物性との相関</h3>
+            <p class="presentation-authors">澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第74回高分子討論会　9月16日〜18日　関西大学</p>
           </li>
 
-          <li>
-            <strong
-              >チアンスレン基を主鎖に有するイミド化合物およびポリイミドの高圧印加に伴う発光特性変化</strong
-            ><br />余 良康・山松 寛華・礒田 隆一・松田 萌実・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・東原 知哉・安藤 慎治<br />第74回高分子討論会　9月16日〜18日　関西大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">チアンスレン基を主鎖に有するイミド化合物およびポリイミドの高圧印加に伴う発光特性変化</h3>
+            <p class="presentation-authors">余 良康・山松 寛華・礒田 隆一・松田 萌実・<span class="presentation-author">劉 浩男</span
+            >・東原 知哉・安藤 慎治</p>
+            <p class="presentation-event">第74回高分子討論会　9月16日〜18日　関西大学</p>
           </li>
 
-          <li>
-            <strong
-              >二重発光性イミド化合物を用いた低温域における非晶性高分子の酸素拡散と高分子運動性との相関</strong
-            ><br />渡部 梨花・<mark class="has-inline-color">劉 浩男</mark
-            >・戸木田 雅利・安藤 慎治<br />第74回高分子討論会　9月16日〜18日　関西大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">二重発光性イミド化合物を用いた低温域における非晶性高分子の酸素拡散と高分子運動性との相関</h3>
+            <p class="presentation-authors">渡部 梨花・<span class="presentation-author">劉 浩男</span
+            >・戸木田 雅利・安藤 慎治</p>
+            <p class="presentation-event">第74回高分子討論会　9月16日〜18日　関西大学</p>
           </li>
 
-          <li>
-            <strong
-              >5G・6G移動体通信応用に向けたポリイミドの広帯域（10-330
-              GHz）誘電特性評価</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・澤田
-            梨々花・澤田 梨々花・津留崎 義元・柳本 舎那・柳本 吉之・安藤 慎治<br />第74回高分子討論会　9月16日〜18日　関西大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">5G・6G移動体通信応用に向けたポリイミドの広帯域（10-330
+              GHz）誘電特性評価</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・澤田
+            梨々花・澤田 梨々花・津留崎 義元・柳本 舎那・柳本 吉之・安藤 慎治</p>
+            <p class="presentation-event">第74回高分子討論会　9月16日〜18日　関西大学</p>
           </li>
 
-          <li>
-            <strong
-              >テラヘルツ分光法による各種ポリイミドの1-10
-              THz帯における吸収特性評価</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・澤田
-            梨々花・保科 宏道・安藤 慎治<br />第74回高分子討論会　9月16日〜18日　関西大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">テラヘルツ分光法による各種ポリイミドの1-10
+              THz帯における吸収特性評価</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・澤田
+            梨々花・保科 宏道・安藤 慎治</p>
+            <p class="presentation-event">第74回高分子討論会　9月16日〜18日　関西大学</p>
           </li>
 
-          <li>
-            <strong
-              >Polarization Analysis and Humidity/Water Absorption Dependence of
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Polarization Analysis and Humidity/Water Absorption Dependence of
               Dielectric Properties of Polyimides for 5G/6G
-              Communications</strong
-            ><br />Shinji Ando, Ririka Sawada, Yoshiyuki, Tsurusaki,
-            <mark class="has-inline-color">Haonan Liu</mark><br />12th World
+              Communications</h3>
+            <p class="presentation-authors">Shinji Ando, Ririka Sawada, Yoshiyuki, Tsurusaki,
+            <span class="presentation-author">Haonan Liu</span></p>
+            <p class="presentation-event">12th World
             Congress of Chemical Engineering (<a
               href="https://www.wcce12.com/index.html"
               target="_blank"
               rel="noreferrer noopener"
               >WCCE12</a
-            >), 13–18 July, China National Convention Center, Beijing, China
+            >), 13–18 July, China National Convention Center, Beijing, China</p>
           </li>
 
-          <li>
-            <strong
-              >Highly Fluorinated Polyimides Exhibiting Extremely Low Frequency
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Highly Fluorinated Polyimides Exhibiting Extremely Low Frequency
               and Humidity Dependence in High-Frequency Broadband (10~330 GHz)
-              Dielectric Properties</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Shinji Ando<br />12th World Congress of Chemical Engineering
+              Dielectric Properties</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Shinji Ando</p>
+            <p class="presentation-event">12th World Congress of Chemical Engineering
             (<a
               href="https://www.wcce12.com/index.html"
               target="_blank"
               rel="noreferrer noopener"
               >WCCE12</a
-            >), 13–18 July, China National Convention Center, Beijing, China
+            >), 13–18 July, China National Convention Center, Beijing, China</p>
           </li>
 
-          <li>
-            <strong
-              >Broadband (10–330 GHz) Dielectric Characterization of Polyimides
-              for High-Frequency Communication Applications</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Yoshiyuki Tsurusaki, Shinji Ando<br />2025 International
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Broadband (10–330 GHz) Dielectric Characterization of Polyimides
+              for High-Frequency Communication Applications</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Yoshiyuki Tsurusaki, Shinji Ando</p>
+            <p class="presentation-event">2025 International
             Polyimide Conference (<a
               href="https://2025polyimide.intseek.cn/"
               target="_blank"
               rel="noreferrer noopener"
               >IPIC2025</a
             >), 9–12 July, Shanghai Minhang Platinum Hanjue Hotel, Shanghai,
-            China
+            China</p>
           </li>
 
-          <li>
-            <strong
-              >Vibrational Spectroscopic Analysis on Relative Humidity and Water
-              Sorption Dependence of Dielectric Properties of Polyimides</strong
-            ><br />Ririka Sawada,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />2025
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Vibrational Spectroscopic Analysis on Relative Humidity and Water
+              Sorption Dependence of Dielectric Properties of Polyimides</h3>
+            <p class="presentation-authors">Ririka Sawada,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">2025
             International Polyimide Conference (<a
               href="https://2025polyimide.intseek.cn/"
               target="_blank"
               rel="noreferrer noopener"
               >IPIC2025</a
-            >), 9–12 July, Shanghai, China
+            >), 9–12 July, Shanghai, China</p>
           </li>
 
-          <li>
-            <strong
-              >Cryogenic Oxygen Diffusion in Amorphous Polymer Evaluated by the
-              Phosphorescence of Imide Compounds</strong
-            ><br />Rika Watanabe,
-            <mark class="has-inline-color">Haonan Liu</mark>, Masatoshi Tokita,
-            Shinji Ando<br />2025 International Polyimide Conference (<a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Cryogenic Oxygen Diffusion in Amorphous Polymer Evaluated by the
+              Phosphorescence of Imide Compounds</h3>
+            <p class="presentation-authors">Rika Watanabe,
+            <span class="presentation-author">Haonan Liu</span>, Masatoshi Tokita,
+            Shinji Ando</p>
+            <p class="presentation-event">2025 International Polyimide Conference (<a
               href="https://2025polyimide.intseek.cn/"
               target="_blank"
               rel="noreferrer noopener"
               >IPIC2025</a
-            >), 9–12 July, Shanghai, China
+            >), 9–12 July, Shanghai, China</p>
           </li>
 
-          <li>
-            <strong
-              >Optical and Dielectric Properties at High-Frequency (20GHz) of
-              Sulfur-Containing Polyimides</strong
-            ><br />Daiki Kubota, Yoshiyuki Tsurusaki, Ririka Sawada,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />2025
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Optical and Dielectric Properties at High-Frequency (20GHz) of
+              Sulfur-Containing Polyimides</h3>
+            <p class="presentation-authors">Daiki Kubota, Yoshiyuki Tsurusaki, Ririka Sawada,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">2025
             International Polyimide Conference (<a
               href="https://2025polyimide.intseek.cn/"
               target="_blank"
               rel="noreferrer noopener"
               >IPIC2025</a
-            >), 9–12 July, Shanghai, China
+            >), 9–12 July, Shanghai, China</p>
           </li>
 
-          <li>
-            <strong
-              >Long-Wavelength Fluorescence Properties of Thiol-containing Imide
-              Compound via Excited-State Intramolecular Proton Transfer</strong
-            ><br />Riku Ota, Yuka Ando, Rika Watanabe,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />2025
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Long-Wavelength Fluorescence Properties of Thiol-containing Imide
+              Compound via Excited-State Intramolecular Proton Transfer</h3>
+            <p class="presentation-authors">Riku Ota, Yuka Ando, Rika Watanabe,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">2025
             International Polyimide Conference (<a
               href="https://2025polyimide.intseek.cn/"
               target="_blank"
               rel="noreferrer noopener"
               >IPIC2025</a
-            >), 9–12 July, Shanghai, China
+            >), 9–12 July, Shanghai, China</p>
           </li>
 
-          <li>
-            <strong
-              >Anisotropic Polarization Analysis and Humidity Dependence of
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Anisotropic Polarization Analysis and Humidity Dependence of
               Dielectric Properties of Polyimides for 5G/6G Wireless
-              Applications</strong
-            ><br />Shinji Ando, Ririka Sawada,
-            <mark class="has-inline-color">Haonan Liu</mark><br />19th
+              Applications</h3>
+            <p class="presentation-authors">Shinji Ando, Ririka Sawada,
+            <span class="presentation-author">Haonan Liu</span></p>
+            <p class="presentation-event">19th
             International Symposium on Advanced Organic Photonics (<a
               href="https://isaop.sciencesconf.org/"
               target="_blank"
               rel="noreferrer noopener"
               >ISAOP-25</a
-            >), 21–22 May, El Jadida, Morocco
+            >), 21–22 May, El Jadida, Morocco</p>
           </li>
 
-          <li>
-            <strong
-              >高周波広帯域 (10~330GHz)
-              の誘電特性で極めて低い周波数依存性と湿度依存性を示す高フッ素化ポリイミド</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・澤田
-            梨々花・柳本 舎那・柳本 吉之・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">高周波広帯域 (10~330GHz)
+              の誘電特性で極めて低い周波数依存性と湿度依存性を示す高フッ素化ポリイミド</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・澤田
+            梨々花・柳本 舎那・柳本 吉之・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://www.spsj.or.jp/nenkai/"
               target="_blank"
               rel="noreferrer noopener"
               >第74回高分子学会年次大会</a
-            >　5月19日〜23日　オンライン
+            >　5月19日〜23日　オンライン</p>
           </li>
 
-          <li>
-            <strong
-              >赤外分光分析を用いたポリイミドの吸湿挙動解析によるGHz帯誘電物性と吸湿および分子運動性との相関解析</strong
-            ><br />澤田 梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">赤外分光分析を用いたポリイミドの吸湿挙動解析によるGHz帯誘電物性と吸湿および分子運動性との相関解析</h3>
+            <p class="presentation-authors">澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://www.spsj.or.jp/nenkai/"
               target="_blank"
               rel="noreferrer noopener"
               >第74回高分子学会年次大会</a
-            >　5月19日〜23日　オンライン
+            >　5月19日〜23日　オンライン</p>
           </li>
 
-          <li>
-            <strong
-              >イミド化合物の燐光発光を用いた低温域における高分子膜中の酸素拡散の検出</strong
-            ><br />渡部 梨花・土井 真里奈・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・戸木田 雅利・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">イミド化合物の燐光発光を用いた低温域における高分子膜中の酸素拡散の検出</h3>
+            <p class="presentation-authors">渡部 梨花・土井 真里奈・<span class="presentation-author">劉 浩男</span
+            >・戸木田 雅利・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://www.spsj.or.jp/nenkai/"
               target="_blank"
               rel="noreferrer noopener"
               >第74回高分子学会年次大会</a
-            >　5月19日〜23日　オンライン
+            >　5月19日〜23日　オンライン</p>
           </li>
 
-          <li>
-            <strong
-              >High-Frequency Broadband (10~330 Ghz) Dielectric Properties of
-              Polyimides Applicable to 5G/6G Wireless Communications</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Shinji Ando<br />APME2025 (<a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">High-Frequency Broadband (10~330 Ghz) Dielectric Properties of
+              Polyimides Applicable to 5G/6G Wireless Communications</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Shinji Ando</p>
+            <p class="presentation-event">APME2025 (<a
               href="https://www.apme2025.com/"
               target="_blank"
               rel="noreferrer noopener"
               >APME2025</a
-            >), 4–8 May, Catania, Italy
+            >), 4–8 May, Catania, Italy</p>
           </li>
 
-          <li>
-            <strong
-              >Elucidating the Mechanism of Water Sorption Dependence in
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Elucidating the Mechanism of Water Sorption Dependence in
               Dielectric Properties at GHz Region of Polyimides by
               Quantification and Analysis of Water Sorption and Its Behavior
-              Using Infrared Spectroscopy</strong
-            ><br />Ririka Sawada,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />APME2025,
-            4–8 May, Catania, Italy
+              Using Infrared Spectroscopy</h3>
+            <p class="presentation-authors">Ririka Sawada,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">APME2025,
+            4–8 May, Catania, Italy</p>
           </li>
 
-          <li>
-            <strong
-              >Photophysical Properties of Thianthrene-Containing Polyimides
-              under High Pressure up to 8 GPa</strong
-            ><br />Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda, Megumi
-            Matsuda, <mark class="has-inline-color">Haonan Liu</mark>, Tomoya
-            Higashihara, Shinji Ando<br />APME2025, 4–8 May, Catania, Italy
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Photophysical Properties of Thianthrene-Containing Polyimides
+              under High Pressure up to 8 GPa</h3>
+            <p class="presentation-authors">Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda, Megumi
+            Matsuda, <span class="presentation-author">Haonan Liu</span>, Tomoya
+            Higashihara, Shinji Ando</p>
+            <p class="presentation-event">APME2025, 4–8 May, Catania, Italy</p>
           </li>
 
-          <li>
-            <strong
-              >Evaluation Of Oxygen Permeability in Amorphous Polymers by
-              Phosphorescent Imide Compounds at Low Temperatures</strong
-            ><br />Rika Watanabe, Marina Doi,
-            <mark class="has-inline-color">Haonan Liu</mark>, Masatoshi Tokita,
-            Shinji Ando<br />APME2025, 4–8 May, Catania, Italy
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Evaluation Of Oxygen Permeability in Amorphous Polymers by
+              Phosphorescent Imide Compounds at Low Temperatures</h3>
+            <p class="presentation-authors">Rika Watanabe, Marina Doi,
+            <span class="presentation-author">Haonan Liu</span>, Masatoshi Tokita,
+            Shinji Ando</p>
+            <p class="presentation-event">APME2025, 4–8 May, Catania, Italy</p>
           </li>
         </ul>
       </section>
@@ -468,350 +576,335 @@
       <!-- 2024 -->
       <section id="y2024" class="card year">
         <h2 class="section-title">2024</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              >高誘電率・低誘電正接を示す含硫黄ポリイミドの高周波（20
-              GHz）誘電特性</strong
-            ><br />津留崎 義元・澤田 梨々花・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br /><a
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">高誘電率・低誘電正接を示す含硫黄ポリイミドの高周波（20
+              GHz）誘電特性</h3>
+            <p class="presentation-authors">津留崎 義元・澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://www.fiber.or.jp/jpn/events/2024/autumn/index.html"
               target="_blank"
               rel="noreferrer noopener"
               >2024年繊維学会秋季研究発表会</a
-            >　11月28日〜29日　京都テルサ
+            >　11月28日〜29日　京都テルサ</p>
           </li>
 
-          <li>
-            <strong
-              >Enhancing optical and dielectric properties of isosorbide-based
-              polyimides by introducing low-<em>M</em><sub>w</sub> PEG</strong
-            ><br />Yoshiyuki Tsurusaki, Ririka Sawada,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />International
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Enhancing optical and dielectric properties of isosorbide-based
+              polyimides by introducing low-<em>M</em><sub>w</sub> PEG</h3>
+            <p class="presentation-authors">Yoshiyuki Tsurusaki, Ririka Sawada,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">International
             Symposium on Fiber Science and Technology 2024 (<a
               href="https://www.primatours.co.jp/isf2024/"
               target="_blank"
               rel="noreferrer noopener"
               >ISF-2024</a
-            >), 25–29 Nov., Kyoto, Japan
+            >), 25–29 Nov., Kyoto, Japan</p>
           </li>
 
-          <li>
-            <strong
-              >ミリ波帯域（25～330 GHz）における各種ポリイミドの誘電特性</strong
-            ><br />劉 浩男・澤田 梨々花・柳本 舎那・柳本 吉之・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">ミリ波帯域（25～330 GHz）における各種ポリイミドの誘電特性</h3>
+            <p class="presentation-authors">劉 浩男・澤田 梨々花・柳本 舎那・柳本 吉之・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="http://www.ando-cap.mac.titech.ac.jp/PIC-2023/index.html"
               target="_blank"
               rel="noreferrer noopener"
               >第32回日本ポリイミド・芳香族系高分子会議</a
-            >　11月8日　亀の井ホテル田沢湖
+            >　11月8日　亀の井ホテル田沢湖</p>
           </li>
 
-          <li>
-            <strong
-              >チアンスレン含有イミド化合物およびポリイミドの高圧下における光物性</strong
-            ><br />余 良康・山松 寛華・松田 萌実・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・東原 知哉・安藤 慎治<br />第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">チアンスレン含有イミド化合物およびポリイミドの高圧下における光物性</h3>
+            <p class="presentation-authors">余 良康・山松 寛華・松田 萌実・<span class="presentation-author">劉 浩男</span
+            >・東原 知哉・安藤 慎治</p>
+            <p class="presentation-event">第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖</p>
           </li>
 
-          <li>
-            <strong
-              >高誘電率・低誘電正接を示す含硫黄ポリイミドの高周波（20
-              GHz）誘電特性</strong
-            ><br />津留崎 義元・澤田 梨々花・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">高誘電率・低誘電正接を示す含硫黄ポリイミドの高周波（20
+              GHz）誘電特性</h3>
+            <p class="presentation-authors">津留崎 義元・澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖</p>
           </li>
 
-          <li>
-            <strong
-              >励起状態分子内プロトン移動を介したチオール基含有イミド化合物の長波長蛍光特性</strong
-            ><br />安藤 悠花・土井 真里奈・田淵 敦子・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">励起状態分子内プロトン移動を介したチオール基含有イミド化合物の長波長蛍光特性</h3>
+            <p class="presentation-authors">安藤 悠花・土井 真里奈・田淵 敦子・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖</p>
           </li>
 
-          <li>
-            <strong
-              >発光性ポリイミドの紫外光照射誘起遅延発光の発現と酸素透過性との相関</strong
-            ><br />土井 真里奈・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">発光性ポリイミドの紫外光照射誘起遅延発光の発現と酸素透過性との相関</h3>
+            <p class="presentation-authors">土井 真里奈・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖</p>
           </li>
 
-          <li>
-            <strong
-              >ポリイミドのGHz
-              帯誘電物性と赤外分光分析により評価した吸湿量および水分吸着挙動との相関解明</strong
-            ><br />澤田梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">ポリイミドのGHz
+              帯誘電物性と赤外分光分析により評価した吸湿量および水分吸着挙動との相関解明</h3>
+            <p class="presentation-authors">澤田梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第32回日本ポリイミド・芳香族系高分子会議　11月8日　亀の井ホテル田沢湖</p>
           </li>
 
-          <li>
-            <strong
-              >Correlation Analysis of the Structure and Dielectric Properties
-              of Polyimides in the Millimeter Wave Band (30~300 GHz)</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Correlation Analysis of the Structure and Dielectric Properties
+              of Polyimides in the Millimeter Wave Band (30~300 GHz)</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando</p>
+            <p class="presentation-event"><a
               href="https://main.spsj.or.jp/tohron/73tohron/"
               target="_blank"
               rel="noreferrer noopener"
               >第73回高分子討論会</a
-            >　9月25日〜27日　新潟大学
+            >　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >分子動力学シミュレーションを用いたポリイミドの分子構造と高周波誘電特性の相関解析</strong
-            ><br />細谷 亮平・<mark class="has-inline-color">劉 浩男</mark
-            >・澤田 梨々花・安藤 慎治・古屋 秀峰<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">分子動力学シミュレーションを用いたポリイミドの分子構造と高周波誘電特性の相関解析</h3>
+            <p class="presentation-authors">細谷 亮平・<span class="presentation-author">劉 浩男</span
+            >・澤田 梨々花・安藤 慎治・古屋 秀峰</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >励起状態プロトン移動性の長波長蛍光を示すチオール基含有イミド化合物の分子設計と光学特性</strong
-            ><br />安藤 悠花・土井 真里奈・田淵 敦子・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">励起状態プロトン移動性の長波長蛍光を示すチオール基含有イミド化合物の分子設計と光学特性</h3>
+            <p class="presentation-authors">安藤 悠花・土井 真里奈・田淵 敦子・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >種々の非晶性高分子母材中に分散させた二重発光性イミド化合物の光学特性の解析</strong
-            ><br />渡部 梨花・土井 真里奈・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">種々の非晶性高分子母材中に分散させた二重発光性イミド化合物の光学特性の解析</h3>
+            <p class="presentation-authors">渡部 梨花・土井 真里奈・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >励起状態プロトン移動蛍光を示すチオール基含有クランク型ナフタルイミド化合物の合成と光学特性</strong
-            ><br />福田 夏櫻・安藤 悠花・土井 真里奈・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">励起状態プロトン移動蛍光を示すチオール基含有クランク型ナフタルイミド化合物の合成と光学特性</h3>
+            <p class="presentation-authors">福田 夏櫻・安藤 悠花・土井 真里奈・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >バイオベースポリイミドへの低分子量PEG
-              添加による光学・誘電特性の改善効果</strong
-            ><br />津留崎 義元・澤田 梨々花・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">バイオベースポリイミドへの低分子量PEG
+              添加による光学・誘電特性の改善効果</h3>
+            <p class="presentation-authors">津留崎 義元・澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >赤外分光分析を用いた吸湿の定量化と吸着挙動解析によるポリイミドのGHz
-              帯誘電物性における吸湿量依存性の機構解明</strong
-            ><br />澤田梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">赤外分光分析を用いた吸湿の定量化と吸着挙動解析によるポリイミドのGHz
+              帯誘電物性における吸湿量依存性の機構解明</h3>
+            <p class="presentation-authors">澤田梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >発光性ポリイミドにおける紫外光照射誘起遅延発光の発現と機構解明</strong
-            ><br />土井 真里奈・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第73回高分子討論会　9月25日〜27日　新潟大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">発光性ポリイミドにおける紫外光照射誘起遅延発光の発現と機構解明</h3>
+            <p class="presentation-authors">土井 真里奈・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >Pressure-induced Conformational Changes and Photophysical
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Pressure-induced Conformational Changes and Photophysical
               Properties of Thianthrene-Containing Imide Compounds and
-              Polyimides</strong
-            ><br />Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />第73回高分子討論会　9月25日〜27日　新潟大学
+              Polyimides</h3>
+            <p class="presentation-authors">Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">第73回高分子討論会　9月25日〜27日　新潟大学</p>
           </li>
 
-          <li>
-            <strong
-              >Dielectric Properties of Various Polyimides in the mmWave
-              Range</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Dielectric Properties of Various Polyimides in the mmWave
+              Range</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando</p>
+            <p class="presentation-event"><a
               href="https://polycond-2024.sciencesconf.org/"
               target="_blank"
               rel="noreferrer noopener"
               >Polycondensation 2024</a
-            >, 15–18 Sept., Lyon, France
+            >, 15–18 Sept., Lyon, France</p>
           </li>
 
-          <li>
-            <strong
-              >Polarization Analysis and Humidity Dependence of Dielectric
-              Properties of Aromatic/Semi-Aromatic Polyimides at 10 GHz</strong
-            ><br />Ririka Sawada,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />Polycondensation
-            2024, Lyon, France
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Polarization Analysis and Humidity Dependence of Dielectric
+              Properties of Aromatic/Semi-Aromatic Polyimides at 10 GHz</h3>
+            <p class="presentation-authors">Ririka Sawada,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">Polycondensation
+            2024, Lyon, France</p>
           </li>
 
-          <li>
-            <strong
-              >Optical Properties of Thiol-Containing Imide Compound via Excited
-              State Intramolecular Proton Transfer</strong
-            ><br />Yuka Ando, Marina Doi, Atsuko Tabuchi,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />Polycondensation
-            2024, Lyon, France
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Optical Properties of Thiol-Containing Imide Compound via Excited
+              State Intramolecular Proton Transfer</h3>
+            <p class="presentation-authors">Yuka Ando, Marina Doi, Atsuko Tabuchi,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">Polycondensation
+            2024, Lyon, France</p>
           </li>
 
-          <li>
-            <strong
-              >Photophysical Mechanism of Prolonged Irradiation-induced Delayed
-              Luminescence Observed for Luminescent Polyimides</strong
-            ><br />Marina Doi, <mark class="has-inline-color">Haonan Liu</mark>,
-            Shinji Ando<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Photophysical Mechanism of Prolonged Irradiation-induced Delayed
+              Luminescence Observed for Luminescent Polyimides</h3>
+            <p class="presentation-authors">Marina Doi, <span class="presentation-author">Haonan Liu</span>,
+            Shinji Ando</p>
+            <p class="presentation-event"><a
               href="https://photochemistry.jp/2024/gaiyou.html"
               target="_blank"
               rel="noreferrer noopener"
               >2024年光化学討論会</a
-            >　9月3日〜5日　九州大学
+            >　9月3日〜5日　九州大学</p>
           </li>
 
-          <li>
-            <strong
-              >Diffusion Behavior of Gas Molecules Monitored by the
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Diffusion Behavior of Gas Molecules Monitored by the
               Phosphorescence Processes of Imide Compound Dispersed in Polymer
-              Matrix at Lower Temperatures</strong
-            ><br />Marina Doi, <mark class="has-inline-color">Haonan Liu</mark>,
-            Shinji Ando<br />IPS-24 / ICARP2024 (<a
+              Matrix at Lower Temperatures</h3>
+            <p class="presentation-authors">Marina Doi, <span class="presentation-author">Haonan Liu</span>,
+            Shinji Ando</p>
+            <p class="presentation-event">IPS-24 / ICARP2024 (<a
               href="https://ips24.jp/"
               target="_blank"
               rel="noreferrer noopener"
               >IPS-24 / ICARP2024</a
-            >), 28 July – 2 Aug., Hiroshima, Japan
+            >), 28 July – 2 Aug., Hiroshima, Japan</p>
           </li>
 
-          <li>
-            <strong
-              >高周波域（10, 25～330
-              GHz）における芳香族ポリイミドの誘電特性</strong
-            ><br />安藤 慎治・澤田 梨々花・<mark class="has-inline-color"
-              >劉 浩男</mark
-            ><br />高分子学会フォトニクスポリマー研究会　6月26日　慶應義塾大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">高周波域（10, 25～330
+              GHz）における芳香族ポリイミドの誘電特性</h3>
+            <p class="presentation-authors">安藤 慎治・澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            ></p>
+            <p class="presentation-event">高分子学会フォトニクスポリマー研究会　6月26日　慶應義塾大学</p>
           </li>
 
-          <li>
-            <strong
-              >イソソルビド骨格と長鎖アルキル基を主鎖に有するバイオベースポリイミドの熱・光学・誘電物性</strong
-            ><br />澤田 梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・矢島 和尚・高雄 惇英・安藤 慎治<br />ICPST-41 (<a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">イソソルビド骨格と長鎖アルキル基を主鎖に有するバイオベースポリイミドの熱・光学・誘電物性</h3>
+            <p class="presentation-authors">澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・矢島 和尚・高雄 惇英・安藤 慎治</p>
+            <p class="presentation-event">ICPST-41 (<a
               href="https://www.spst-photopolymer.org/japanese-top-%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%9A%E3%83%BC%E3%82%B8/"
               target="_blank"
               rel="noreferrer noopener"
               >ICPST-41</a
-            >)　6月25日〜28日　幕張メッセ
+            >)　6月25日〜28日　幕張メッセ</p>
           </li>
 
-          <li>
-            <strong
-              >Dielectric Dispersion of Polyimides in the Millimeter Wave
-              Frequency (25–330 GHz) Range</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando<br />IPIC2024
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Dielectric Dispersion of Polyimides in the Millimeter Wave
+              Frequency (25–330 GHz) Range</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando</p>
+            <p class="presentation-event">IPIC2024
             (<a
               href="http://polyimide2024.cpsjournals.cn/"
               target="_blank"
               rel="noreferrer noopener"
               >IPIC2024</a
-            >), 18–21 June, Beijing, China
+            >), 18–21 June, Beijing, China</p>
           </li>
 
-          <li>
-            <strong
-              >Photophysical Properties of Thianthrene-Containing Imide
-              Compounds and Polyimides under High Pressure up to 8 GPa</strong
-            ><br />Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />IPIC2024,
-            18–21 June, Beijing, China
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Photophysical Properties of Thianthrene-Containing Imide
+              Compounds and Polyimides under High Pressure up to 8 GPa</h3>
+            <p class="presentation-authors">Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">IPIC2024,
+            18–21 June, Beijing, China</p>
           </li>
 
-          <li>
-            <strong
-              >Detection of Local Relaxation Motion of Amorphous Polymers using
-              Phosphorescence Properties of Imide Compounds</strong
-            ><br />Rika Wataneba, Marina Doi,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />IPIC2024,
-            18–21 June, Beijing, China
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Detection of Local Relaxation Motion of Amorphous Polymers using
+              Phosphorescence Properties of Imide Compounds</h3>
+            <p class="presentation-authors">Rika Wataneba, Marina Doi,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">IPIC2024,
+            18–21 June, Beijing, China</p>
           </li>
 
-          <li>
-            <strong
-              >イミド化合物分散薄膜における低温域での気体分子の拡散挙動と燐光発光過程</strong
-            ><br />土井 真里奈・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">イミド化合物分散薄膜における低温域での気体分子の拡散挙動と燐光発光過程</h3>
+            <p class="presentation-authors">土井 真里奈・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://sites.google.com/view/photochem-wakate2024"
               target="_blank"
               rel="noreferrer noopener"
               >第45回 光化学若手の会</a
-            >　6月14日〜16日
+            >　6月14日〜16日</p>
           </li>
 
-          <li>
-            <strong
-              >チオール基含有化合物へのイミド基導入による励起状態分子内プロトン移動特性変化</strong
-            ><br />安藤 悠花・土井 真里奈・田淵 敦子・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第45回 光化学若手の会　6月14日〜16日
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">チオール基含有化合物へのイミド基導入による励起状態分子内プロトン移動特性変化</h3>
+            <p class="presentation-authors">安藤 悠花・土井 真里奈・田淵 敦子・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第45回 光化学若手の会　6月14日〜16日</p>
           </li>
 
-          <li>
-            <strong
-              >Correlation between the Molecular Structures and
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Correlation between the Molecular Structures and
               Frequency-Dependent Dielectric Properties of Aromatic Polyimides
-              in the 25–330 GHz Range</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Ririka
-            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando<br /><a
+              in the 25–330 GHz Range</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Ririka
+            Sawada, Shana Yanagimoto, Yoshiyuki Yanagimoto, Shinji Ando</p>
+            <p class="presentation-event"><a
               href="https://main.spsj.or.jp/nenkai/73nenkai/"
               target="_blank"
               rel="noreferrer noopener"
               >第73回 高分子学会年次大会</a
-            >　6月5日〜7日　仙台
+            >　6月5日〜7日　仙台</p>
           </li>
 
-          <li>
-            <strong
-              >バイオベースポリイミド群における GHz
-              帯誘電物性の湿度依存性と赤外分光分析を用いた吸湿性の定量評価</strong
-            ><br />澤田 梨々花・<mark class="has-inline-color">劉 浩男</mark
-            >・安藤 慎治<br />第73回 高分子学会年次大会　6月5日〜7日　仙台
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">バイオベースポリイミド群における GHz
+              帯誘電物性の湿度依存性と赤外分光分析を用いた吸湿性の定量評価</h3>
+            <p class="presentation-authors">澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回 高分子学会年次大会　6月5日〜7日　仙台</p>
           </li>
 
-          <li>
-            <strong
-              >イソソルビド骨格を有するバイオベースポリイミドの諸物性への PEG
-              添加効果</strong
-            ><br />津留崎 義元・澤田 梨々花・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第73回 高分子学会年次大会　6月5日〜7日　仙台
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">イソソルビド骨格を有するバイオベースポリイミドの諸物性への PEG
+              添加効果</h3>
+            <p class="presentation-authors">津留崎 義元・澤田 梨々花・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第73回 高分子学会年次大会　6月5日〜7日　仙台</p>
           </li>
 
-          <li>
-            <strong
-              >Correlation between the Photophysical Properties and Structural
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Correlation between the Photophysical Properties and Structural
               Changes of Thianthrene-Containing Imide Compound and Polyimide
-              Generated by High Pressure</strong
-            ><br />Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda,
-            <mark class="has-inline-color">Haonan Liu</mark>, Shinji Ando<br />第73回
-            高分子学会年次大会　6月5日〜7日　仙台
+              Generated by High Pressure</h3>
+            <p class="presentation-authors">Liangkang Yu, Hiroka Yamamatsu, Ryuichi Isoda,
+            <span class="presentation-author">Haonan Liu</span>, Shinji Ando</p>
+            <p class="presentation-event">第73回
+            高分子学会年次大会　6月5日〜7日　仙台</p>
           </li>
 
-          <li>
-            <strong
-              >25–330 GHz
-              における各種ポリイミドの誘電分散と双極子・電子分極との関係</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・澤田
-            梨々花・柳本 舎那・柳本 吉之・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">25–330 GHz
+              における各種ポリイミドの誘電分散と双極子・電子分極との関係</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・澤田
+            梨々花・柳本 舎那・柳本 吉之・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://meeting.jsap.or.jp/jsap2024s/"
               target="_blank"
               rel="noreferrer noopener"
               >第71回 応用物理学会 春季学術講演会</a
-            >　3月22日〜25日　東京都市大学
+            >　3月22日〜25日　東京都市大学</p>
           </li>
         </ul>
       </section>
@@ -819,90 +912,86 @@
       <!-- 2023 -->
       <section id="y2023" class="card year">
         <h2 class="section-title">2023</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              >Multi-colored Fluorescence Properties of Thiol-Containing Imide
-              Compounds via Excited State Intramolecular Proton Transfer</strong
-            ><br />Yuka Ando, Marina Doi, Atsuko Tabuchi,
-            <mark class="has-inline-color">Haonan Liu</mark>, and Shinji Ando<br />GPS-K
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Multi-colored Fluorescence Properties of Thiol-Containing Imide
+              Compounds via Excited State Intramolecular Proton Transfer</h3>
+            <p class="presentation-authors">Yuka Ando, Marina Doi, Atsuko Tabuchi,
+            <span class="presentation-author">Haonan Liu</span>, and Shinji Ando</p>
+            <p class="presentation-event">GPS-K
             2023 (<a
               href="https://sites.google.com/view/gps-k2023/"
               target="_blank"
               rel="noreferrer noopener"
               >GPS-K 2023</a
-            >), 25 Nov., Online
+            >), 25 Nov., Online</p>
           </li>
 
-          <li>
-            <strong
-              >励起状態分子内プロトン移動を介したチオール基含有イミド化合物の多色発光特性</strong
-            ><br />安藤 悠花・土井 真里奈・田淵 敦子・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br />第31回
-            日本ポリイミド・芳香族系高分子会議　11月18日　東京工業大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">励起状態分子内プロトン移動を介したチオール基含有イミド化合物の多色発光特性</h3>
+            <p class="presentation-authors">安藤 悠花・土井 真里奈・田淵 敦子・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event">第31回
+            日本ポリイミド・芳香族系高分子会議　11月18日　東京工業大学</p>
           </li>
 
-          <li>
-            <strong
-              >Changes in Stereo-structures and Optical Properties of
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Changes in Stereo-structures and Optical Properties of
               Thianthrene-containing Imide and Polyimide Induced by
-              Photoexcitation and High Pressure</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Hiroka
+              Photoexcitation and High Pressure</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Hiroka
             Yamamatsu, Ryuichi Isoda, Megumi Matsuda, Naoki Matsuda, Tomoya
-            Higashihara, and Shinji Ando<br />第72回
-            高分子討論会　9月26日〜28日　香川大学
+            Higashihara, and Shinji Ando</p>
+            <p class="presentation-event">第72回
+            高分子討論会　9月26日〜28日　香川大学</p>
           </li>
 
-          <li>
-            <strong
-              >スチレン系熱可塑性エラストマーのAFMナノメカニクス：射出成形と圧縮成形の比較</strong
-            ><br />伊藤 万喜子・<mark class="has-inline-color">劉 浩男</mark
-            >・梁 暁斌・中嶋 健<br />第72回
-            高分子討論会　9月26日〜28日　香川大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">スチレン系熱可塑性エラストマーのAFMナノメカニクス：射出成形と圧縮成形の比較</h3>
+            <p class="presentation-authors">伊藤 万喜子・<span class="presentation-author">劉 浩男</span
+            >・梁 暁斌・中嶋 健</p>
+            <p class="presentation-event">第72回
+            高分子討論会　9月26日〜28日　香川大学</p>
           </li>
 
-          <li>
-            <strong
-              >励起状態分子内プロトン移動を介したチオール基含有イミド化合物の発光挙動の解明</strong
-            ><br />安藤 悠花・土井 真里奈・田淵 敦子・<mark
-              class="has-inline-color"
-              >劉 浩男</mark
-            >・安藤 慎治<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">励起状態分子内プロトン移動を介したチオール基含有イミド化合物の発光挙動の解明</h3>
+            <p class="presentation-authors">安藤 悠花・土井 真里奈・田淵 敦子・<span class="presentation-author">劉 浩男</span
+            >・安藤 慎治</p>
+            <p class="presentation-event"><a
               href="https://photochemistry.jp/2023/"
               target="_blank"
               rel="noreferrer noopener"
               >2023年 光化学討論会</a
-            >　9月5日～7日　広島国際会議場
+            >　9月5日～7日　広島国際会議場</p>
           </li>
 
-          <li>
-            <strong
-              >AFM Nanomechanics of Injection Molded Styrenic Thermoplastic
-              Elastomers</strong
-            ><br />Makiko Ito, Airi Sato,
-            <mark class="has-inline-color">Haonan Liu</mark>, Xiaobin Liang, and
-            Ken Nakajima<br />IPC2023 (<a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">AFM Nanomechanics of Injection Molded Styrenic Thermoplastic
+              Elastomers</h3>
+            <p class="presentation-authors">Makiko Ito, Airi Sato,
+            <span class="presentation-author">Haonan Liu</span>, Xiaobin Liang, and
+            Ken Nakajima</p>
+            <p class="presentation-event">IPC2023 (<a
               href="https://main.spsj.or.jp/ipc/2023/"
               target="_blank"
               rel="noreferrer noopener"
               >IPC2023</a
-            >), 18–21 July, Sapporo, Japan
+            >), 18–21 July, Sapporo, Japan</p>
           </li>
 
-          <li>
-            <strong
-              >AFM elucidates nanomechanical mapping of NR film containing
-              various non-rubber</strong
-            ><br />Narueporn Payungwong,
-            <mark class="has-inline-color">Haonan Liu</mark>, Xiaobin Liang, Ken
-            Nakajima, and Jitladda Sakdapipanich<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">AFM elucidates nanomechanical mapping of NR film containing
+              various non-rubber</h3>
+            <p class="presentation-authors">Narueporn Payungwong,
+            <span class="presentation-author">Haonan Liu</span>, Xiaobin Liang, Ken
+            Nakajima, and Jitladda Sakdapipanich</p>
+            <p class="presentation-event"><a
               href="https://www.srij.or.jp/annual2023/"
               target="_blank"
               rel="noreferrer noopener"
               >日本ゴム協会 2023年年次大会</a
-            >　5月30日~31日　兵庫県民会館
+            >　5月30日~31日　兵庫県民会館</p>
           </li>
         </ul>
       </section>
@@ -910,38 +999,38 @@
       <!-- 2022 -->
       <section id="y2022" class="card year">
         <h2 class="section-title">2022</h2>
-        <ul class="bullets">
-          <li>
-            <strong>AFM-Based Nanomechanics on Thermoplastic Elastomer</strong
-            ><br />Ken Nakajima,
-            <mark class="has-inline-color">Haonan Liu</mark>, and Xiaobin
-            Liang<br />IVC-22 (<a
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">AFM-Based Nanomechanics on Thermoplastic Elastomer</h3>
+            <p class="presentation-authors">Ken Nakajima,
+            <span class="presentation-author">Haonan Liu</span>, and Xiaobin
+            Liang</p>
+            <p class="presentation-event">IVC-22 (<a
               href="https://ivc22.org/"
               target="_blank"
               rel="noreferrer noopener"
               >IVC-22</a
-            >), 11–16 Sept., Sapporo, Japan
+            >), 11–16 Sept., Sapporo, Japan</p>
           </li>
 
-          <li>
-            <strong
-              >熱可塑性エラストマーブレンドのAFMナノメカニクスの研究</strong
-            ><br />伊藤 万喜子・佐藤 愛理・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・梁 暁斌・中嶋 健・細谷 亮平・森田 裕史<br />第71回
-            高分子討論会　9月5日〜7日　北海道大学
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">熱可塑性エラストマーブレンドのAFMナノメカニクスの研究</h3>
+            <p class="presentation-authors">伊藤 万喜子・佐藤 愛理・<span class="presentation-author">劉 浩男</span
+            >・梁 暁斌・中嶋 健・細谷 亮平・森田 裕史</p>
+            <p class="presentation-event">第71回
+            高分子討論会　9月5日〜7日　北海道大学</p>
           </li>
 
-          <li>
-            <strong
-              >ナノ触診原子間力顕微鏡と電子線トモグラフィーによるゴム複合材料のフィラー－マトリックス界面領域の直接可視化</strong
-            ><br />伊藤 万喜子・<mark class="has-inline-color">劉 浩男</mark
-            >・熊谷 明美・梁 暁斌・中嶋 健・陣内 浩司<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">ナノ触診原子間力顕微鏡と電子線トモグラフィーによるゴム複合材料のフィラー－マトリックス界面領域の直接可視化</h3>
+            <p class="presentation-authors">伊藤 万喜子・<span class="presentation-author">劉 浩男</span
+            >・熊谷 明美・梁 暁斌・中嶋 健・陣内 浩司</p>
+            <p class="presentation-event"><a
               href="https://www.srij.or.jp/annual2022/"
               target="_blank"
               rel="noreferrer noopener"
               >日本ゴム協会 2022年年次大会</a
-            >　5月30日〜31日　オンライン
+            >　5月30日〜31日　オンライン</p>
           </li>
         </ul>
       </section>
@@ -949,52 +1038,52 @@
       <!-- 2021 -->
       <section id="y2021" class="card year">
         <h2 class="section-title">2021</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              >Local Strain-Stress Evolution of Polymeric Materials Revealed by
-              In-Situ AFM Nanomechanical Mapping</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Xiaobin
-            Liang, and Ken Nakajima<br />ICSPM29 (<a
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Local Strain-Stress Evolution of Polymeric Materials Revealed by
+              In-Situ AFM Nanomechanical Mapping</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Xiaobin
+            Liang, and Ken Nakajima</p>
+            <p class="presentation-event">ICSPM29 (<a
               href="https://dora.bk.tsukuba.ac.jp/event/ICSPM29/"
               target="_blank"
               rel="noreferrer noopener"
               >ICSPM29</a
-            >), 9–10 Dec., Online
+            >), 9–10 Dec., Online</p>
           </li>
 
-          <li>
-            <strong
-              >熱可塑性エラストマーの初期伸長過程における応力ネットワークの形成とその動的挙動</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・梁 暁斌・中嶋
-            健<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">熱可塑性エラストマーの初期伸長過程における応力ネットワークの形成とその動的挙動</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・梁 暁斌・中嶋
+            健</p>
+            <p class="presentation-event"><a
               href="https://www.srij.or.jp/elastomer2021/"
               target="_blank"
               rel="noreferrer noopener"
               >第32回 エラストマー討論会</a
-            >　11月24日〜25日　九州大学
+            >　11月24日〜25日　九州大学</p>
           </li>
 
-          <li>
-            <strong
-              >Self-assembling Behavior and Mechanical Properties of
-              Triptycene-Appended Block Copolymers</strong
-            ><br />Ayami Itagaki, Fumitaka Ishiwari, Tomoya Fukui, Takashi
-            Kajitani, <mark class="has-inline-color">Haonan Liu</mark>, Xiaobin
-            Liang, Ken Nakajima, and Takanori Fukushima<br />第70回
-            高分子討論会　9月6日〜8日　オンライン
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Self-assembling Behavior and Mechanical Properties of
+              Triptycene-Appended Block Copolymers</h3>
+            <p class="presentation-authors">Ayami Itagaki, Fumitaka Ishiwari, Tomoya Fukui, Takashi
+            Kajitani, <span class="presentation-author">Haonan Liu</span>, Xiaobin
+            Liang, Ken Nakajima, and Takanori Fukushima</p>
+            <p class="presentation-event">第70回
+            高分子討論会　9月6日〜8日　オンライン</p>
           </li>
 
-          <li>
-            <strong
-              >ドロネー三⾓形分割に基づく応⼒下の熱可塑性エラストマーにおける動的ネットワークの構造解析</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・梁 暁斌・中嶋
-            健<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">ドロネー三⾓形分割に基づく応⼒下の熱可塑性エラストマーにおける動的ネットワークの構造解析</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・梁 暁斌・中嶋
+            健</p>
+            <p class="presentation-event"><a
               href="https://main.spsj.or.jp/nenkai/70nenkai/index.html"
               target="_blank"
               rel="noreferrer noopener"
               >第70回 高分子学会年次大会</a
-            >　5月26日〜28日　オンライン
+            >　5月26日〜28日　オンライン</p>
           </li>
         </ul>
       </section>
@@ -1002,13 +1091,13 @@
       <!-- 2020 -->
       <section id="y2020" class="card year">
         <h2 class="section-title">2020</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              ><em>In situ</em> ナノ触診 AFM によるブロックコポリマー型 TPE
-              の変形挙動解析</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・梁 暁斌・中嶋
-            健<br />日本ゴム協会 2020年年次大会　5月21日〜22日（中止）
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja"><em>In situ</em> ナノ触診 AFM によるブロックコポリマー型 TPE
+              の変形挙動解析</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・梁 暁斌・中嶋
+            健</p>
+            <p class="presentation-event">日本ゴム協会 2020年年次大会　5月21日〜22日（中止）</p>
           </li>
         </ul>
       </section>
@@ -1016,57 +1105,57 @@
       <!-- 2019 -->
       <section id="y2019" class="card year">
         <h2 class="section-title">2019</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              >AFM Nanomechanical Studies on Dynamic Stress Networks of
-              Stretched Thermoplastic Elastomer </strong
-            ><a
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">AFM Nanomechanical Studies on Dynamic Stress Networks of
+              Stretched Thermoplastic Elastomer <a
               href="https://dora.bk.tsukuba.ac.jp/event/ICSPM27/en/award"
               target="_blank"
               rel="noreferrer noopener"
               >(Best Poster Award)</a
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Xiaobin
-            Liang, and Ken Nakajima<br />ICSPM27 (<a
+            ></h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Xiaobin
+            Liang, and Ken Nakajima</p>
+            <p class="presentation-event">ICSPM27 (<a
               href="https://dora.bk.tsukuba.ac.jp/event/ICSPM27/"
               target="_blank"
               rel="noreferrer noopener"
               >ICSPM27</a
-            >), 5–7 Dec., Shizuoka, Japan
+            >), 5–7 Dec., Shizuoka, Japan</p>
           </li>
 
-          <li>
-            <strong
-              >ナノ触診原子間力顕微鏡によるブロックコポリマー型TPEの変形挙動解析</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・梁 暁斌・中嶋
-            健<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">ナノ触診原子間力顕微鏡によるブロックコポリマー型TPEの変形挙動解析</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・梁 暁斌・中嶋
+            健</p>
+            <p class="presentation-event"><a
               href="https://www.mrs-j.org/meeting2019/jp/"
               target="_blank"
               rel="noreferrer noopener"
               >第29回 日本MRS年次大会</a
-            >　11月27日〜29日　横浜
+            >　11月27日〜29日　横浜</p>
           </li>
 
-          <li>
-            <strong
-              >Direct Visualization of Dynamic Stress Networks of TPE Based on
-              AFM Nanomechanics</strong
-            ><br /><mark class="has-inline-color">Haonan Liu</mark>, Xiaobin
-            Liang, and Ken Nakajima<br />13th China-Japan Seminar on Advanced
+          <li class="presentation">
+            <h3 class="presentation-title" lang="en">Direct Visualization of Dynamic Stress Networks of TPE Based on
+              AFM Nanomechanics</h3>
+            <p class="presentation-authors"><span class="presentation-author">Haonan Liu</span>, Xiaobin
+            Liang, and Ken Nakajima</p>
+            <p class="presentation-event">13th China-Japan Seminar on Advanced
             Engineering Plastics, Polymer Alloys and Composites, 19–23 Nov.,
-            Qingdao, China
+            Qingdao, China</p>
           </li>
 
-          <li>
-            <strong
-              >ナノ触診原子間力顕微鏡による熱可塑性エラストマーの変形挙動解析</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・梁 暁斌・中嶋
-            健<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">ナノ触診原子間力顕微鏡による熱可塑性エラストマーの変形挙動解析</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・梁 暁斌・中嶋
+            健</p>
+            <p class="presentation-event"><a
               href="https://main.spsj.or.jp/tohron/68tohron/index.html"
               target="_blank"
               rel="noreferrer noopener"
               >第68回 高分子討論会</a
-            >　9月25日〜27日　福井大学
+            >　9月25日〜27日　福井大学</p>
           </li>
         </ul>
       </section>
@@ -1074,31 +1163,30 @@
       <!-- 2018 -->
       <section id="y2018" class="card year">
         <h2 class="section-title">2018</h2>
-        <ul class="bullets">
-          <li>
-            <strong
-              >三脚型トリプチセン含有ビニルポリマーおよびコポリマーの合成と自己集合化挙動</strong
-            ><br /><mark class="has-inline-color">劉 浩男</mark>・石割
-            文崇・梶谷 孝・福島 孝典<br /><a
+        <ul class="presentations">
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">三脚型トリプチセン含有ビニルポリマーおよびコポリマーの合成と自己集合化挙動</h3>
+            <p class="presentation-authors"><span class="presentation-author">劉 浩男</span>・石割
+            文崇・梶谷 孝・福島 孝典</p>
+            <p class="presentation-event"><a
               href="https://main.spsj.or.jp/nenkai/67nenkai/nenkai.html"
               target="_blank"
               rel="noreferrer noopener"
               >第67回 高分子学会年次大会</a
-            >　5月23日〜25日　名古屋国際会議場
+            >　5月23日〜25日　名古屋国際会議場</p>
           </li>
 
-          <li>
-            <strong
-              >三脚型トリプチセン含有ビニルポリマーおよびコポリマーの合成と自己集合高分子の自己集合挙動と物性に影響を与える三脚型トリプチセン
-              ユニットの特異な効果</strong
-            ><br />石割 文崇・岡部 玄・<mark class="has-inline-color"
-              >劉 浩男</mark
-            >・荻原 響・山下 幸大・木村 忠弘・ 梶谷 孝・福島 孝典<br /><a
+          <li class="presentation">
+            <h3 class="presentation-title" lang="ja">三脚型トリプチセン含有ビニルポリマーおよびコポリマーの合成と自己集合高分子の自己集合挙動と物性に影響を与える三脚型トリプチセン
+              ユニットの特異な効果</h3>
+            <p class="presentation-authors">石割 文崇・岡部 玄・<span class="presentation-author">劉 浩男</span
+            >・荻原 響・山下 幸大・木村 忠弘・ 梶谷 孝・福島 孝典</p>
+            <p class="presentation-event"><a
               href="https://www.csj.jp/nenkai/98haru/"
               target="_blank"
               rel="noreferrer noopener"
               >日本化学会 第98春季年会</a
-            >　3月20日〜23日　日本大学
+            >　3月20日〜23日　日本大学</p>
           </li>
         </ul>
       </section>
@@ -1107,32 +1195,48 @@
     <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <nav class="footer-nav" aria-label="Footer">
+        <nav class="footer-nav" aria-label="Footer navigation">
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/profile/">Profile</a></li>
             <li><a href="/profile/current_topic/">Current Topics</a></li>
-            <li><a href="/profile/publication/">Publication</a></li>
-            <li>
-              <a href="/profile/presentation/" aria-current="page"
-                >Presentation</a
-              >
-            </li>
-            <li><a href="/profile/patent/">Patent</a></li>
+            <li><a href="/profile/publication/">Publications</a></li>
+            <li><a href="/profile/presentation/" aria-current="page">Presentations</a></li>
+            <li><a href="/profile/patent/">Patents</a></li>
             <li><a href="/category/posts/">Posts</a></li>
             <li><a href="/links/">Links</a></li>
             <li><a href="/tools/">Tools</a></li>
           </ul>
         </nav>
         <div class="copyright">
-          © <span id="yy"></span> Haonan LIU. All rights reserved.
+          © <span id="yy"></span> Haonan Liu. All rights reserved.
         </div>
       </div>
     </footer>
 
     <script>
-      // Update footer year
-      document.getElementById('yy').textContent = new Date().getFullYear();
+      document.getElementById("yy").textContent = new Date().getFullYear();
+      const toggle = document.querySelector('.submenu-toggle');
+      const submenu = document.getElementById('profile-submenu');
+      const group = toggle.parentElement;
+      function setMenu(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        submenu.hidden = !open;
+      }
+      setMenu(false);
+      document.documentElement.classList.add('js');
+      toggle.addEventListener('click', () => setMenu(submenu.hidden));
+      document.addEventListener('click', event => {
+        if (!group.contains(event.target)) setMenu(false);
+      });
+      group.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !submenu.hidden) {
+          setMenu(false); toggle.focus(); event.preventDefault();
+        }
+      });
+      group.addEventListener('focusout', event => {
+        if (!group.contains(event.relatedTarget)) setMenu(false);
+      });
     </script>
   </body>
 </html>
