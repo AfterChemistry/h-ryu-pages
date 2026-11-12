@@ -9,6 +9,7 @@
       content="Profile of Haonan Liu – Assistant Professor, Institute of Science Tokyo. Research, education, experience, lectures, awards, news, and affiliations."
     />
     <link rel="canonical" href="https://h-ryu.com/profile/" />
+<link rel="alternate" hreflang="en" href="https://h-ryu.com/profile/" /><link rel="alternate" hreflang="ja" href="https://h-ryu.com/profile/ja.html" /><link rel="alternate" hreflang="zh-Hans" href="https://h-ryu.com/profile/zh.html" />
     <link
       rel="icon"
       href="/wp-content/uploads/2022/09/avatar_non_bg.png"
@@ -238,6 +239,11 @@
         .section-nav { gap:6px 16px; }
       }
       @media (prefers-reduced-motion:reduce) { .nav .submenu { transition:none; } }
+      .language-nav { display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+      .language-nav a { padding:4px 12px; border:1px solid var(--border); border-radius:999px; font-size:.9rem; }
+      .language-nav a[aria-current="page"] { background:var(--accent); color:white; }
+      html[lang="ja"], html[lang="zh-Hans"] { line-break:strict; }
+      .source-note { color:var(--muted); font-size:.85rem; margin-top:18px; }
     </style>
   </head>
   <body>
@@ -281,6 +287,7 @@
     <!-- Main -->
     <main class="container" id="main-content" tabindex="-1">
       <section class="card stack">
+        <nav class="language-nav" aria-label="Language"><a href="index.html" lang="en" hreflang="en" aria-current="page">English</a><a href="ja.html" lang="ja" hreflang="ja">日本語</a><a href="zh.html" lang="zh-Hans" hreflang="zh-Hans">中文</a></nav>
         <div class="hero">
           <div class="avatar">
             <img
@@ -342,7 +349,7 @@
           </div>
         </div>
 
-        <nav class="section-nav" aria-label="Profile sections"><a href="#about">About</a><a href="#experience">Work Experience</a><a href="#education">Education</a><a href="#lectures">Lectures</a><a href="#awards">Awards &amp; Recognition</a><a href="#news">News &amp; Press</a></nav>
+        <nav class="section-nav" aria-label="Profile sections"><a href="#about">About</a><a href="#research">Research Interests</a><a href="#committees">Committee Memberships</a><a href="#experience">Work Experience</a><a href="#education">Education</a><a href="#lectures">Lectures</a><a href="#awards">Awards &amp; Recognition</a><a href="#news">News &amp; Press</a></nav>
 
         <div class="grid">
           <!-- Left side (quick facts) -->
@@ -372,9 +379,9 @@
               <h2 class="section-title" id="affiliations">Affiliations</h2>
               <div class="divider"></div>
               <ul class="list">
-                <li>The Society of Polymer Science, Japan</li>
-                <li>The Japan Society of Applied Physics</li>
-                <li>Chinese Chemical Society</li>
+                <li>The Society of Polymer Science, Japan <span class="muted">(2018 – Present)</span></li>
+                <li>The Japan Society of Applied Physics <span class="muted">(2021 – Present)</span></li>
+                <li>Chinese Chemical Society <span class="muted">(2025 – Present)</span></li><li>The Society of Rubber Science and Technology, Japan <span class="muted">(2019–2022)</span></li>
               </ul>
             </div>
             <div>
@@ -388,8 +395,8 @@
             </div>
           </aside>
 
-          <!-- Right side (content) -->
-          <div class="stack">
+          <!-- Main profile content -->
+          <div class="stack"><div><h2 class="section-title" id="research">Research Interests</h2><div class="divider"></div><div class="badges"><span class="chip">Polymer nanomechanics</span><span class="chip">Atomic force microscopy</span><span class="chip">Elastomers</span><span class="chip">Polyimides</span><span class="chip">High-pressure measurements</span><span class="chip">High-frequency dielectric properties</span></div></div><div><h2 class="section-title" id="committees">Committee Memberships</h2><div class="divider"></div><ul class="list"><li>Research Group on Computational Polymer Science — Organizing Committee, <strong>2026 – Present</strong></li><li>Japan Polyimide &amp; Aromatic Polymers Conference — Organizing Committee, <strong>2023 – Present</strong></li></ul></div>
             <div>
               <h2 class="section-title" id="about">About</h2>
               <div class="divider"></div>
@@ -618,6 +625,7 @@
           </div>
         </div>
       </section>
+      <p class="source-note">Profile references: <a href="https://researchmap.jp/hryu">Researchmap</a> · <a href="https://strdb.s.isct.ac.jp/html/100003365_ja.html">Science Tokyo Research Information Database</a></p>
     </main>
 
     <!-- Footer -->
